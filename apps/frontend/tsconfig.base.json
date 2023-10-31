@@ -1,0 +1,28 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"target": "es5",
+		"module": "esnext",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"baseUrl": "./",
+		"jsx": "preserve",
+		"paths": {
+			"@/interfaces/*": ["src/interfaces/*"],
+			"@/ui/*": ["src/components/ui/*"],
+			"@/containers/*": ["src/components/containers/*"],
+			"@/layout/*": ["src/components/layout/*"],
+			"@/data/*": ["src/data/*"],
+			"@/utils/*": ["src/utils/*"],
+			"@/services/*": ["src/services/*"],
+			"@/helpers/*": ["src/helpers/*"],
+			"@/store/*": ["src/store/*"],
+			"@/images/*": ["src/assets/images/*"],
+			"@/assets/*": ["src/assets/*"],
+			"@/hooks/*": ["src/hooks/*"],
+			"@/models/*": ["src/models/*"],
+			"@/styles/*": ["src/styles/*"],
+			"@/types/*": ["src/types/*"]
+		},
+		"typeRoots": ["./@types", "./node_modules/@types"]
+	}
+}

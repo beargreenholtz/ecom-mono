@@ -1,0 +1,17 @@
+{
+	"ignores": [
+		"chalk",
+		"figlet",
+		"commitizen",
+		"lint-staged",
+		"prettier",
+		"@commitlint/cli",
+		"stylelint",
+		"wait-on",
+		"open",
+		"prettier-plugin-sh",
+		"rimraf",
+		"cz-vinyl",
+		"@types/node"
+	]
+}

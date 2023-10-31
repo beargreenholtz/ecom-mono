@@ -1,0 +1,12 @@
+{
+	"ignores": [
+		"lint-staged",
+		"prettier",
+		"stylelint",
+		"prettier-plugin-sh",
+		"stylelint-config-standard-scss",
+		"stylelint-config-recess-order",
+		"stylelint-declaration-strict-value"
+	],
+	"skip-missing": true
+}

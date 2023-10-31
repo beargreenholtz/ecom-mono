@@ -1,0 +1,6 @@
+node_modules
+.next
+out
+.env
+pnpm-lock.yaml
+_static

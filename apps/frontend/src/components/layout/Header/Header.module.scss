@@ -1,0 +1,163 @@
+@use 'sass:map';
+
+@import '../../../styles/variables.scss';
+
+@keyframes slide-up {
+	from {
+		top: 64px;
+	}
+
+	to {
+		top: -64px;
+	}
+}
+
+.container {
+	position: relative;
+	top: 64px;
+	z-index: 1;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	padding-inline: 64px;
+
+	&--slideUp {
+		animation: slide-up 1s;
+	}
+
+	&--float {
+		margin-bottom: -64px;
+	}
+
+	.mobileBurger {
+		display: none;
+	}
+
+	&__menu {
+		z-index: 2;
+		font-size: 3.2rem;
+		font-weight: 700;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: color 0.2s ease-in-out;
+
+		&--dark {
+			color: #1e1e1e;
+		}
+
+		&--light {
+			color: #f5f5f5;
+		}
+
+		&--active {
+			color: #268741;
+		}
+
+		&--fromNavMenu {
+			z-index: 1;
+		}
+
+		&--hover {
+			&:hover {
+				color: #268741;
+			}
+		}
+	}
+
+	&__logo {
+		font-size: 4rem;
+		font-weight: 700;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: color 0.2s ease-in-out;
+
+		&--dark {
+			color: #333;
+		}
+
+		&--light {
+			color: #f5f5f5;
+		}
+
+		&--inMenu {
+			color: #f5f5f5;
+			transition: color 1.2s ease-in-out;
+		}
+	}
+
+	&__text {
+		font-size: 3.2rem;
+		font-weight: 700;
+		text-decoration: none;
+
+		&--dark {
+			color: #1e1e1e;
+		}
+
+		&--light {
+			color: #f5f5f5;
+		}
+
+		&--inMenu {
+			color: #f5f5f5;
+			transition: color 1.2s ease-in-out;
+		}
+	}
+}
+
+@media (max-width: map.get($sizes, main-mobile-width)) {
+	.container {
+		top: 16px;
+		z-index: 5;
+		align-items: center;
+		padding-inline: 16px;
+
+		&--slideUp {
+			animation: none;
+		}
+
+		&--float {
+			margin-bottom: -16px;
+		}
+
+		.mobileBurger {
+			z-index: 6;
+			display: block;
+
+			&--fromNavMenu {
+				z-index: 1;
+			}
+
+			&__icon {
+				width: 20.5px;
+				height: 20.5px;
+
+				&--dark {
+					stroke: #1e1e1e;
+				}
+
+				&--light {
+					stroke: #f5f5f5;
+				}
+
+				&--active {
+					stroke: #268741;
+				}
+			}
+		}
+
+		&__menu {
+			display: none;
+		}
+
+		&__logo {
+			font-size: 2.4rem;
+			font-weight: 800;
+		}
+
+		&__text {
+			display: none;
+		}
+	}
+}
