@@ -19,9 +19,7 @@ module.exports = {
 	},
 	plugins: ['@typescript-eslint', 'unused-imports', 'import', 'deprecation', 'unicorn'],
 	rules: {
-		'capitalized-comments': ['error'],
 		'max-lines': ['error', { max: 500, skipBlankLines: true, skipComments: true }],
-		'indent': ['error', 'tab', { SwitchCase: 1 }],
 		'quotes': ['error', 'single', { avoidEscape: true }],
 		'semi': ['error', 'always'],
 		'no-empty': [
@@ -134,7 +132,6 @@ module.exports = {
 		'import/no-self-import': ['error'],
 		'import/no-useless-path-segments': ['error'],
 		'import/export': ['error'],
-		'import/no-extraneous-dependencies': ['error'],
 		'import/no-mutable-exports': ['error'],
 		'import/no-unused-modules': ['error'],
 		'import/no-commonjs': ['error'],

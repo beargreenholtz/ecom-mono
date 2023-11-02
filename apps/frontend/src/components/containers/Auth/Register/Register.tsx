@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios, { type AxiosError } from 'axios';
 import RegisterView from './Register.view';
 
@@ -84,8 +84,26 @@ const Register = () => {
 	};
 
 	const onClickGoogle = () => {
-		window.open('http://localhost:5000/user/googleauth', '_self');
+		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
 	};
+
+	const [user, setUser] = useState(null);
+
+	const getUser = async () => {
+		try {
+			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
+			const { data } = await axios.get(url, { withCredentials: true });
+
+			setUser(data);
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		getUser();
+	}, []);
 
 	return (
 		<RegisterView

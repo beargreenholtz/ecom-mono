@@ -4,7 +4,7 @@
 	"private": true,
 	"description": "Ecom site",
 	"author": "Bar Greenholtz",
-	"license": "UNLICENSED",
+	"license": "MIT",
 	"scripts": {
 		"husky:install": "husky install",
 		"git:config": "git config --local include.path ../.gitconfig",
