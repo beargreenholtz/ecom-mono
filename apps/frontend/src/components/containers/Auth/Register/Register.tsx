@@ -89,7 +89,7 @@ const Register = () => {
 
 	const [user, setUser] = useState(null);
 
-	const getUser = async () => {
+	const getUserFromGoogle = async () => {
 		try {
 			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
 			const { data } = await axios.get(url, { withCredentials: true });
@@ -102,7 +102,7 @@ const Register = () => {
 	};
 
 	useEffect(() => {
-		getUser();
+		getUserFromGoogle();
 	}, []);
 
 	return (

@@ -21,14 +21,21 @@
 		label {
 			display: block;
 			margin-bottom: 5px;
+			font-size: 1.2rem;
 			font-weight: bold;
 		}
 
 		input {
 			width: 100%;
 			padding: 10px;
+			margin-inline-end: 8px;
 			border: 1px solid #ccc;
 			border-radius: 5px;
+		}
+
+
+		&__otp {
+			display: flex;
 		}
 	}
 
@@ -36,7 +43,6 @@
 	button {
 		width: 100%;
 		padding: 10px;
-		margin-bottom: 8px;
 		color: #fff;
 		cursor: pointer;
 		background-color: #007bff;
