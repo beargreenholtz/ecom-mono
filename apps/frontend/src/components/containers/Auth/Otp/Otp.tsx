@@ -6,11 +6,34 @@ import OtpView from './Otp.view';
 const Otp = () => {
 	const [inputOtpState, setInputOtpState] = useState(new Array(6).fill(''));
 
+	const handleInputPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+		console.log(e.clipboardData.getData('text'));
+
+		const pasteArray = e.clipboardData.getData('text').split('');
+
+		const finalArray: string[] = [];
+
+		for (let i = 0; i < 6; i++) {
+			if (!pasteArray[i]) {
+				finalArray.push('');
+			} else {
+				finalArray.push(pasteArray[i]);
+			}
+		}
+
+		console.log(finalArray);
+
+		setInputOtpState(() => {
+			return finalArray;
+		});
+	};
+
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
 		setInputOtpState((prev) => [
 			...prev.map((char, indexMap) => (indexMap === index ? e.target.value : char)),
 		]);
 
+		console.log(e.target.value);
 		const nextInput = e.target.nextElementSibling as HTMLInputElement | null;
 
 		if (nextInput) {
@@ -22,7 +45,7 @@ const Otp = () => {
 		e.preventDefault();
 
 		axios
-			.post('http://localhost:5000/user/loginotp', {
+			.post(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/loginotp`, {
 				otp: inputOtpState.join(''),
 				email: 'bare1212@gmail.com',
 			})
@@ -41,7 +64,12 @@ const Otp = () => {
 	};
 
 	return (
-		<OtpView handleInputChange={handleInputChange} inputOtp={inputOtpState} handleSubmit={handleSubmit} />
+		<OtpView
+			handleInputPaste={handleInputPaste}
+			handleInputChange={handleInputChange}
+			inputOtp={inputOtpState}
+			handleSubmit={handleSubmit}
+		/>
 	);
 };
 
