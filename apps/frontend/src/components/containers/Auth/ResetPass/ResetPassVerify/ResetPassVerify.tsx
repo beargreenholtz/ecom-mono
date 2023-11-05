@@ -24,7 +24,7 @@ const ResetPassVerify = () => {
 			const response = await axios.post(decodedUrl, {
 				newPassword: passwordInputState,
 			});
-			ssda;
+
 			console.log('User ID:', response);
 			setSuccesPasswordResetState(true);
 		} catch (error) {

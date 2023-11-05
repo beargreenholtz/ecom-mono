@@ -4,6 +4,7 @@ import classes from './Otp.module.scss';
 
 type TProps = {
 	readonly inputOtp: string[];
+	readonly handleInputPaste: (e: React.ClipboardEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 };
@@ -24,6 +25,7 @@ const OtpView = (props: TProps) => {
 									maxLength={1}
 									key={index}
 									value={data}
+									onPaste={(e) => props.handleInputPaste(e)}
 									onChange={(e) => props.handleInputChange(e, index)}
 									onFocus={(e) => e.target.select()}
 								/>

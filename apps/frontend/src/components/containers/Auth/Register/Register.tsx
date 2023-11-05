@@ -1,9 +1,23 @@
-/* eslint-disable no-console */
-import React, { useEffect, useState } from 'react';
-import axios, { type AxiosError } from 'axios';
+import React, { useEffect, useState, type Dispatch } from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+import * as authActions from '../../../../store/actions/auth';
+import type * as fromApp from '../../../../store/app';
+
 import RegisterView from './Register.view';
 
-const Register = () => {
+interface IPropsFromState {
+	readonly isAuthenticated: boolean;
+}
+
+interface IPropsFromDispatch {
+	loginSuccess: () => authActions.LoginSuccessAction;
+}
+
+interface TProps extends IPropsFromState, IPropsFromDispatch {}
+
+const Register = (props: TProps) => {
 	const [formData, setFormData] = useState({
 		username: '',
 		name: '',
@@ -27,75 +41,92 @@ const Register = () => {
 		}));
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
+	type TValidateInputs = {
+		username: string;
+		email: string;
+		password: string;
+		name: string;
+		confirmPassword: string;
+	};
 
+	const validateInput = (inputs: TValidateInputs) => {
 		if (
-			formData.username.trim() === '' ||
-			formData.email.trim() === '' ||
-			formData.name.trim() === '' ||
-			formData.password.trim() === ''
+			inputs.username.trim() === '' ||
+			inputs.email.trim() === '' ||
+			inputs.name.trim() === '' ||
+			inputs.password.trim() === ''
 		) {
 			console.error('All Inputs Required');
 
-			return;
+			return false;
 		}
 
-		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(formData.password)) {
+		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(inputs.password)) {
 			console.error(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
 
-			return;
+			return false;
 		}
 
-		if (formData.password !== formData.confirmPassword) {
+		if (inputs.password !== inputs.confirmPassword) {
 			console.error('Passwords dont match');
 
+			return false;
+		}
+
+		return true;
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (!validateInput(formData)) {
 			return;
 		}
 
 		console.log('Form data:', formData);
 
-		await axios
-			.post('http://localhost:5000/user/signup', {
+		try {
+			const response = await axios.post('http://localhost:5000/user/signup', {
 				name: formData.username,
 				username: formData.username,
 				email: formData.email,
 				password: formData.password,
-			})
-			.then(
-				(res) => {
-					const { userId, email, token } = res.data;
+			});
 
-					console.log('Registration successful!');
-					console.log('User ID:', userId);
-					console.log('User Email:', email);
-					console.log('JWT Token:', token);
-				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
-				},
-			);
+			const tokenWithTime = {
+				token: response.headers.authorization,
+				timestamp: new Date().getTime() + 30 * 60 * 1000,
+			};
+
+			localStorage.setItem('jwt_token', JSON.stringify(tokenWithTime));
+			props.loginSuccess();
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				console.error('Error during registration:', error?.response?.data?.message);
+			} else {
+				console.log('An unknown error occurred');
+			}
+		}
 	};
 
 	const onClickGoogle = () => {
 		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
 	};
 
-	const [user, setUser] = useState(null);
-
 	const getUserFromGoogle = async () => {
 		try {
 			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
+			const response = await axios.get(url, { withCredentials: true });
 
-			setUser(data);
-			console.log(data);
+			const tokenWithTime = {
+				token: response.headers.authorization,
+				timestamp: new Date().getTime() + 30 * 60 * 1000,
+			};
+
+			localStorage.setItem('jwt_token', JSON.stringify(tokenWithTime));
+			props.loginSuccess();
 		} catch (error) {
 			console.log(error);
 		}
@@ -120,4 +151,20 @@ const Register = () => {
 Register.displayName = 'Register';
 Register.defaultProps = {};
 
-export default React.memo(Register);
+const mapStateToProps = (state: fromApp.RootState) => {
+	return {
+		isAuthenticated: state.user.isAuthenticated,
+	};
+};
+
+const mapDispatchToProps = (dispatch: Dispatch<authActions.AuthActionTypes>): IPropsFromDispatch => {
+	return {
+		loginSuccess: () => {
+			dispatch(authActions.loginSuccess());
+
+			return authActions.loginSuccess();
+		},
+	};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Register));

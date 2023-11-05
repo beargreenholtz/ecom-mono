@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios, { type AxiosError } from 'axios';
+import axios from 'axios';
 
 import ResetPassView from './ResetPass.view';
 
@@ -8,22 +8,23 @@ const ResetPass = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		await axios
-			.post(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordresetrequest`, {
-				email: email,
-			})
-			.then(
-				(res) => {
-					console.log('User ID:', res);
-				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
+
+		try {
+			const response = await axios.post(
+				`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordresetrequest`,
+				{
+					email: email,
 				},
 			);
+
+			console.log('User ID:', response);
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				console.error('Error during registration:', error.response?.data?.message);
+			} else {
+				console.error('An unknown error occurred');
+			}
+		}
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

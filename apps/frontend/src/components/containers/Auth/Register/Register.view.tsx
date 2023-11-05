@@ -17,65 +17,59 @@ type TProps = {
 };
 
 const RegisterView = (props: TProps) => {
+	const formFields = [
+		{
+			label: 'Username',
+			type: 'text',
+			id: 'username',
+			name: 'username',
+		},
+		{
+			label: 'Email',
+			type: 'email',
+			id: 'email',
+			name: 'email',
+		},
+		{
+			label: 'Name',
+			type: 'text',
+			id: 'name',
+			name: 'name',
+		},
+		{
+			label: 'Password',
+			type: `${props.showPassword ? 'text' : 'password'}`,
+			id: 'password',
+			name: 'password',
+		},
+		{
+			label: 'Confirm Password',
+			type: `${props.showPassword ? 'text' : 'password'}`,
+			id: 'confirmPassword',
+			name: 'confirmPassword',
+		},
+	];
+
 	return (
 		<div className={classes['container']}>
-			<h2>Register</h2>
-			<form onSubmit={props.onSubmit}>
-				<div className={classes['inputContainer']}>
-					<label htmlFor="username">Username:</label>
-					<input
-						type="text"
-						id="username"
-						name="username"
-						value={props.formData.username}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="email">Email:</label>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						value={props.formData.email}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="name">Name:</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						value={props.formData.name}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="password">Password:</label>
-					<div className={classes['passwordInputContainer']}>
-						<input
-							type={props.showPassword ? 'text' : 'password'}
-							id="password"
-							name="password"
-							value={props.formData.password}
-							onChange={props.onInputChange}
-						/>
-					</div>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="confirmPassword">Confirm Password:</label>
-					<input
-						type={props.showPassword ? 'text' : 'password'}
-						id="confirmPassword"
-						name="confirmPassword"
-						value={props.formData.confirmPassword}
-						onChange={props.onInputChange}
-					/>
+			<div className={classes['registerContainer']}>
+				<h2 className={classes['registerContainer__title']}>Register</h2>
+				<form onSubmit={props.onSubmit}>
+					{formFields.map((field) => (
+						<div className={classes['inputContainer']} key={field.name}>
+							<label className={classes['inputContainer__label']} htmlFor={field.id}>
+								{field.label}
+							</label>
+							<input
+								className={classes['inputContainer__input']}
+								type={field.type}
+								id={field.id}
+								name={field.name}
+								value={props.formData[field.name as keyof typeof props.formData]}
+								onChange={props.onInputChange}
+							/>
+						</div>
+					))}
 					<button
 						type="button"
 						className={classes['passwordToggle']}
@@ -83,13 +77,12 @@ const RegisterView = (props: TProps) => {
 					>
 						{props.showPassword ? 'Hide' : 'Show'}
 					</button>
-				</div>
-
-				<button type="submit">Register</button>
-			</form>
-			<button type="submit" onClick={props.onClickGoogle}>
-				Google
-			</button>
+					<button type="submit">Register</button>
+				</form>
+				<button type="submit" onClick={props.onClickGoogle}>
+					Google
+				</button>
+			</div>
 		</div>
 	);
 };
