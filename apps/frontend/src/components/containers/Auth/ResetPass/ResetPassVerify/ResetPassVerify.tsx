@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios, { type AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import ResetPassVerifyView from './ResetPassVerify.view';
@@ -8,31 +8,32 @@ const ResetPassVerify = () => {
 	const router = useRouter();
 
 	const [passwordInputState, setPasswordInputState] = useState('');
+	const [succesPasswordResetState, setSuccesPasswordResetState] = useState(false);
+	const [errorState, setErrorState] = useState<string | null>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		const { token } = router.query;
 
 		const decodedUrl = decodeURI(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordreset/${token}`);
 
-		console.log(decodedUrl);
+		console.log(errorState);
 
 		e.preventDefault();
-		await axios
-			.post(decodedUrl, {
+
+		try {
+			const response = await axios.post(decodedUrl, {
 				newPassword: passwordInputState,
-			})
-			.then(
-				(res) => {
-					console.log('User ID:', res);
-				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
-				},
-			);
+			});
+			ssda;
+			console.log('User ID:', response);
+			setSuccesPasswordResetState(true);
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				setErrorState(error.message);
+			} else {
+				setErrorState('Generic Error');
+			}
+		}
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +42,11 @@ const ResetPassVerify = () => {
 
 	return (
 		<ResetPassVerifyView
+			error={errorState}
+			passwordInputState={passwordInputState}
+			succesPasswordReset={succesPasswordResetState}
 			handleSubmit={handleSubmit}
 			handleInputChange={handleInputChange}
-			passwordInputState={passwordInputState}
 		/>
 	);
 };
