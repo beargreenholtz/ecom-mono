@@ -24,6 +24,8 @@ export const loginSuccess = (): LoginSuccessAction => {
 };
 
 export const logout = (): LogoutAction => {
+	localStorage.removeItem('token');
+
 	return {
 		type: LOGOUT,
 		payload: { isAuthenticated: false },

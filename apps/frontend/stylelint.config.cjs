@@ -9,6 +9,7 @@ module.exports = {
 		'property-no-vendor-prefix': null,
 		'value-no-vendor-prefix': null,
 		'selector-id-pattern': null,
+		'scale-unlimited/declaration-strict-value': null,
 		'color-named': ['never'],
 		'declaration-block-no-duplicate-properties': [true],
 		'function-disallowed-list': ['rgb', 'rgba', 'hsl', 'hwb'],
@@ -23,9 +24,5 @@ module.exports = {
 		'scss/at-import-partial-extension': null,
 		'scss/percent-placeholder-pattern':
 			/^_[a-z][a-z0-9]*(([A-Z][a-z0-9]+)*[A-Z]?|([a-z0-9]+[A-Z])*|[A-Z])$/,
-		// 'scale-unlimited/declaration-strict-value': [
-		// 	['/padding/', 'top', 'bottom', '/margin/', 'font-size', 'fill', '/gap/'],
-		// 	{ ignoreVariables: false, ignoreValues: ['transparent', '/rem/', '0', 'auto'] },
-		// ],
 	},
 };

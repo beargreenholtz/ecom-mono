@@ -1,7 +1,9 @@
 import React, { useEffect, useState, type Dispatch } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
+import axios, { AxiosError } from 'axios';
+import { useDispatch, connect } from 'react-redux';
 
+import useHttp from '@/utils/useHttp';
+import useModal from '@/utils/useModal';
 import * as authActions from '../../../../store/actions/auth';
 import type * as fromApp from '../../../../store/app';
 
@@ -18,6 +20,9 @@ interface IPropsFromDispatch {
 interface TProps extends IPropsFromState, IPropsFromDispatch {}
 
 const Register = (props: TProps) => {
+	const dispatch = useDispatch();
+	const [isShowingModal, toggleModal] = useModal();
+
 	const [formData, setFormData] = useState({
 		username: '',
 		name: '',
@@ -34,6 +39,8 @@ const Register = (props: TProps) => {
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
+
+		console.log(isShowingModal);
 
 		setFormData((prevData) => ({
 			...prevData,
@@ -88,26 +95,34 @@ const Register = (props: TProps) => {
 		console.log('Form data:', formData);
 
 		try {
-			const response = await axios.post('http://localhost:5000/user/signup', {
-				name: formData.username,
-				username: formData.username,
-				email: formData.email,
-				password: formData.password,
-			});
+			const response = await useHttp(
+				{
+					url: `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/signup`,
+					method: 'post',
+					data: {
+						name: formData.username,
+						username: formData.username,
+						email: formData.email,
+						password: formData.password,
+					},
+				},
+				dispatch,
+				toggleModal,
+			);
+
+			if (response instanceof AxiosError) {
+				throw response;
+			}
 
 			const tokenWithTime = {
-				token: response.headers.authorization,
+				token: response?.headers.authorization,
 				timestamp: new Date().getTime() + 30 * 60 * 1000,
 			};
 
 			localStorage.setItem('jwt_token', JSON.stringify(tokenWithTime));
 			props.loginSuccess();
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				console.error('Error during registration:', error?.response?.data?.message);
-			} else {
-				console.log('An unknown error occurred');
-			}
+			console.error('An error occurred during registration:', error);
 		}
 	};
 
@@ -140,7 +155,9 @@ const Register = (props: TProps) => {
 		<RegisterView
 			showPassword={showPassword}
 			formData={formData}
+			isShowingModal={isShowingModal}
 			handlePasswordToggle={handlePasswordToggle}
+			toggleModal={toggleModal}
 			onInputChange={handleInputChange}
 			onSubmit={handleSubmit}
 			onClickGoogle={onClickGoogle}

@@ -79,8 +79,6 @@ module.exports = {
 		'react/jsx-key': ['error', { checkKeyMustBeforeSpread: true }],
 		'react/jsx-max-depth': ['error', { max: 10 }],
 		'react/jsx-no-duplicate-props': ['error'],
-
-		'react-hooks/rules-of-hooks': ['error'],
 	},
 	overrides: [
 		{

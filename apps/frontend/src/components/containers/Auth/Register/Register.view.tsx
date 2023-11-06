@@ -1,4 +1,7 @@
 import React from 'react';
+
+import Modal from '@/ui/Modal';
+
 import classes from './Register.module.scss';
 
 type TProps = {
@@ -9,11 +12,13 @@ type TProps = {
 		password: string;
 		confirmPassword: string;
 	};
+	showPassword: boolean;
+	isShowingModal: boolean;
 	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: (e: React.FormEvent) => void;
-	showPassword: boolean;
 	handlePasswordToggle: () => void;
 	onClickGoogle: () => void;
+	toggleModal: () => void;
 };
 
 const RegisterView = (props: TProps) => {
@@ -51,39 +56,44 @@ const RegisterView = (props: TProps) => {
 	];
 
 	return (
-		<div className={classes['container']}>
-			<div className={classes['registerContainer']}>
-				<h2 className={classes['registerContainer__title']}>Register</h2>
-				<form onSubmit={props.onSubmit}>
-					{formFields.map((field) => (
-						<div className={classes['inputContainer']} key={field.name}>
-							<label className={classes['inputContainer__label']} htmlFor={field.id}>
-								{field.label}
-							</label>
-							<input
-								className={classes['inputContainer__input']}
-								type={field.type}
-								id={field.id}
-								name={field.name}
-								value={props.formData[field.name as keyof typeof props.formData]}
-								onChange={props.onInputChange}
-							/>
-						</div>
-					))}
-					<button
-						type="button"
-						className={classes['passwordToggle']}
-						onClick={props.handlePasswordToggle}
-					>
-						{props.showPassword ? 'Hide' : 'Show'}
+		<>
+			<Modal isShow={!props.isShowingModal} onClickCloseButton={props.toggleModal}>
+				error
+			</Modal>
+			<div className={classes['container']}>
+				<div className={classes['registerContainer']}>
+					<h2 className={classes['registerContainer__title']}>Register</h2>
+					<form onSubmit={props.onSubmit}>
+						{formFields.map((field) => (
+							<div className={classes['inputContainer']} key={field.name}>
+								<label className={classes['inputContainer__label']} htmlFor={field.id}>
+									{field.label}
+								</label>
+								<input
+									className={classes['inputContainer__input']}
+									type={field.type}
+									id={field.id}
+									name={field.name}
+									value={props.formData[field.name as keyof typeof props.formData]}
+									onChange={props.onInputChange}
+								/>
+							</div>
+						))}
+						<button
+							type="button"
+							className={classes['passwordToggle']}
+							onClick={props.handlePasswordToggle}
+						>
+							{props.showPassword ? 'Hide' : 'Show'}
+						</button>
+						<button type="submit">Register</button>
+					</form>
+					<button type="submit" onClick={props.onClickGoogle}>
+						Google
 					</button>
-					<button type="submit">Register</button>
-				</form>
-				<button type="submit" onClick={props.onClickGoogle}>
-					Google
-				</button>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

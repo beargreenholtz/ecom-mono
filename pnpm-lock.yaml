@@ -257,7 +257,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: 8.0.5
-        version: 8.0.5(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0)
+        version: 8.0.5(@types/react-dom@18.2.14)(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0)
       redux:
         specifier: 4.2.0
         version: 4.2.0
@@ -268,6 +268,9 @@ importers:
       '@types/react':
         specifier: 18.0.33
         version: 18.0.33
+      '@types/react-dom':
+        specifier: 18.2.14
+        version: 18.2.14
       hygen:
         specifier: 6.2.11
         version: 6.2.11
@@ -281,17 +284,20 @@ importers:
         specifier: 1.49.7
         version: 1.49.7
       stylelint:
-        specifier: 15.6.0
-        version: 15.6.0(typescript@5.0.3)
+        specifier: 15.10.0
+        version: 15.10.0(typescript@5.0.3)
+      stylelint-config-prettier-scss:
+        specifier: 1.0.0
+        version: 1.0.0(stylelint@15.10.0)
       stylelint-config-recess-order:
         specifier: 4.3.0
-        version: 4.3.0(stylelint@15.6.0)
+        version: 4.3.0(stylelint@15.10.0)
       stylelint-config-standard-scss:
         specifier: 11.1.0
-        version: 11.1.0(postcss@8.4.31)(stylelint@15.6.0)
+        version: 11.1.0(postcss@8.4.31)(stylelint@15.10.0)
       stylelint-declaration-strict-value:
         specifier: 1.9.2
-        version: 1.9.2(stylelint@15.6.0)
+        version: 1.9.2(stylelint@15.10.0)
       typescript:
         specifier: 5.0.3
         version: 5.0.3
@@ -357,16 +363,16 @@ packages:
       tslib: 1.14.1
     optional: true
 
-  /@aws-sdk/client-cognito-identity@3.438.0:
-    resolution: {integrity: sha512-ZaMx8S2Uex5UXk1R5Qje2aE8lhXz1bw5Pk0Kjjz/8mo+CBiQDgtHu5SrS9ccLfBrFIcz6HtDWsJazEQaBaLplQ==}
+  /@aws-sdk/client-cognito-identity@3.441.0:
+    resolution: {integrity: sha512-0BYe2YAoAIF2GdonU6IcrUb/r2pYJHICzqOCi85ixAiGKYokBSl53P7x17DkA7J2mjLWTv+S9nvuVa2RG/L7bA==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.438.0
-      '@aws-sdk/core': 3.436.0
-      '@aws-sdk/credential-provider-node': 3.438.0
+      '@aws-sdk/client-sts': 3.441.0
+      '@aws-sdk/core': 3.441.0
+      '@aws-sdk/credential-provider-node': 3.441.0
       '@aws-sdk/middleware-host-header': 3.433.0
       '@aws-sdk/middleware-logger': 3.433.0
       '@aws-sdk/middleware-recursion-detection': 3.433.0
@@ -405,14 +411,14 @@ packages:
       - aws-crt
     optional: true
 
-  /@aws-sdk/client-sso@3.438.0:
-    resolution: {integrity: sha512-L/xKq+K78PShLku8x5gM6lZDUp7LhFJ2ksKH7Vll+exSZq+QUaxuzjp4gqdzh6B0oIshv2jssQlUa0ScOmVRMg==}
+  /@aws-sdk/client-sso@3.441.0:
+    resolution: {integrity: sha512-gndGymu4cEIN7WWhQ67RO0JMda09EGBlay2L8IKCHBK/65Y34FHUX1tCNbO2qezEzsi6BPW5o2n53Rd9QqpHUw==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/core': 3.436.0
+      '@aws-sdk/core': 3.441.0
       '@aws-sdk/middleware-host-header': 3.433.0
       '@aws-sdk/middleware-logger': 3.433.0
       '@aws-sdk/middleware-recursion-detection': 3.433.0
@@ -450,15 +456,15 @@ packages:
       - aws-crt
     optional: true
 
-  /@aws-sdk/client-sts@3.438.0:
-    resolution: {integrity: sha512-UBxLZKVVvbR4LHwSNSqaKx22YBSOGkavrh4SyDP8o8XOlXeRxTCllfSfjL9K5Mktp+ZwQ2NiubNcwmvUcGKbbg==}
+  /@aws-sdk/client-sts@3.441.0:
+    resolution: {integrity: sha512-GL0Cw2v7XL1cn0T+Sk5VHLlgBJoUdMsysXsHa1mFdk0l6XHMAAnwXVXiNnjmoDSPrG0psz7dL2AKzPVRXbIUjA==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/core': 3.436.0
-      '@aws-sdk/credential-provider-node': 3.438.0
+      '@aws-sdk/core': 3.441.0
+      '@aws-sdk/credential-provider-node': 3.441.0
       '@aws-sdk/middleware-host-header': 3.433.0
       '@aws-sdk/middleware-logger': 3.433.0
       '@aws-sdk/middleware-recursion-detection': 3.433.0
@@ -499,20 +505,20 @@ packages:
       - aws-crt
     optional: true
 
-  /@aws-sdk/core@3.436.0:
-    resolution: {integrity: sha512-vX5/LjXvCejC2XUY6TSg1oozjqK6BvkE75t0ys9dgqyr5PlZyZksMoeAFHUlj0sCjhT3ziWCujP1oiSpPWY9hg==}
+  /@aws-sdk/core@3.441.0:
+    resolution: {integrity: sha512-gV0eQwR0VnSPUYAbgDkbBtfXbSpZgl/K6UB13DP1IFFjQYbF/BxYwvcQe4jHoPOBifSgjEbl8MfOOeIyI7k9vg==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@smithy/smithy-client': 2.1.12
     optional: true
 
-  /@aws-sdk/credential-provider-cognito-identity@3.438.0:
-    resolution: {integrity: sha512-/HgSPPvzIQ25SMII0vYlarJbijOAsXZCjayKWZ7+hilzju22hMB0ZTPM1E3QopWoZ6os76K59aAACfjhVAfIUg==}
+  /@aws-sdk/credential-provider-cognito-identity@3.441.0:
+    resolution: {integrity: sha512-mIs5vI3zcN/iVyUwpVdEhmFsUFX0x95aGErVh1ratX7fHdtENdSt0X5Bn3yQowze1DRUJBahqsPZuxe35gUt8w==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
-      '@aws-sdk/client-cognito-identity': 3.438.0
+      '@aws-sdk/client-cognito-identity': 3.441.0
       '@aws-sdk/types': 3.433.0
       '@smithy/property-provider': 2.0.13
       '@smithy/types': 2.4.0
@@ -548,14 +554,14 @@ packages:
       tslib: 2.6.2
     optional: true
 
-  /@aws-sdk/credential-provider-ini@3.438.0:
-    resolution: {integrity: sha512-WYPQR3pXoHJjn9/RMWipUhsUNFy6zhOiII6u8LJ5w84aNqIjV4+BdRYztRNGJD98jdtekhbkX0YKoSuZqP+unQ==}
+  /@aws-sdk/credential-provider-ini@3.441.0:
+    resolution: {integrity: sha512-SQipQYxYqDUuSOfIhDmaTdwPTcndGQotGZXWJl56mMWqAhU8MkwjK+oMf3VgRt/umJC0QwUCF5HUHIj7gSB1JA==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@aws-sdk/credential-provider-env': 3.433.0
       '@aws-sdk/credential-provider-process': 3.433.0
-      '@aws-sdk/credential-provider-sso': 3.438.0
+      '@aws-sdk/credential-provider-sso': 3.441.0
       '@aws-sdk/credential-provider-web-identity': 3.433.0
       '@aws-sdk/types': 3.433.0
       '@smithy/credential-provider-imds': 2.0.18
@@ -567,15 +573,15 @@ packages:
       - aws-crt
     optional: true
 
-  /@aws-sdk/credential-provider-node@3.438.0:
-    resolution: {integrity: sha512-uaw3D2R0svyrC32qyZ2aOv/l0AT9eClh+eQsZJTQD3Kz9q+2VdeOBThQ8fsMfRtm26nUbZo6A/CRwxkm6okI+w==}
+  /@aws-sdk/credential-provider-node@3.441.0:
+    resolution: {integrity: sha512-WB9p37yHq6fGJt6Vll29ijHbkh9VDbPM/n5ns73bTAgFD7R0ht5kPmdmHGQA6m3RKjcHLPbymQ3lXykkMwWf/Q==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
       '@aws-sdk/credential-provider-env': 3.433.0
-      '@aws-sdk/credential-provider-ini': 3.438.0
+      '@aws-sdk/credential-provider-ini': 3.441.0
       '@aws-sdk/credential-provider-process': 3.433.0
-      '@aws-sdk/credential-provider-sso': 3.438.0
+      '@aws-sdk/credential-provider-sso': 3.441.0
       '@aws-sdk/credential-provider-web-identity': 3.433.0
       '@aws-sdk/types': 3.433.0
       '@smithy/credential-provider-imds': 2.0.18
@@ -599,12 +605,12 @@ packages:
       tslib: 2.6.2
     optional: true
 
-  /@aws-sdk/credential-provider-sso@3.438.0:
-    resolution: {integrity: sha512-Xykli/64xR18cBV5P0XFxcH120omtfAjC/cFy/9nFU/+dPvbk0uu1yEOZYteWHyGGkPN4PkHmbh60GiUCLQkWQ==}
+  /@aws-sdk/credential-provider-sso@3.441.0:
+    resolution: {integrity: sha512-pTg16G+62mWCE8yGKuQnEBqPdpG5g71remf2jUqXaI1c7GCzbnkQDV9eD4DaAGOvzIs0wo9zAQnS2kVDPFlCYA==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
-      '@aws-sdk/client-sso': 3.438.0
+      '@aws-sdk/client-sso': 3.441.0
       '@aws-sdk/token-providers': 3.438.0
       '@aws-sdk/types': 3.433.0
       '@smithy/property-provider': 2.0.13
@@ -626,21 +632,21 @@ packages:
       tslib: 2.6.2
     optional: true
 
-  /@aws-sdk/credential-providers@3.438.0:
-    resolution: {integrity: sha512-EBtcczPtUyXsN/yNGvZxGU/Ildl8kJeq7Vt7MsFLtOmYXDWoMsSIEVuSYbBdzBal1z03fmd/Mmjr0DhYiSAqMg==}
+  /@aws-sdk/credential-providers@3.441.0:
+    resolution: {integrity: sha512-DLx7s9/YR1CwWSjVmDMKLhyWrBXOFY3RtDLXh7AD4CAEGjhNr9mYWILMk4E6RtXl1ZhRKTMlkrUQnxNTwmct1w==}
     engines: {node: '>=14.0.0'}
     requiresBuild: true
     dependencies:
-      '@aws-sdk/client-cognito-identity': 3.438.0
-      '@aws-sdk/client-sso': 3.438.0
-      '@aws-sdk/client-sts': 3.438.0
-      '@aws-sdk/credential-provider-cognito-identity': 3.438.0
+      '@aws-sdk/client-cognito-identity': 3.441.0
+      '@aws-sdk/client-sso': 3.441.0
+      '@aws-sdk/client-sts': 3.441.0
+      '@aws-sdk/credential-provider-cognito-identity': 3.441.0
       '@aws-sdk/credential-provider-env': 3.433.0
       '@aws-sdk/credential-provider-http': 3.435.0
-      '@aws-sdk/credential-provider-ini': 3.438.0
-      '@aws-sdk/credential-provider-node': 3.438.0
+      '@aws-sdk/credential-provider-ini': 3.441.0
+      '@aws-sdk/credential-provider-node': 3.441.0
       '@aws-sdk/credential-provider-process': 3.433.0
-      '@aws-sdk/credential-provider-sso': 3.438.0
+      '@aws-sdk/credential-provider-sso': 3.441.0
       '@aws-sdk/credential-provider-web-identity': 3.433.0
       '@aws-sdk/types': 3.433.0
       '@smithy/credential-provider-imds': 2.0.18
@@ -999,6 +1005,15 @@ packages:
       postcss-selector-parser: 6.0.13
     dev: true
 
+  /@csstools/selector-specificity@3.0.0(postcss-selector-parser@6.0.13):
+    resolution: {integrity: sha512-hBI9tfBtuPIi885ZsZ32IMEU/5nlZH/KOVYJCOh7gyMxaVLGmLedYqFN6Ui1LXkI8JlC8IsuC0rF0btcRZKd5g==}
+    engines: {node: ^14 || ^16 || >=18}
+    peerDependencies:
+      postcss-selector-parser: ^6.0.13
+    dependencies:
+      postcss-selector-parser: 6.0.13
+    dev: true
+
   /@eslint-community/eslint-utils@4.4.0(eslint@8.38.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1012,8 +1027,8 @@ packages:
     resolution: {integrity: sha512-Cu96Sd2By9mCNTx2iyKOmq10v22jUVQv0lQnlGNy16oE9589yE+QADPbrMGCkA51cKZSg3Pu/aTJVTGfL/qjUA==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
 
-  /@eslint/eslintrc@2.1.2:
-    resolution: {integrity: sha512-+wvgpDsrB1YqAMdEUCcnTlpfVBH7Vqn6A/NT3D8WVXFIaKMlErPIZT3oCIAVCOtarRpMtelZLqJeU3t7WY6X6g==}
+  /@eslint/eslintrc@2.1.3:
+    resolution: {integrity: sha512-yZzuIG+jnVu6hNSzFEN07e8BxF3uAzYtQb6uDkaYZLo6oYZDCq454c5kB8zxnzfCYyP4MIuyBn10L0DqwujTmA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
@@ -1377,7 +1392,7 @@ packages:
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     dependencies:
       cross-spawn: 7.0.3
-      fast-glob: 3.3.1
+      fast-glob: 3.3.2
       is-glob: 4.0.3
       open: 9.1.0
       picocolors: 1.0.0
@@ -1397,7 +1412,7 @@ packages:
     dependencies:
       immer: 9.0.21
       react: 18.2.0
-      react-redux: 8.0.5(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0)
+      react-redux: 8.0.5(@types/react-dom@18.2.14)(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0)
       redux: 4.2.1
       redux-thunk: 2.4.2(redux@4.2.1)
       reselect: 4.1.8
@@ -1997,6 +2012,11 @@ packages:
   /@types/range-parser@1.2.6:
     resolution: {integrity: sha512-+0autS93xyXizIYiyL02FCY8N+KkKPhILhcUSA276HxzreZ16kl+cmwvV2qAM/PuCCwPXzOXOWhiPcw20uSFcA==}
 
+  /@types/react-dom@18.2.14:
+    resolution: {integrity: sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==}
+    dependencies:
+      '@types/react': 18.0.33
+
   /@types/react@18.0.33:
     resolution: {integrity: sha512-sHxzVxeanvQyQ1lr8NSHaj0kDzcNiGpILEVt69g9S31/7PfMvNCKLKcsHw4lYKjs3cGNJjXSP4mYzX43QlnjNA==}
     dependencies:
@@ -2538,56 +2558,56 @@ packages:
       '@typescript-eslint/types': 5.62.0
       eslint-visitor-keys: 3.4.3
 
-  /@vue/compiler-core@3.3.7:
-    resolution: {integrity: sha512-pACdY6YnTNVLXsB86YD8OF9ihwpolzhhtdLVHhBL6do/ykr6kKXNYABRtNMGrsQXpEXXyAdwvWWkuTbs4MFtPQ==}
+  /@vue/compiler-core@3.3.8:
+    resolution: {integrity: sha512-hN/NNBUECw8SusQvDSqqcVv6gWq8L6iAktUR0UF3vGu2OhzRqcOiAno0FmBJWwxhYEXRlQJT5XnoKsVq1WZx4g==}
     dependencies:
       '@babel/parser': 7.23.0
-      '@vue/shared': 3.3.7
+      '@vue/shared': 3.3.8
       estree-walker: 2.0.2
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-dom@3.3.7:
-    resolution: {integrity: sha512-0LwkyJjnUPssXv/d1vNJ0PKfBlDoQs7n81CbO6Q0zdL7H1EzqYRrTVXDqdBVqro0aJjo/FOa1qBAPVI4PGSHBw==}
+  /@vue/compiler-dom@3.3.8:
+    resolution: {integrity: sha512-+PPtv+p/nWDd0AvJu3w8HS0RIm/C6VGBIRe24b9hSyNWOAPEUosFZ5diwawwP8ip5sJ8n0Pe87TNNNHnvjs0FQ==}
     dependencies:
-      '@vue/compiler-core': 3.3.7
-      '@vue/shared': 3.3.7
+      '@vue/compiler-core': 3.3.8
+      '@vue/shared': 3.3.8
     dev: true
 
-  /@vue/compiler-sfc@3.3.7:
-    resolution: {integrity: sha512-7pfldWy/J75U/ZyYIXRVqvLRw3vmfxDo2YLMwVtWVNew8Sm8d6wodM+OYFq4ll/UxfqVr0XKiVwti32PCrruAw==}
+  /@vue/compiler-sfc@3.3.8:
+    resolution: {integrity: sha512-WMzbUrlTjfYF8joyT84HfwwXo+8WPALuPxhy+BZ6R4Aafls+jDBnSz8PDz60uFhuqFbl3HxRfxvDzrUf3THwpA==}
     dependencies:
       '@babel/parser': 7.23.0
-      '@vue/compiler-core': 3.3.7
-      '@vue/compiler-dom': 3.3.7
-      '@vue/compiler-ssr': 3.3.7
-      '@vue/reactivity-transform': 3.3.7
-      '@vue/shared': 3.3.7
+      '@vue/compiler-core': 3.3.8
+      '@vue/compiler-dom': 3.3.8
+      '@vue/compiler-ssr': 3.3.8
+      '@vue/reactivity-transform': 3.3.8
+      '@vue/shared': 3.3.8
       estree-walker: 2.0.2
       magic-string: 0.30.5
       postcss: 8.4.31
       source-map-js: 1.0.2
     dev: true
 
-  /@vue/compiler-ssr@3.3.7:
-    resolution: {integrity: sha512-TxOfNVVeH3zgBc82kcUv+emNHo+vKnlRrkv8YvQU5+Y5LJGJwSNzcmLUoxD/dNzv0bhQ/F0s+InlgV0NrApJZg==}
+  /@vue/compiler-ssr@3.3.8:
+    resolution: {integrity: sha512-hXCqQL/15kMVDBuoBYpUnSYT8doDNwsjvm3jTefnXr+ytn294ySnT8NlsFHmTgKNjwpuFy7XVV8yTeLtNl/P6w==}
     dependencies:
-      '@vue/compiler-dom': 3.3.7
-      '@vue/shared': 3.3.7
+      '@vue/compiler-dom': 3.3.8
+      '@vue/shared': 3.3.8
     dev: true
 
-  /@vue/reactivity-transform@3.3.7:
-    resolution: {integrity: sha512-APhRmLVbgE1VPGtoLQoWBJEaQk4V8JUsqrQihImVqKT+8U6Qi3t5ATcg4Y9wGAPb3kIhetpufyZ1RhwbZCIdDA==}
+  /@vue/reactivity-transform@3.3.8:
+    resolution: {integrity: sha512-49CvBzmZNtcHua0XJ7GdGifM8GOXoUMOX4dD40Y5DxI3R8OUhMlvf2nvgUAcPxaXiV5MQQ1Nwy09ADpnLQUqRw==}
     dependencies:
       '@babel/parser': 7.23.0
-      '@vue/compiler-core': 3.3.7
-      '@vue/shared': 3.3.7
+      '@vue/compiler-core': 3.3.8
+      '@vue/shared': 3.3.8
       estree-walker: 2.0.2
       magic-string: 0.30.5
     dev: true
 
-  /@vue/shared@3.3.7:
-    resolution: {integrity: sha512-N/tbkINRUDExgcPTBvxNkvHGu504k8lzlNQRITVnm6YjOjwa4r0nnbd4Jb01sNpur5hAllyRJzSK5PvB9PPwRg==}
+  /@vue/shared@3.3.8:
+    resolution: {integrity: sha512-8PGwybFwM4x8pcfgqEQFy70NaQxASvOC5DJwLQfpArw1UDfUXrJkdxD3BhVTMS+0Lef/TU7YO0Jvr0jJY8T+mw==}
     dev: true
 
   /@yarnpkg/lockfile@1.1.0:
@@ -2800,8 +2820,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /async@3.2.4:
-    resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
+  /async@3.2.5:
+    resolution: {integrity: sha512-baNZyqaaLhyLVKm/DlvdW051MSgO6b8eVfIezl9E5PqWxFgzLm/wQntEW4zOytVburDEr0JlALEpdOFwvErLsg==}
     dev: true
 
   /asynckit@0.4.0:
@@ -2995,8 +3015,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite@1.0.30001559:
-    resolution: {integrity: sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==}
+  /caniuse-lite@1.0.30001561:
+    resolution: {integrity: sha512-NTt0DNoKe958Q0BE0j0c1V9jbUzhBxHIEJy7asmGrpE0yG63KTV7PLHPnK2E1O9RsQrQ081I3NLuXGS6zht3cw==}
     dev: false
 
   /chalk@2.4.2:
@@ -3424,7 +3444,7 @@ packages:
     dependencies:
       '@babel/parser': 7.16.4
       '@babel/traverse': 7.23.2
-      '@vue/compiler-sfc': 3.3.7
+      '@vue/compiler-sfc': 3.3.8
       camelcase: 6.3.0
       cosmiconfig: 7.1.0
       debug: 4.3.4
@@ -4058,7 +4078,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.38.0)
       '@eslint-community/regexpp': 4.10.0
-      '@eslint/eslintrc': 2.1.2
+      '@eslint/eslintrc': 2.1.3
       '@eslint/js': 8.38.0
       '@humanwhocodes/config-array': 0.11.13
       '@humanwhocodes/module-importer': 1.0.1
@@ -4253,8 +4273,8 @@ packages:
       micromatch: 4.0.5
     dev: true
 
-  /fast-glob@3.3.1:
-    resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
+  /fast-glob@3.3.2:
+    resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
     engines: {node: '>=8.6.0'}
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -4419,7 +4439,7 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
-      universalify: 2.0.0
+      universalify: 2.0.1
     dev: true
 
   /fs-extra@11.1.1:
@@ -4428,7 +4448,7 @@ packages:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
-      universalify: 2.0.0
+      universalify: 2.0.1
     dev: true
 
   /fs.realpath@1.0.0:
@@ -4554,7 +4574,7 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.3.1
+      fast-glob: 3.3.2
       ignore: 5.2.4
       merge2: 1.4.1
       slash: 3.0.0
@@ -4989,7 +5009,7 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      async: 3.2.4
+      async: 3.2.5
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
@@ -5079,7 +5099,7 @@ packages:
   /jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
     dependencies:
-      universalify: 2.0.0
+      universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
     dev: true
@@ -5453,7 +5473,7 @@ packages:
       mongodb-connection-string-url: 2.6.0
       socks: 2.7.1
     optionalDependencies:
-      '@aws-sdk/credential-providers': 3.438.0
+      '@aws-sdk/credential-providers': 3.441.0
       '@mongodb-js/saslprep': 1.1.1
     transitivePeerDependencies:
       - aws-crt
@@ -5521,8 +5541,8 @@ packages:
     resolution: {integrity: sha512-kMbrH0EObaKmK3nVRKUIIya1dpASHIEusM13S4V1ViHFuxuNxCo+arxoa6j/dbV22YBGjl7UKJm9QQKJ2Crzhg==}
     dev: true
 
-  /nanoid@3.3.6:
-    resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
+  /nanoid@3.3.7:
+    resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -5560,7 +5580,7 @@ packages:
     dependencies:
       '@next/env': 13.2.4
       '@swc/helpers': 0.4.14
-      caniuse-lite: 1.0.30001559
+      caniuse-lite: 1.0.30001561
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -6126,7 +6146,7 @@ packages:
     resolution: {integrity: sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.6
+      nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: false
@@ -6135,7 +6155,7 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
-      nanoid: 3.3.6
+      nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
@@ -6267,7 +6287,7 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-redux@8.0.5(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0):
+  /react-redux@8.0.5(@types/react-dom@18.2.14)(@types/react@18.0.33)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.0):
     resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -6291,6 +6311,7 @@ packages:
       '@babel/runtime': 7.23.2
       '@types/hoist-non-react-statics': 3.3.4
       '@types/react': 18.0.33
+      '@types/react-dom': 18.2.14
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
@@ -6910,16 +6931,26 @@ packages:
       react: 18.2.0
     dev: false
 
-  /stylelint-config-recess-order@4.3.0(stylelint@15.6.0):
+  /stylelint-config-prettier-scss@1.0.0(stylelint@15.10.0):
+    resolution: {integrity: sha512-Gr2qLiyvJGKeDk0E/+awNTrZB/UtNVPLqCDOr07na/sLekZwm26Br6yYIeBYz3ulsEcQgs5j+2IIMXCC+wsaQA==}
+    engines: {node: 14.* || 16.* || >= 18}
+    hasBin: true
+    peerDependencies:
+      stylelint: '>=15.0.0'
+    dependencies:
+      stylelint: 15.10.0(typescript@5.0.3)
+    dev: true
+
+  /stylelint-config-recess-order@4.3.0(stylelint@15.10.0):
     resolution: {integrity: sha512-EWVtxZ8oq4/meTrRNUDrS5TqMz6TX72JjKDwVQq0JJDXE+P/o7UuFw3wWV/0O9yvJfh/da6nJY71ZUn/wSfB4g==}
     peerDependencies:
       stylelint: '>=15'
     dependencies:
-      stylelint: 15.6.0(typescript@5.0.3)
-      stylelint-order: 6.0.3(stylelint@15.6.0)
+      stylelint: 15.10.0(typescript@5.0.3)
+      stylelint-order: 6.0.3(stylelint@15.10.0)
     dev: true
 
-  /stylelint-config-recommended-scss@13.1.0(postcss@8.4.31)(stylelint@15.6.0):
+  /stylelint-config-recommended-scss@13.1.0(postcss@8.4.31)(stylelint@15.10.0):
     resolution: {integrity: sha512-8L5nDfd+YH6AOoBGKmhH8pLWF1dpfY816JtGMePcBqqSsLU+Ysawx44fQSlMOJ2xTfI9yTGpup5JU77c17w1Ww==}
     peerDependencies:
       postcss: ^8.3.3
@@ -6930,21 +6961,21 @@ packages:
     dependencies:
       postcss: 8.4.31
       postcss-scss: 4.0.9(postcss@8.4.31)
-      stylelint: 15.6.0(typescript@5.0.3)
-      stylelint-config-recommended: 13.0.0(stylelint@15.6.0)
-      stylelint-scss: 5.3.0(stylelint@15.6.0)
+      stylelint: 15.10.0(typescript@5.0.3)
+      stylelint-config-recommended: 13.0.0(stylelint@15.10.0)
+      stylelint-scss: 5.3.0(stylelint@15.10.0)
     dev: true
 
-  /stylelint-config-recommended@13.0.0(stylelint@15.6.0):
+  /stylelint-config-recommended@13.0.0(stylelint@15.10.0):
     resolution: {integrity: sha512-EH+yRj6h3GAe/fRiyaoO2F9l9Tgg50AOFhaszyfov9v6ayXJ1IkSHwTxd7lB48FmOeSGDPLjatjO11fJpmarkQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
       stylelint: ^15.10.0
     dependencies:
-      stylelint: 15.6.0(typescript@5.0.3)
+      stylelint: 15.10.0(typescript@5.0.3)
     dev: true
 
-  /stylelint-config-standard-scss@11.1.0(postcss@8.4.31)(stylelint@15.6.0):
+  /stylelint-config-standard-scss@11.1.0(postcss@8.4.31)(stylelint@15.10.0):
     resolution: {integrity: sha512-5gnBgeNTgRVdchMwiFQPuBOtj9QefYtfXiddrOMJA2pI22zxt6ddI2s+e5Oh7/6QYl7QLJujGnaUR5YyGq72ow==}
     peerDependencies:
       postcss: ^8.3.3
@@ -6954,42 +6985,42 @@ packages:
         optional: true
     dependencies:
       postcss: 8.4.31
-      stylelint: 15.6.0(typescript@5.0.3)
-      stylelint-config-recommended-scss: 13.1.0(postcss@8.4.31)(stylelint@15.6.0)
-      stylelint-config-standard: 34.0.0(stylelint@15.6.0)
+      stylelint: 15.10.0(typescript@5.0.3)
+      stylelint-config-recommended-scss: 13.1.0(postcss@8.4.31)(stylelint@15.10.0)
+      stylelint-config-standard: 34.0.0(stylelint@15.10.0)
     dev: true
 
-  /stylelint-config-standard@34.0.0(stylelint@15.6.0):
+  /stylelint-config-standard@34.0.0(stylelint@15.10.0):
     resolution: {integrity: sha512-u0VSZnVyW9VSryBG2LSO+OQTjN7zF9XJaAJRX/4EwkmU0R2jYwmBSN10acqZisDitS0CLiEiGjX7+Hrq8TAhfQ==}
     engines: {node: ^14.13.1 || >=16.0.0}
     peerDependencies:
       stylelint: ^15.10.0
     dependencies:
-      stylelint: 15.6.0(typescript@5.0.3)
-      stylelint-config-recommended: 13.0.0(stylelint@15.6.0)
+      stylelint: 15.10.0(typescript@5.0.3)
+      stylelint-config-recommended: 13.0.0(stylelint@15.10.0)
     dev: true
 
-  /stylelint-declaration-strict-value@1.9.2(stylelint@15.6.0):
+  /stylelint-declaration-strict-value@1.9.2(stylelint@15.10.0):
     resolution: {integrity: sha512-Z/2yr7g4tq2iGOUWhZLzHL2g2GJYJGcPkfjDh++zI8ukLxW0tcLGJjo64XYCDjja6YcECPDUWbpN+OAoAtAYvw==}
     peerDependencies:
       stylelint: '>=7 <=15'
     dependencies:
       css-values: 0.1.0
       shortcss: 0.1.3
-      stylelint: 15.6.0(typescript@5.0.3)
+      stylelint: 15.10.0(typescript@5.0.3)
     dev: true
 
-  /stylelint-order@6.0.3(stylelint@15.6.0):
+  /stylelint-order@6.0.3(stylelint@15.10.0):
     resolution: {integrity: sha512-1j1lOb4EU/6w49qZeT2SQVJXm0Ht+Qnq9GMfUa3pMwoyojIWfuA+JUDmoR97Bht1RLn4ei0xtLGy87M7d29B1w==}
     peerDependencies:
       stylelint: ^14.0.0 || ^15.0.0
     dependencies:
       postcss: 8.4.31
       postcss-sorting: 8.0.2(postcss@8.4.31)
-      stylelint: 15.6.0(typescript@5.0.3)
+      stylelint: 15.10.0(typescript@5.0.3)
     dev: true
 
-  /stylelint-scss@5.3.0(stylelint@15.6.0):
+  /stylelint-scss@5.3.0(stylelint@15.10.0):
     resolution: {integrity: sha512-Sc7S1uWqStMc99NREsHNxpxHHFRvjo2pWILNl/UCwWO8PxhODK8qbJH0GHWIALxl6BD5rwJL4cSm4jk36hi6fg==}
     peerDependencies:
       stylelint: ^14.5.1 || ^15.0.0
@@ -6999,25 +7030,25 @@ packages:
       postcss-resolve-nested-selector: 0.1.1
       postcss-selector-parser: 6.0.13
       postcss-value-parser: 4.2.0
-      stylelint: 15.6.0(typescript@5.0.3)
+      stylelint: 15.10.0(typescript@5.0.3)
     dev: true
 
-  /stylelint@15.6.0(typescript@5.0.3):
-    resolution: {integrity: sha512-Cqzpc8tvJm77KaM8qUbhpJ/UYK55Ia0whQXj4b9IId9dlPICO7J8Lyo15SZWiHxKjlvy3p5FQor/3n6i8ignXg==}
+  /stylelint@15.10.0(typescript@5.0.3):
+    resolution: {integrity: sha512-uDCwoZA+C2Ee29wEFi8irICpH+wie1Ku/57QrWKqtKh+ZE1LuVDkUQUg9Zp3WlWMu8IABXxFaFj3/szy+SRc0Q==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
       '@csstools/css-parser-algorithms': 2.3.2(@csstools/css-tokenizer@2.2.1)
       '@csstools/css-tokenizer': 2.2.1
       '@csstools/media-query-list-parser': 2.1.5(@csstools/css-parser-algorithms@2.3.2)(@csstools/css-tokenizer@2.2.1)
-      '@csstools/selector-specificity': 2.2.0(postcss-selector-parser@6.0.13)
+      '@csstools/selector-specificity': 3.0.0(postcss-selector-parser@6.0.13)
       balanced-match: 2.0.0
       colord: 2.9.3
       cosmiconfig: 8.3.6(typescript@5.0.3)
       css-functions-list: 3.2.1
       css-tree: 2.3.1
       debug: 4.3.4
-      fast-glob: 3.3.1
+      fast-glob: 3.3.2
       fastest-levenshtein: 1.0.16
       file-entry-cache: 6.0.1
       global-modules: 2.0.0
@@ -7035,7 +7066,6 @@ packages:
       normalize-path: 3.0.0
       picocolors: 1.0.0
       postcss: 8.4.31
-      postcss-media-query-parser: 0.2.3
       postcss-resolve-nested-selector: 0.1.1
       postcss-safe-parser: 6.0.0(postcss@8.4.31)
       postcss-selector-parser: 6.0.13
@@ -7047,7 +7077,6 @@ packages:
       supports-hyperlinks: 3.0.0
       svg-tags: 1.0.0
       table: 6.8.1
-      v8-compile-cache: 2.4.0
       write-file-atomic: 5.0.1
     transitivePeerDependencies:
       - supports-color
@@ -7069,7 +7098,7 @@ packages:
       css-functions-list: 3.2.1
       css-tree: 2.3.1
       debug: 4.3.4
-      fast-glob: 3.3.1
+      fast-glob: 3.3.2
       fastest-levenshtein: 1.0.16
       file-entry-cache: 6.0.1
       global-modules: 2.0.0
@@ -7424,8 +7453,8 @@ packages:
     resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}
     dev: true
 
-  /universalify@2.0.0:
-    resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
+  /universalify@2.0.1:
+    resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
     dev: true
 
