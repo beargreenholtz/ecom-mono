@@ -62,7 +62,7 @@ const Login = () => {
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
 	};
 
 	const handleOnClickPassReset = () => {

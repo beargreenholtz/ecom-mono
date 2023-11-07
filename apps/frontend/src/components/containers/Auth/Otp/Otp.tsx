@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useParams } from 'react-router-dom';
 
 import OtpView from './Otp.view';
 
 const Otp = () => {
-	const router = useRouter();
-
-	const { otp } = router.query;
+	const { otp } = useParams();
 
 	let decodedUrl: string;
 
@@ -43,7 +41,7 @@ const Otp = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/loginotp`, {
+			const response = await axios.post(`${import.meta.env.VITE_BACkEND_URL}/user/loginotp`, {
 				token: decodedUrl,
 				otp: inputOtpState.join(''),
 			});

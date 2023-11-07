@@ -97,7 +97,7 @@ const Register = (props: TProps) => {
 		try {
 			const response = await useHttp(
 				{
-					url: `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/signup`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/signup`,
 					method: 'post',
 					data: {
 						name: formData.username,
@@ -127,12 +127,12 @@ const Register = (props: TProps) => {
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
 	};
 
 	const getUserFromGoogle = async () => {
 		try {
-			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
+			const url = `${import.meta.env.VITE_BACkEND_URL}/user/success`;
 			const response = await axios.get(url, { withCredentials: true });
 
 			const tokenWithTime = {

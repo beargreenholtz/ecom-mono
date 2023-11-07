@@ -1,9 +1,8 @@
 import React from 'react';
-import type { NextPage } from 'next';
 
 import Register from '@/containers/Auth/Register';
 
-const registerPage: NextPage = () => {
+const registerPage = () => {
 	return <Register />;
 };
 

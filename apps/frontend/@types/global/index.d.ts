@@ -1,10 +1,14 @@
+/// <reference types="vite/client" />
 declare global {
+	declare module '*.module.css';
+	declare module '*.module.scss';
+
 	namespace NodeJS {
 		interface ProcessEnv {
-			readonly NEXT_PUBLIC_BASE_URL: string;
-			readonly NEXT_PUBLIC_DEMO_URL: string;
-			readonly NEXT_PUBLIC_BACkEND_URL: string;
-			readonly NEXT_PUBLIC_CLIENT_URL: string;
+			readonly BASE_URL: string;
+			readonly DEMO_URL: string;
+			readonly VITE_BACkEND_URL: string;
+			readonly VITE_CLIENT_URL: string;
 		}
 	}
 }

@@ -6,12 +6,14 @@ import ResetPassView from './ResetPass.view';
 const ResetPass = () => {
 	const [email, setEmail] = useState('');
 
+	console.log(import.meta.env.VITE_VITE_BACkEND_URL);
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		try {
 			const response = await axios.post(
-				`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordresetrequest`,
+				`${import.meta.env.VITE_BACkEND_URL}/user/passwordresetrequest`,
 				{
 					email: email,
 				},

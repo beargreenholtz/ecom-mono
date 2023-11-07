@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
+import { useParams } from 'react-router-dom';
 
 import ResetPassVerifyView from './ResetPassVerify.view';
 
 const ResetPassVerify = () => {
-	const router = useRouter();
+	const { token } = useParams();
 
 	const [passwordInputState, setPasswordInputState] = useState('');
 	const [succesPasswordResetState, setSuccesPasswordResetState] = useState(false);
 	const [errorState, setErrorState] = useState<string | null>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		const { token } = router.query;
-
-		const decodedUrl = decodeURI(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordreset/${token}`);
+		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/passwordreset/${token}`);
 
 		console.log(errorState);
 

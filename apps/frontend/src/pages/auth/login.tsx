@@ -1,13 +1,14 @@
 import React from 'react';
-import type { NextPage } from 'next';
 
 import Login from '@/containers/Auth/Login';
 
-const loginPage: NextPage = () => {
+interface IProps {}
+
+const LoginPage: React.FC<IProps> = () => {
 	return <Login />;
 };
 
-loginPage.displayName = 'loginPage';
-loginPage.defaultProps = {};
+LoginPage.displayName = 'LoginPage';
+LoginPage.defaultProps = {};
 
-export default loginPage;
+export default LoginPage;

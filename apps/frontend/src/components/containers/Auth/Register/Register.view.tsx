@@ -57,7 +57,7 @@ const RegisterView = (props: TProps) => {
 
 	return (
 		<>
-			<Modal isShow={!props.isShowingModal} onClickCloseButton={props.toggleModal}>
+			<Modal isShow={props.isShowingModal} onClickCloseButton={props.toggleModal}>
 				error
 			</Modal>
 			<div className={classes['container']}>

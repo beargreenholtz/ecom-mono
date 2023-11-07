@@ -1,9 +1,8 @@
 import React from 'react';
-import type { NextPage } from 'next';
 
 import Otp from '@/containers/Auth/Otp';
 
-const otpPage: NextPage = () => {
+const otpPage = () => {
 	return <Otp />;
 };
 

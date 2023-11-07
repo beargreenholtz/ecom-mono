@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export const backendApi = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_BACKEND_URL,
+	baseURL: import.meta.env.VITE_BACkEND_URL,
 });

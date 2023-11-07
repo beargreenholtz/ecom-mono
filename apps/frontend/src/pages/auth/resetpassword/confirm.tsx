@@ -1,9 +1,8 @@
 import React from 'react';
-import type { NextPage } from 'next';
 
 import ResetPassVerify from '@/containers/Auth/ResetPass/ResetPassVerify';
 
-const resetPassVerifyPage: NextPage = () => {
+const resetPassVerifyPage = () => {
 	return <ResetPassVerify />;
 };
 
