@@ -27,7 +27,4 @@ const Modal = (props: TProps) => {
 	);
 };
 
-Modal.displayName = 'Modal';
-Modal.defaultProps = {};
-
 export default React.memo(Modal);

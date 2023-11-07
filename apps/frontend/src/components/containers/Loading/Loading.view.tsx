@@ -9,6 +9,4 @@ const LoadingView = () => {
 	);
 };
 
-LoadingView.displayName = 'LoadingView';
-
 export default React.memo(LoadingView);

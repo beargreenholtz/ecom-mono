@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
+import { useDispatch } from 'react-redux';
+import useApi from '@/utils/useApi';
 import ResetPassView from './ResetPass.view';
 
 const ResetPass = () => {
-	const [email, setEmail] = useState('');
+	const dispatch = useDispatch();
 
-	console.log(import.meta.env.VITE_VITE_BACkEND_URL);
+	const [email, setEmail] = useState('');
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(
-				`${import.meta.env.VITE_BACkEND_URL}/user/passwordresetrequest`,
+			const response = await useApi(
 				{
-					email: email,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/passwordresetrequest`,
+					method: 'post',
+					data: {
+						email: email,
+					},
 				},
+				dispatch,
 			);
 
 			console.log('User ID:', response);
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				console.error('Error during registration:', error.response?.data?.message);
-			} else {
-				console.error('An unknown error occurred');
-			}
+			console.log(error);
 		}
 	};
 
@@ -35,8 +36,5 @@ const ResetPass = () => {
 
 	return <ResetPassView email={email} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />;
 };
-
-ResetPass.displayName = 'ResetPass';
-ResetPass.defaultProps = {};
 
 export default React.memo(ResetPass);

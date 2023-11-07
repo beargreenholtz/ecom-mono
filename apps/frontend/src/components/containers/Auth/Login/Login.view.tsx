@@ -3,16 +3,16 @@ import React from 'react';
 import classes from './Login.module.scss';
 
 type TProps = {
-	formData: {
+	readonly formData: {
 		email: string;
 		password: string;
 	};
-	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: (e: React.FormEvent) => void;
-	showPassword: boolean;
-	handlePasswordToggle: () => void;
-	onClickGoogle: () => void;
-	handleOnClickPassReset: () => void;
+	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleSubmit: (e: React.FormEvent) => void;
+	readonly showPassword: boolean;
+	readonly handlePasswordToggle: () => void;
+	readonly handleClickGoogle: () => void;
+	readonly handleOnClickPassReset: () => void;
 };
 
 const LoginView = (props: TProps) => {
@@ -20,7 +20,7 @@ const LoginView = (props: TProps) => {
 		<div className={classes['container']}>
 			<div className={classes['loginContainer']}>
 				<h2 className={classes['loginContainer__title']}>Login</h2>
-				<form onSubmit={props.onSubmit}>
+				<form onSubmit={props.handleSubmit}>
 					<div className={classes['inputContainer']}>
 						<label htmlFor="email">Email:</label>
 						<input
@@ -28,7 +28,7 @@ const LoginView = (props: TProps) => {
 							id="email"
 							name="email"
 							value={props.formData.email}
-							onChange={props.onInputChange}
+							onChange={props.handleInputChange}
 						/>
 					</div>
 
@@ -40,14 +40,14 @@ const LoginView = (props: TProps) => {
 								id="password"
 								name="password"
 								value={props.formData.password}
-								onChange={props.onInputChange}
+								onChange={props.handleInputChange}
 							/>
 						</div>
 					</div>
 
 					<button type="submit">Login</button>
 				</form>
-				<button type="button" onClick={props.onClickGoogle}>
+				<button type="button" onClick={props.handleClickGoogle}>
 					Google
 				</button>
 				<button type="button" onClick={props.handleOnClickPassReset}>
@@ -57,8 +57,5 @@ const LoginView = (props: TProps) => {
 		</div>
 	);
 };
-
-LoginView.displayName = 'LoginView';
-LoginView.defaultProps = {};
 
 export default React.memo(LoginView);

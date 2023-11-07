@@ -5,20 +5,20 @@ import Modal from '@/ui/Modal';
 import classes from './Register.module.scss';
 
 type TProps = {
-	formData: {
+	readonly formData: {
 		username: string;
 		email: string;
 		name: string;
 		password: string;
 		confirmPassword: string;
 	};
-	showPassword: boolean;
-	isShowingModal: boolean;
-	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: (e: React.FormEvent) => void;
-	handlePasswordToggle: () => void;
-	onClickGoogle: () => void;
-	toggleModal: () => void;
+	readonly isShowPassword: boolean;
+	readonly isShowingModal: boolean;
+	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleSubmit: (e: React.FormEvent) => void;
+	readonly handlePasswordToggle: () => void;
+	readonly handleClickGoogle: () => void;
+	readonly toggleModal: () => void;
 };
 
 const RegisterView = (props: TProps) => {
@@ -43,13 +43,13 @@ const RegisterView = (props: TProps) => {
 		},
 		{
 			label: 'Password',
-			type: `${props.showPassword ? 'text' : 'password'}`,
+			type: `${props.isShowPassword ? 'text' : 'password'}`,
 			id: 'password',
 			name: 'password',
 		},
 		{
 			label: 'Confirm Password',
-			type: `${props.showPassword ? 'text' : 'password'}`,
+			type: `${props.isShowPassword ? 'text' : 'password'}`,
 			id: 'confirmPassword',
 			name: 'confirmPassword',
 		},
@@ -63,7 +63,7 @@ const RegisterView = (props: TProps) => {
 			<div className={classes['container']}>
 				<div className={classes['registerContainer']}>
 					<h2 className={classes['registerContainer__title']}>Register</h2>
-					<form onSubmit={props.onSubmit}>
+					<form onSubmit={props.handleSubmit}>
 						{formFields.map((field) => (
 							<div className={classes['inputContainer']} key={field.name}>
 								<label className={classes['inputContainer__label']} htmlFor={field.id}>
@@ -75,7 +75,7 @@ const RegisterView = (props: TProps) => {
 									id={field.id}
 									name={field.name}
 									value={props.formData[field.name as keyof typeof props.formData]}
-									onChange={props.onInputChange}
+									onChange={props.handleInputChange}
 								/>
 							</div>
 						))}
@@ -84,11 +84,11 @@ const RegisterView = (props: TProps) => {
 							className={classes['passwordToggle']}
 							onClick={props.handlePasswordToggle}
 						>
-							{props.showPassword ? 'Hide' : 'Show'}
+							{props.isShowPassword ? 'Hide' : 'Show'}
 						</button>
 						<button type="submit">Register</button>
 					</form>
-					<button type="submit" onClick={props.onClickGoogle}>
+					<button type="submit" onClick={props.handleClickGoogle}>
 						Google
 					</button>
 				</div>
@@ -96,8 +96,5 @@ const RegisterView = (props: TProps) => {
 		</>
 	);
 };
-
-RegisterView.displayName = 'RegisterView';
-RegisterView.defaultProps = {};
 
 export default React.memo(RegisterView);

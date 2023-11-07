@@ -32,7 +32,4 @@ const ResetPassView = (props: TProps) => {
 	);
 };
 
-ResetPassView.displayName = 'ResetPassView';
-ResetPassView.defaultProps = {};
-
 export default React.memo(ResetPassView);

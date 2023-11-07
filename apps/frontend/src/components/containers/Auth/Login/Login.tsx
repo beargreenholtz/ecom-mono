@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { AxiosError } from 'axios';
+import { useDispatch } from 'react-redux';
 
-import axios from 'axios';
+import { passowrdvaliteregex } from '@/utils/password-validate';
+import useApi from '@/utils/useApi';
 import LoginView from './Login.view';
 
 const Login = () => {
+	const dispatch = useDispatch();
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -33,7 +38,7 @@ const Login = () => {
 			return;
 		}
 
-		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(formData.password)) {
+		if (!passowrdvaliteregex.test(formData.password)) {
 			console.error(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
@@ -44,20 +49,27 @@ const Login = () => {
 		console.log('Form data:', formData);
 
 		try {
-			const response = await axios.post('http://localhost:5000/user/loginGenerateOtp', {
-				email: formData.email,
-				password: formData.password,
-			});
+			const response = await useApi(
+				{
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginGenerateOtp`,
+					method: 'post',
+					data: {
+						email: formData.email,
+						password: formData.password,
+					},
+				},
+				dispatch,
+			);
 
-			const token: string = response.data.otp.encryptedOtpPayload;
-
-			window.location.href = `http://localhost/auth/otp/${token}`;
-		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				console.error('Error during registration:', error.response?.data?.message);
-			} else {
-				console.log('An unknown error occurred');
+			if (response instanceof AxiosError) {
+				throw response;
 			}
+
+			const token: string = response?.data.otp.encryptedOtpPayload;
+
+			window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/otp/${token}`;
+		} catch (error) {
+			console.error('An error occurred during otp:', error);
 		}
 	};
 
@@ -66,7 +78,7 @@ const Login = () => {
 	};
 
 	const handleOnClickPassReset = () => {
-		window.location.href = 'http://localhost/auth/resetpassword/request';
+		window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/resetpassword/request`;
 	};
 
 	return (
@@ -75,14 +87,11 @@ const Login = () => {
 			formData={formData}
 			handlePasswordToggle={handlePasswordToggle}
 			handleOnClickPassReset={handleOnClickPassReset}
-			onInputChange={handleInputChange}
-			onSubmit={handleSubmit}
-			onClickGoogle={onClickGoogle}
+			handleInputChange={handleInputChange}
+			handleSubmit={handleSubmit}
+			handleClickGoogle={onClickGoogle}
 		/>
 	);
 };
-
-Login.displayName = 'Login';
-Login.defaultProps = {};
 
 export default React.memo(Login);

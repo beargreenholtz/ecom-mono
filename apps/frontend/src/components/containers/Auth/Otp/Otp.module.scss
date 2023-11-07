@@ -1,16 +1,19 @@
 .container {
+	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 400px;
-	padding: 20px;
-	margin: 0 auto;
-	background-color: #f5f5f5;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	box-shadow: 0 0 10px #0000001a;
+	height: 100vh;
 
 
 	.containerOtp {
+		width: 400px;
+		padding: 20px;
+		margin: 0 auto;
+		background-color: #f5f5f5;
+		border: 1px solid #ddd;
+		border-radius: 5px;
+		box-shadow: 0 0 10px #0000001a;
+
 		h2 {
 			margin-bottom: 20px;
 			text-align: center;

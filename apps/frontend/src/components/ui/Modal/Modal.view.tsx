@@ -30,7 +30,4 @@ const ModalView = (props: TProps) => {
 	);
 };
 
-ModalView.displayName = 'ModalView';
-ModalView.defaultProps = {};
-
 export default React.memo(ModalView);

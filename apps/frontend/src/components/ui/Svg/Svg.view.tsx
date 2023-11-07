@@ -31,7 +31,4 @@ const SvgView = (props: TProps) => {
 	);
 };
 
-SvgView.displayName = 'SvgView';
-SvgView.defaultProps = {};
-
 export default SvgView;

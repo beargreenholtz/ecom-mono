@@ -29,7 +29,4 @@ const NotFoundView = () => {
 	);
 };
 
-NotFoundView.displayName = 'NotFoundView';
-NotFoundView.defaultProps = {};
-
 export default React.memo(NotFoundView);

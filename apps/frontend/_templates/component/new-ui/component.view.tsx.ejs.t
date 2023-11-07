@@ -11,7 +11,4 @@ const <%= h.changeCase.pascalCase(name) %>iew = (props: TProps) => {
   return <React.Fragment></React.Fragment>;
 };
 
-<%= h.changeCase.pascalCase(name) %>iew.displayName = '<%= h.changeCase.pascalCase(name) %>iew';
-<%= h.changeCase.pascalCase(name) %>iew.defaultProps = {};
-
 export default React.memo(<%= h.changeCase.pascalCase(name) %>iew);

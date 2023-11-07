@@ -18,7 +18,4 @@ const Svg = (props: TProps) => {
 	);
 };
 
-Svg.displayName = 'Svg';
-Svg.defaultProps = {};
-
 export default React.memo(Svg);

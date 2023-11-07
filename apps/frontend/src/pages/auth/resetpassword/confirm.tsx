@@ -6,7 +6,4 @@ const resetPassVerifyPage = () => {
 	return <ResetPassVerify />;
 };
 
-resetPassVerifyPage.displayName = 'resetPassVerifyPage';
-resetPassVerifyPage.defaultProps = {};
-
 export default resetPassVerifyPage;

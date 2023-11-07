@@ -16,7 +16,9 @@ export interface LogoutAction {
 	};
 }
 
-export const loginSuccess = (): LoginSuccessAction => {
+export const loginSuccess = (token: string): LoginSuccessAction => {
+	localStorage.setItem('jwt_token', token);
+
 	return {
 		type: LOGIN_SUCCESS,
 		payload: { isAuthenticated: true },
@@ -24,7 +26,7 @@ export const loginSuccess = (): LoginSuccessAction => {
 };
 
 export const logout = (): LogoutAction => {
-	localStorage.removeItem('token');
+	localStorage.removeItem('jwt_token');
 
 	return {
 		type: LOGOUT,

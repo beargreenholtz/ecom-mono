@@ -6,7 +6,4 @@ const otpPage = () => {
 	return <Otp />;
 };
 
-otpPage.displayName = 'otpPage';
-otpPage.defaultProps = {};
-
 export default otpPage;

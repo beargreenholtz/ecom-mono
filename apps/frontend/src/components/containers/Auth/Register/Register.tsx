@@ -1,26 +1,19 @@
-import React, { useEffect, useState, type Dispatch } from 'react';
-import axios, { AxiosError } from 'axios';
-import { useDispatch, connect } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { AxiosError } from 'axios';
 
-import useHttp from '@/utils/useHttp';
+import { useDispatch } from 'react-redux';
+
+import useApi from '@/utils/useApi';
 import useModal from '@/utils/useModal';
+import type { TValidateInputs } from '@/types/user';
+import { passowrdvaliteregex } from '@/utils/password-validate';
 import * as authActions from '../../../../store/actions/auth';
-import type * as fromApp from '../../../../store/app';
 
 import RegisterView from './Register.view';
 
-interface IPropsFromState {
-	readonly isAuthenticated: boolean;
-}
-
-interface IPropsFromDispatch {
-	loginSuccess: () => authActions.LoginSuccessAction;
-}
-
-interface TProps extends IPropsFromState, IPropsFromDispatch {}
-
-const Register = (props: TProps) => {
+const Register = () => {
 	const dispatch = useDispatch();
+
 	const [isShowingModal, toggleModal] = useModal();
 
 	const [formData, setFormData] = useState({
@@ -31,10 +24,10 @@ const Register = (props: TProps) => {
 		confirmPassword: '',
 	});
 
-	const [showPassword, setShowPassword] = useState(false);
+	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const handlePasswordToggle = () => {
-		setShowPassword(!showPassword);
+		setIsShowPassword(!isShowPassword);
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,27 +41,14 @@ const Register = (props: TProps) => {
 		}));
 	};
 
-	type TValidateInputs = {
-		username: string;
-		email: string;
-		password: string;
-		name: string;
-		confirmPassword: string;
-	};
-
 	const validateInput = (inputs: TValidateInputs) => {
-		if (
-			inputs.username.trim() === '' ||
-			inputs.email.trim() === '' ||
-			inputs.name.trim() === '' ||
-			inputs.password.trim() === ''
-		) {
+		if (Object.values(inputs).some((value) => value.trim() === '')) {
 			console.error('All Inputs Required');
 
 			return false;
 		}
 
-		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(inputs.password)) {
+		if (!passowrdvaliteregex.test(inputs.password)) {
 			console.error(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
@@ -95,7 +75,7 @@ const Register = (props: TProps) => {
 		console.log('Form data:', formData);
 
 		try {
-			const response = await useHttp(
+			const response = await useApi(
 				{
 					url: `${import.meta.env.VITE_BACkEND_URL}/user/signup`,
 					method: 'post',
@@ -114,13 +94,9 @@ const Register = (props: TProps) => {
 				throw response;
 			}
 
-			const tokenWithTime = {
-				token: response?.headers.authorization,
-				timestamp: new Date().getTime() + 30 * 60 * 1000,
-			};
+			const token: string = response?.headers.authorization;
 
-			localStorage.setItem('jwt_token', JSON.stringify(tokenWithTime));
-			props.loginSuccess();
+			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
 			console.error('An error occurred during registration:', error);
 		}
@@ -133,15 +109,24 @@ const Register = (props: TProps) => {
 	const getUserFromGoogle = async () => {
 		try {
 			const url = `${import.meta.env.VITE_BACkEND_URL}/user/success`;
-			const response = await axios.get(url, { withCredentials: true });
 
-			const tokenWithTime = {
-				token: response.headers.authorization,
-				timestamp: new Date().getTime() + 30 * 60 * 1000,
-			};
+			const response = await useApi(
+				{
+					url,
+					method: 'get',
+					withCredentials: true,
+				},
+				dispatch,
+				toggleModal,
+			);
 
-			localStorage.setItem('jwt_token', JSON.stringify(tokenWithTime));
-			props.loginSuccess();
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+
+			const token = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
 			console.log(error);
 		}
@@ -153,35 +138,16 @@ const Register = (props: TProps) => {
 
 	return (
 		<RegisterView
-			showPassword={showPassword}
+			isShowPassword={isShowPassword}
 			formData={formData}
 			isShowingModal={isShowingModal}
 			handlePasswordToggle={handlePasswordToggle}
 			toggleModal={toggleModal}
-			onInputChange={handleInputChange}
-			onSubmit={handleSubmit}
-			onClickGoogle={onClickGoogle}
+			handleInputChange={handleInputChange}
+			handleSubmit={handleSubmit}
+			handleClickGoogle={onClickGoogle}
 		/>
 	);
 };
 
-Register.displayName = 'Register';
-Register.defaultProps = {};
-
-const mapStateToProps = (state: fromApp.RootState) => {
-	return {
-		isAuthenticated: state.user.isAuthenticated,
-	};
-};
-
-const mapDispatchToProps = (dispatch: Dispatch<authActions.AuthActionTypes>): IPropsFromDispatch => {
-	return {
-		loginSuccess: () => {
-			dispatch(authActions.loginSuccess());
-
-			return authActions.loginSuccess();
-		},
-	};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Register));
+export default React.memo(Register);

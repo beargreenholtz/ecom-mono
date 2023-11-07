@@ -41,7 +41,4 @@ const OtpView = (props: TProps) => {
 	);
 };
 
-OtpView.displayName = 'OtpView';
-OtpView.defaultProps = {};
-
 export default React.memo(OtpView);

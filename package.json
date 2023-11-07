@@ -6,7 +6,7 @@
 	"author": "Bar Greenholtz",
 	"license": "MIT",
 	"scripts": {
-		"start:dev": "run-p start-backend start-frontend",
+		"start:dev": "npm-run-all start-backend start-frontend",
 		"start-backend": "cd apps/backend && pnpm start:dev",
 		"start-frontend": "cd apps/frontend && pnpm start:dev",
 		"onboarding": "node ./scripts/onboarding.cjs",

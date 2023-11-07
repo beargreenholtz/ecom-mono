@@ -3,15 +3,17 @@ import type { Dispatch, AnyAction } from '@reduxjs/toolkit';
 
 import { logout } from '@/store/actions/auth';
 
-const useHttp = async (
+const useApi = async (
 	axiosParams: AxiosRequestConfig,
 	dispatch: Dispatch<AnyAction>,
-	toggleModal: () => void,
+	toggleModal?: () => void,
 ) => {
 	try {
 		const result = await axios.request(axiosParams);
 
-		toggleModal();
+		if (toggleModal) {
+			toggleModal();
+		}
 
 		return result;
 	} catch (error) {
@@ -33,4 +35,4 @@ const useHttp = async (
 	}
 };
 
-export default useHttp;
+export default useApi;

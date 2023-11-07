@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { AxiosError } from 'axios';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
+import useApi from '@/utils/useApi';
 import OtpView from './Otp.view';
 
 const Otp = () => {
+	const dispatch = useDispatch();
+
 	const { otp } = useParams();
 
 	let decodedUrl: string;
@@ -13,14 +17,12 @@ const Otp = () => {
 		decodedUrl = decodeURI(otp);
 	}
 
-	const [inputOtpState, setInputOtpState] = useState(new Array(6).fill(''));
+	const [inputOtpState, setInputOtpState] = useState(['', '', '', '', '', '']);
 
 	const handleInputPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
 		const pasteArray = e.clipboardData.getData('text').split('');
 
-		setInputOtpState((prev) => [
-			...prev.map((char, indexMap) => (char = pasteArray[indexMap] ? pasteArray[indexMap] : '')),
-		]);
+		setInputOtpState((prev) => [...prev.map((_, indexMap) => pasteArray[indexMap] || '')]);
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -41,18 +43,25 @@ const Otp = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(`${import.meta.env.VITE_BACkEND_URL}/user/loginotp`, {
-				token: decodedUrl,
-				otp: inputOtpState.join(''),
-			});
+			const response = await useApi(
+				{
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginotp`,
+					method: 'post',
+					data: {
+						token: decodedUrl,
+						otp: inputOtpState.join(''),
+					},
+				},
+				dispatch,
+			);
+
+			if (response instanceof AxiosError) {
+				throw response;
+			}
 
 			console.log(response);
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				console.error('Error during registration:', error.response?.data?.message);
-			} else {
-				console.log('An unknown error occurred');
-			}
+			console.error('An error occurred during otp:', error);
 		}
 	};
 
@@ -65,8 +74,5 @@ const Otp = () => {
 		/>
 	);
 };
-
-Otp.displayName = 'Otp';
-Otp.defaultProps = {};
 
 export default React.memo(Otp);

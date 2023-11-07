@@ -2,13 +2,10 @@ import React from 'react';
 
 import Login from '@/containers/Auth/Login';
 
-interface IProps {}
+interface TProps {}
 
-const LoginPage: React.FC<IProps> = () => {
+const LoginPage = () => {
 	return <Login />;
 };
-
-LoginPage.displayName = 'LoginPage';
-LoginPage.defaultProps = {};
 
 export default LoginPage;
