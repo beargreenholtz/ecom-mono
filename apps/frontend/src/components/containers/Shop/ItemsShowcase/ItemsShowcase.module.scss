@@ -1,0 +1,45 @@
+.container {
+	display: grid;
+	grid-template:
+		"item1 item2 item3 item4" 0.9fr "item5 item5 item6 item6" 1.4fr / 1fr 1fr 1fr 1fr;
+	gap: 8px 8px;
+	padding: 0 24px;
+
+	.itemContainer {
+		height: 100%;
+		background-color: #e3fcf3;
+		border-radius: 8px;
+
+		&__image {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+
+		}
+	}
+
+	.itemContainer:nth-child(1) {
+		grid-area: item1;
+	}
+
+	.itemContainer:nth-child(2) {
+		grid-area: item2;
+	}
+
+	.itemContainer:nth-child(3) {
+		grid-area: item3;
+	}
+
+	.itemContainer:nth-child(4) {
+		grid-area: item4;
+	}
+
+	.itemContainer:nth-child(5) {
+		grid-area: item5;
+	}
+
+	.itemContainer:nth-child(6) {
+		grid-area: item6;
+	}
+}

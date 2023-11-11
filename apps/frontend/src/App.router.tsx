@@ -1,10 +1,13 @@
 import React, { Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-// import ProtectedRoute from './ProtectedRoute';
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Loading from '@/containers/Loading';
 import NotFound from '@/containers/NotFound';
+import Header from '@/layout/Header';
+import Items from '@/containers/Dashboard/Items';
+import Sidebar from '@/layout/Sidebar';
+import DashHeader from '@/layout/DashHeader';
 import type { RootState } from './store/app';
 
 const Login = React.lazy(() => import('./pages/auth/Login'));
@@ -12,15 +15,48 @@ const Register = React.lazy(() => import('./pages/auth/Register'));
 const Otp = React.lazy(() => import('./pages/auth/otp/Otp'));
 const ResetPassRequest = React.lazy(() => import('./pages/auth/resetpassword/Request'));
 const ResetPassConfirm = React.lazy(() => import('./pages/auth/resetpassword/confirm'));
+const Home = React.lazy(() => import('./pages/shop/Home'));
 
 const AppRouter = () => {
 	const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);
 
-	const routes = !isAuth
-		? [
+	console.log(isAuth);
+	const generealRotues = [
+		{
+			element: (
+				<>
+					<DashHeader />
+					<Sidebar />
+					<Outlet />
+				</>
+			),
+			children: [
+				{
+					path: '/',
+					element: <Items />,
+				},
+			],
+		},
+
+		{
+			element: (
+				<>
+					<Header />
+					<Outlet />
+				</>
+			),
+			children: [
 				{
 					path: '/auth/login',
 					element: <Login />,
+				},
+				{
+					path: '/auth/resetpassword/request',
+					element: <ResetPassRequest />,
+				},
+				{
+					path: '/auth/resetpassword/confirm/:token',
+					element: <ResetPassConfirm />,
 				},
 				{
 					path: '/auth/register',
@@ -31,15 +67,16 @@ const AppRouter = () => {
 					element: <Otp />,
 				},
 				{
-					path: '/auth/resetpassword/request',
-					element: <ResetPassRequest />,
+					path: '*',
+					element: <Navigate to="/" replace />,
 				},
-				{
-					path: '/auth/resetpassword/confirm/:token',
-					element: <ResetPassConfirm />,
-				},
-		  ]
-		: [];
+			],
+		},
+	];
+
+	const authRoutes = [];
+
+	const notAuthRotues = [];
 
 	const errorElement = [
 		{
@@ -47,7 +84,7 @@ const AppRouter = () => {
 		},
 	];
 
-	const router = createBrowserRouter([...routes, ...errorElement]);
+	const router = createBrowserRouter([...generealRotues, ...errorElement]);
 
 	return (
 		<Suspense fallback={<Loading />}>

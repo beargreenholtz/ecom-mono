@@ -7,9 +7,9 @@ type TProps = {
 		email: string;
 		password: string;
 	};
+	readonly showPassword: boolean;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
-	readonly showPassword: boolean;
 	readonly handlePasswordToggle: () => void;
 	readonly handleClickGoogle: () => void;
 	readonly handleOnClickPassReset: () => void;
@@ -22,27 +22,27 @@ const LoginView = (props: TProps) => {
 				<h2 className={classes['loginContainer__title']}>Login</h2>
 				<form onSubmit={props.handleSubmit}>
 					<div className={classes['inputContainer']}>
-						<label htmlFor="email">Email:</label>
 						<input
 							type="email"
 							id="email"
 							name="email"
+							placeholder=" "
 							value={props.formData.email}
 							onChange={props.handleInputChange}
 						/>
+						<label htmlFor="email">Email:</label>
 					</div>
 
 					<div className={classes['inputContainer']}>
+						<input
+							type={props.showPassword ? 'text' : 'password'}
+							id="password"
+							name="password"
+							placeholder=" "
+							value={props.formData.password}
+							onChange={props.handleInputChange}
+						/>
 						<label htmlFor="password">Password:</label>
-						<div className={classes['passwordInputContainer']}>
-							<input
-								type={props.showPassword ? 'text' : 'password'}
-								id="password"
-								name="password"
-								value={props.formData.password}
-								onChange={props.handleInputChange}
-							/>
-						</div>
 					</div>
 
 					<button type="submit">Login</button>

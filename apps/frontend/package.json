@@ -32,9 +32,12 @@
 		"eslint-plugin-react-hooks": "4.6.0",
 		"eslint-plugin-unicorn": "46.0.0",
 		"eslint-plugin-unused-imports": "2.0.0",
+		"flickity": "2.3.0",
 		"react": "18.2.0",
 		"react-dom": "18.2.0",
+		"react-flickity-component": "4.0.7",
 		"react-redux": "8.0.5",
+		"react-responsive-carousel": "3.2.23",
 		"react-router-dom": "6.18.0",
 		"redux": "4.2.0"
 	},

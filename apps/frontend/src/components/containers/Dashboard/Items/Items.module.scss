@@ -1,0 +1,53 @@
+.container {
+	display: flex;
+
+
+	.itemsContainer {
+		width: 100%;
+		height: 100vh;
+		margin-inline-start: 250px;
+		margin-top: 150px;
+		border: solid 2px #808080;
+		border-radius: 4px;
+
+		.itemsBar {
+			display: flex;
+			padding: 20px;
+			border-bottom: solid 2px #bbdd;
+
+			&__description {
+				width: 400px;
+				font-size: 2rem;
+				color: #bbdd;
+				border-inline-start: solid 2px #bbdd;
+			}
+		}
+
+		.itemContainer {
+			display: flex;
+			padding: 20px;
+			font-size: 1.3rem;
+			border-bottom: solid 2px #bbdd;
+
+			&__description {
+				width: 400px;
+			}
+
+			&__button {
+				padding: 4px;
+				color: #fff;
+				background-color: #008000;
+				border-radius: 8px;
+			}
+
+		}
+	}
+
+	.addItemButton {
+		position: fixed;
+		right: 50px;
+		bottom: 50px;
+		padding: 20px;
+		border: #808080 2px dashed;
+	}
+}
