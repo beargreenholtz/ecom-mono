@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AxiosError } from 'axios';
+import type { TItem } from '@/types/item';
 import useApi from '@/utils/useApi';
 import EditItemFormView from './EditItemForm.view';
 
 type TProps = {
-	readonly id: string;
+	readonly item: TItem | null;
 	readonly toggleModal: () => void;
 };
 
@@ -14,9 +15,10 @@ const EditItemForm = (props: TProps) => {
 	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
-		name: '',
-		stock: 0,
-		price: 0,
+		name: props.item?.name,
+		stock: props.item?.stock,
+		imageUrl: props.item?.imageUrl,
+		price: props.item?.price,
 	});
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,10 +39,14 @@ const EditItemForm = (props: TProps) => {
 					url: `${import.meta.env.VITE_BACkEND_URL}/item/update`,
 					method: 'post',
 					data: {
-						id: props.id,
+						id: props.item && props.item._id,
 						name: formData.name,
 						stock: formData.stock,
 						price: formData.price,
+						imageUrl: formData.imageUrl,
+					},
+					headers: {
+						authorization: localStorage.getItem('jwt_token'),
 					},
 				},
 				dispatch,

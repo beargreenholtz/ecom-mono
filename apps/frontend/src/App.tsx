@@ -1,15 +1,21 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { store } from './store/app';
+import * as authActions from '@/store/actions/auth';
 import AppRouter from './App.router';
 
 const App = () => {
-	return (
-		<Provider store={store}>
-			<AppRouter />
-		</Provider>
-	);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const token = localStorage.getItem('jwt_token');
+
+		if (!token) return;
+
+		dispatch(authActions.loginSuccess(token));
+	}, []);
+
+	return <AppRouter />;
 };
 
 export default React.memo(App);

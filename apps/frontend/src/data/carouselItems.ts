@@ -9,14 +9,14 @@ export const carouselItems = [
 		alt: 'women1',
 		title: 'Look at this amazing story',
 		text: 'This is a test on e-commerce lorem ipsum lorem ipsum',
-		color: '#FFC0CB',
+		color: '#ADD8E6',
 	},
 	{
 		src: women2,
 		alt: 'women2',
 		title: 'Another fantastic story',
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-		color: '#ADD8E6',
+		color: '#98FB98',
 	},
 	{
 		src: women3,

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { AxiosError } from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import * as authActions from '@/store/actions/auth';
 import useApi from '@/utils/useApi';
 import OtpView from './Otp.view';
 
 const Otp = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const { otp } = useParams();
 
@@ -59,7 +61,11 @@ const Otp = () => {
 				throw response;
 			}
 
-			console.log(response);
+			const jwttoken: string = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(jwttoken));
+
+			navigate('/');
 		} catch (error) {
 			console.error('An error occurred during otp:', error);
 		}

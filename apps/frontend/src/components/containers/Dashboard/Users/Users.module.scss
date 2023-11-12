@@ -2,15 +2,14 @@
 	display: flex;
 
 
-	.itemsContainer {
+	.usersContainer {
 		width: 100%;
-		height: 100vh;
 		margin-inline-start: 250px;
 		margin-top: 150px;
 		border: solid 2px #808080;
 		border-radius: 4px;
 
-		.itemsBar {
+		.usersBar {
 			display: flex;
 			padding: 20px;
 			border-bottom: solid 2px #bbdd;
@@ -48,11 +47,5 @@
 		}
 	}
 
-	.addItemButton {
-		position: fixed;
-		right: 50px;
-		bottom: 50px;
-		padding: 20px;
-		border: #808080 2px dashed;
-	}
+
 }

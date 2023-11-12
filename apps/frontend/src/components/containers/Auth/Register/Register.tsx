@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { useDispatch } from 'react-redux';
 
@@ -7,7 +7,7 @@ import useApi from '@/utils/useApi';
 import useModal from '@/utils/useModal';
 import type { TValidateInputs } from '@/types/user';
 import { passowrdvaliteregex } from '@/utils/password-validate';
-import * as authActions from '../../../../store/actions/auth';
+import * as authActions from '@/store/actions/auth';
 
 import RegisterView from './Register.view';
 
@@ -108,17 +108,9 @@ const Register = () => {
 
 	const getUserFromGoogle = async () => {
 		try {
-			const url = `${import.meta.env.VITE_BACkEND_URL}/user/success`;
-
-			const response = await useApi(
-				{
-					url,
-					method: 'get',
-					withCredentials: true,
-				},
-				dispatch,
-				toggleModal,
-			);
+			const response = await axios.get(`${import.meta.env.VITE_BACkEND_URL}/user/success`, {
+				withCredentials: true,
+			});
 
 			if (response instanceof AxiosError) {
 				throw response;

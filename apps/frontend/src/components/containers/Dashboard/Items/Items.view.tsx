@@ -10,11 +10,11 @@ type TProps = {
 	readonly isShowingModal: boolean;
 	readonly isShowingModalEdit: boolean;
 	readonly allItems: TItem[];
-	readonly clickedItemId: string;
+	readonly clickedItemId: TItem | null;
 	readonly addItem: (itemInfo: TItem) => void;
 	readonly toggleModal: () => void;
 	readonly toggleModalEdit: () => void;
-	readonly handleClickEdit: (e: React.MouseEvent<HTMLButtonElement>, id: string) => void;
+	readonly handleClickEdit: (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => void;
 };
 
 const ItemsView = (props: TProps) => {
@@ -26,7 +26,10 @@ const ItemsView = (props: TProps) => {
 				<AddItemForm toggleModal={props.toggleModal} addItem={props.addItem} />
 			</Modal>
 			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.toggleModalEdit}>
-				<EditItemForm toggleModal={props.toggleModalEdit} id={props.clickedItemId} />
+				<EditItemForm
+					toggleModal={props.toggleModalEdit}
+					item={props.clickedItemId && props.clickedItemId}
+				/>
 			</Modal>
 			<div className={classes['container']}>
 				<div className={classes['itemsContainer']}>
@@ -44,12 +47,20 @@ const ItemsView = (props: TProps) => {
 								<span className={classes['itemContainer__description']}>{item._id}</span>
 								<span className={classes['itemContainer__description']}>{item.name}</span>
 								<span className={classes['itemContainer__description']}>{item.stock}</span>
-								<span className={classes['itemContainer__description']}>{item.price}</span>
+								<span className={classes['itemContainer__description']}>
+									<img
+										className={classes['itemContainer__image']}
+										src={item.imageUrl}
+										alt=""
+									/>
+									{item.price}
+								</span>
+
 								<div className={classes['itemContainer__description']}>
 									<button
 										type="button"
 										className={classes['itemContainer__button']}
-										onClick={(e) => props.handleClickEdit(e, item._id)}
+										onClick={(e) => props.handleClickEdit(e, item)}
 									>
 										Edit
 									</button>

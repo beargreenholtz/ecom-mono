@@ -8,6 +8,7 @@ import Header from '@/layout/Header';
 import Items from '@/containers/Dashboard/Items';
 import Sidebar from '@/layout/Sidebar';
 import DashHeader from '@/layout/DashHeader';
+import Users from '@/containers/Dashboard/Users';
 import type { RootState } from './store/app';
 
 const Login = React.lazy(() => import('./pages/auth/Login'));
@@ -23,6 +24,7 @@ const AppRouter = () => {
 	console.log(isAuth);
 	const generealRotues = [
 		{
+			path: '/dashboard',
 			element: (
 				<>
 					<DashHeader />
@@ -32,8 +34,12 @@ const AppRouter = () => {
 			),
 			children: [
 				{
-					path: '/',
+					path: 'items',
 					element: <Items />,
+				},
+				{
+					path: 'users',
+					element: <Users />,
 				},
 			],
 		},
@@ -46,6 +52,10 @@ const AppRouter = () => {
 				</>
 			),
 			children: [
+				{
+					path: '/',
+					element: <Home />,
+				},
 				{
 					path: '/auth/login',
 					element: <Login />,

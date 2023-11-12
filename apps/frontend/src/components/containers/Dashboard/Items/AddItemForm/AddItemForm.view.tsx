@@ -7,6 +7,7 @@ type TProps = {
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly formData: {
 		name: string;
+		imageUrl: string;
 		stock: number;
 		image?: string;
 		price: number;
@@ -40,7 +41,7 @@ const AddItemFormView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
 			<h1 className={classes['container__title']}>Add Item</h1>
-			<form onSubmit={props.handleSubmit}>
+			<form encType="multipart/form-data" onSubmit={props.handleSubmit}>
 				<div className={classes['inputContainer']}>
 					<input
 						type="text"
@@ -67,14 +68,14 @@ const AddItemFormView = (props: TProps) => {
 
 				<div className={classes['inputContainer']}>
 					<input
-						type="file"
-						id="image"
-						name="image"
+						type="text"
+						id="imageUrl"
+						name="imageUrl"
 						placeholder=" "
-						value={props.formData.image}
+						value={props.formData.imageUrl}
 						onChange={props.handleInputChange}
 					/>
-					<label htmlFor="image">Image:</label>
+					<label htmlFor="imageUrl">Image url:</label>
 				</div>
 
 				<div className={classes['inputContainer']}>

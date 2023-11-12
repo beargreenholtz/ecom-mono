@@ -4,10 +4,10 @@ import classes from './EditItemForm.module.scss';
 
 type TProps = {
 	readonly formData: {
-		name: string;
-		stock: number;
-		image?: string;
-		price: number;
+		name?: string;
+		stock?: number;
+		imageUrl?: string;
+		price?: number;
 	};
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -44,14 +44,14 @@ const EditItemFormView = (props: TProps) => {
 
 				<div className={classes['inputContainer']}>
 					<input
-						type="file"
-						id="image"
-						name="image"
+						type="text"
+						id="imageUrl"
+						name="imageUrl"
 						placeholder=" "
-						value={props.formData.image}
+						value={props.formData.imageUrl}
 						onChange={props.handleInputChange}
 					/>
-					<label htmlFor="image">Image:</label>
+					<label htmlFor="imageUrl">Image:</label>
 				</div>
 
 				<div className={classes['inputContainer']}>

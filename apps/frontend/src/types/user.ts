@@ -5,3 +5,10 @@ export type TValidateInputs = {
 	name: string;
 	confirmPassword: string;
 };
+
+export type TUser = {
+	_id: string;
+	name: string;
+	email: string;
+	role: string;
+};

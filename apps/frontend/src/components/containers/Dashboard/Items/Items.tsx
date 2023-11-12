@@ -11,7 +11,7 @@ const Items = () => {
 	const dispatch = useDispatch();
 	const [isShowingModal, toggleModal] = useModal();
 	const [isShowingModalEdit, toggleModalEdit] = useModal();
-	const [clickedItemId, setClickedItemId] = useState('');
+	const [clickedItemId, setClickedItemId] = useState<TItem | null>(null);
 
 	const [allItemsState, setAllItemsState] = useState<TItem[]>([]);
 
@@ -25,7 +25,10 @@ const Items = () => {
 				const response = await useApi(
 					{
 						url: `${import.meta.env.VITE_BACkEND_URL}/item/getallitems`,
-						method: 'get',
+						method: 'post',
+						data: {
+							limit: Infinity,
+						},
 					},
 					dispatch,
 				);
@@ -43,9 +46,9 @@ const Items = () => {
 		findAllItems();
 	}, []);
 
-	const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>, id: string) => {
+	const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => {
 		console.log(e);
-		setClickedItemId(id);
+		setClickedItemId(item);
 		toggleModalEdit();
 	};
 

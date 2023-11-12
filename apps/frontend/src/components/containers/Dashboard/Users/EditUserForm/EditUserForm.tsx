@@ -2,26 +2,26 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AxiosError } from 'axios';
-import type { TItem } from '@/types/item';
 import useApi from '@/utils/useApi';
-import AddItemFormView from './AddItemForm.view';
+import type { TUser } from '@/types/user';
+
+import EditUserFormView from './EditUserForm.view';
 
 type TProps = {
+	readonly item: TUser | null;
 	readonly toggleModal: () => void;
-	readonly addItem: (itemInfo: TItem) => void;
 };
 
-const AddItemForm = (props: TProps) => {
+const EditUserForm = (props: TProps) => {
 	const dispatch = useDispatch();
 
 	const [formData, setFormData] = useState({
-		name: '',
-		imageUrl: '',
-		stock: 0,
-		price: 0,
+		name: props.item?.name,
+		email: props.item?.email,
+		role: props.item?.role,
 	});
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 
 		setFormData((prevData) => ({
@@ -34,20 +34,15 @@ const AddItemForm = (props: TProps) => {
 		e.preventDefault();
 
 		try {
-			const userToken = localStorage.getItem('jwt_token');
-
 			const response = await useApi(
 				{
-					url: `${import.meta.env.VITE_BACkEND_URL}/item/create`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/update`,
 					method: 'post',
 					data: {
+						id: props.item && props.item._id,
 						name: formData.name,
-						imageUrl: formData.imageUrl,
-						stock: formData.stock,
-						price: formData.price,
-					},
-					headers: {
-						authorization: `${userToken}`,
+						email: formData.email,
+						role: formData.role,
 					},
 				},
 				dispatch,
@@ -57,16 +52,14 @@ const AddItemForm = (props: TProps) => {
 				throw response;
 			}
 
-			props.addItem({ ...formData, _id: 'reload to generate id' });
-
 			props.toggleModal();
 		} catch (error) {
-			console.error('An error occurred during adding item:', error);
+			console.error('An error occurred during otp:', error);
 		}
 	};
 
 	return (
-		<AddItemFormView
+		<EditUserFormView
 			formData={formData}
 			handleSubmit={handleSubmit}
 			handleInputChange={handleInputChange}
@@ -74,4 +67,4 @@ const AddItemForm = (props: TProps) => {
 	);
 };
 
-export default React.memo(AddItemForm);
+export default React.memo(EditUserForm);
