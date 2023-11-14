@@ -59,7 +59,6 @@ module.exports = {
 		'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
 		'react/button-has-type': 'error',
 		'react/destructuring-assignment': ['error', 'never'],
-		'react/display-name': ['error', { ignoreTranspilerName: true }],
 		'react/function-component-definition': [
 			'error',
 			{
@@ -79,8 +78,6 @@ module.exports = {
 		'react/jsx-key': ['error', { checkKeyMustBeforeSpread: true }],
 		'react/jsx-max-depth': ['error', { max: 10 }],
 		'react/jsx-no-duplicate-props': ['error'],
-
-		'react-hooks/rules-of-hooks': ['error'],
 	},
 	overrides: [
 		{

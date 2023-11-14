@@ -1,38 +1,45 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
+import { useParams } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import useApi from '@/utils/useApi';
 import ResetPassVerifyView from './ResetPassVerify.view';
 
 const ResetPassVerify = () => {
-	const router = useRouter();
+	const { token } = useParams();
 
 	const [passwordInputState, setPasswordInputState] = useState('');
-	const [succesPasswordResetState, setSuccesPasswordResetState] = useState(false);
+	const [isSuccesPasswordResetState, setIsSuccesPasswordResetState] = useState(false);
 	const [errorState, setErrorState] = useState<string | null>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		const { token } = router.query;
+		const dispatch = useDispatch();
 
-		const decodedUrl = decodeURI(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/passwordreset/${token}`);
+		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/passwordreset/${token}`);
 
 		console.log(errorState);
 
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(decodedUrl, {
-				newPassword: passwordInputState,
-			});
-			ssda;
+			const response = await useApi(
+				{
+					url: decodedUrl,
+					method: 'post',
+					data: {
+						newPassword: passwordInputState,
+					},
+				},
+				dispatch,
+			);
+
 			console.log('User ID:', response);
-			setSuccesPasswordResetState(true);
+			setIsSuccesPasswordResetState(true);
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				setErrorState(error.message);
-			} else {
-				setErrorState('Generic Error');
-			}
+			if (error instanceof AxiosError) setErrorState(error.message);
+
+			console.log(error);
 		}
 	};
 
@@ -44,14 +51,11 @@ const ResetPassVerify = () => {
 		<ResetPassVerifyView
 			error={errorState}
 			passwordInputState={passwordInputState}
-			succesPasswordReset={succesPasswordResetState}
+			isSuccesPasswordReset={isSuccesPasswordResetState}
 			handleSubmit={handleSubmit}
 			handleInputChange={handleInputChange}
 		/>
 	);
 };
-
-ResetPassVerify.displayName = 'ResetPassVerify';
-ResetPassVerify.defaultProps = {};
 
 export default React.memo(ResetPassVerify);

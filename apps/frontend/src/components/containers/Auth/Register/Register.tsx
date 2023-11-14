@@ -1,9 +1,21 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import axios, { type AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
+
+import { useDispatch } from 'react-redux';
+
+import useApi from '@/utils/useApi';
+import useModal from '@/utils/useModal';
+import type { TValidateInputs } from '@/types/user';
+import { passowrdvaliteregex } from '@/utils/password-validate';
+import * as authActions from '@/store/actions/auth';
+
 import RegisterView from './Register.view';
 
 const Register = () => {
+	const dispatch = useDispatch();
+
+	const [isShowingModal, toggleModal] = useModal();
+
 	const [formData, setFormData] = useState({
 		username: '',
 		name: '',
@@ -12,14 +24,16 @@ const Register = () => {
 		confirmPassword: '',
 	});
 
-	const [showPassword, setShowPassword] = useState(false);
+	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const handlePasswordToggle = () => {
-		setShowPassword(!showPassword);
+		setIsShowPassword(!isShowPassword);
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
+
+		console.log(isShowingModal);
 
 		setFormData((prevData) => ({
 			...prevData,
@@ -27,75 +41,84 @@ const Register = () => {
 		}));
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault();
-
-		if (
-			formData.username.trim() === '' ||
-			formData.email.trim() === '' ||
-			formData.name.trim() === '' ||
-			formData.password.trim() === ''
-		) {
+	const validateInput = (inputs: TValidateInputs) => {
+		if (Object.values(inputs).some((value) => value.trim() === '')) {
 			console.error('All Inputs Required');
 
-			return;
+			return false;
 		}
 
-		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(formData.password)) {
+		if (!passowrdvaliteregex.test(inputs.password)) {
 			console.error(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
 
-			return;
+			return false;
 		}
 
-		if (formData.password !== formData.confirmPassword) {
+		if (inputs.password !== inputs.confirmPassword) {
 			console.error('Passwords dont match');
 
+			return false;
+		}
+
+		return true;
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (!validateInput(formData)) {
 			return;
 		}
 
 		console.log('Form data:', formData);
 
-		await axios
-			.post('http://localhost:5000/user/signup', {
-				name: formData.username,
-				username: formData.username,
-				email: formData.email,
-				password: formData.password,
-			})
-			.then(
-				(res) => {
-					const { userId, email, token } = res.data;
-
-					console.log('Registration successful!');
-					console.log('User ID:', userId);
-					console.log('User Email:', email);
-					console.log('JWT Token:', token);
+		try {
+			const response = await useApi(
+				{
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/signup`,
+					method: 'post',
+					data: {
+						name: formData.username,
+						username: formData.username,
+						email: formData.email,
+						password: formData.password,
+					},
 				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
-				},
+				dispatch,
+				toggleModal,
 			);
+
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+
+			const token: string = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(token));
+		} catch (error) {
+			console.error('An error occurred during registration:', error);
+		}
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
 	};
-
-	const [user, setUser] = useState(null);
 
 	const getUserFromGoogle = async () => {
 		try {
-			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
+			const response = await axios.get(`${import.meta.env.VITE_BACkEND_URL}/user/success`, {
+				withCredentials: true,
+			});
 
-			setUser(data);
-			console.log(data);
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+
+			const token = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
 			console.log(error);
 		}
@@ -107,17 +130,16 @@ const Register = () => {
 
 	return (
 		<RegisterView
-			showPassword={showPassword}
+			isShowPassword={isShowPassword}
 			formData={formData}
+			isShowingModal={isShowingModal}
 			handlePasswordToggle={handlePasswordToggle}
-			onInputChange={handleInputChange}
-			onSubmit={handleSubmit}
-			onClickGoogle={onClickGoogle}
+			toggleModal={toggleModal}
+			handleInputChange={handleInputChange}
+			handleSubmit={handleSubmit}
+			handleClickGoogle={onClickGoogle}
 		/>
 	);
 };
-
-Register.displayName = 'Register';
-Register.defaultProps = {};
 
 export default React.memo(Register);

@@ -34,5 +34,23 @@
 		"_templates": "template"
 	},
 	"material-icon-theme.activeIconPack": "react_redux",
-	"task.allowAutomaticTasks": "on"
+	"task.allowAutomaticTasks": "on",
+	"cSpell.words": ["passowrdvaliteregex", "reduxjs"],
+	"reactTsScss.autoComplete": true,
+	"reactTsScss.definition": true,
+	"reactTsScss.peekProperties": true,
+	"reactTsScss.cssAutoComplete": true,
+	"reactTsScss.cssDefinitions": true,
+	"reactTsScss.diagnostics": true,
+	"reactTsScss.baseDir": "src",
+	"reactTsScss.cssSyntaxColor": true,
+	"reactTsScss.cleanUpDefs": [
+		"*.module.css",
+		"*.module.scss",
+		"*.module.sass",
+		"*.module.less",
+		"*.module.styl"
+	],
+	"reactTsScss.references": true,
+	"reactTsScss.codelens": false
 }
