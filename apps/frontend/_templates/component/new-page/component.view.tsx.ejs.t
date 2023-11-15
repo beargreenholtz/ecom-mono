@@ -12,7 +12,4 @@ const <%= h.changeCase.pascalCase(name) %>View= (props: TProps) => {
   return <></>;
 };
 
-<%= h.changeCase.pascalCase(name) %>View.displayName = '<%= h.changeCase.pascalCase(name) %>View';
-<%= h.changeCase.pascalCase(name) %>View.defaultProps = {};
-
 export default React.memo(<%= h.changeCase.pascalCase(name) %>View);
