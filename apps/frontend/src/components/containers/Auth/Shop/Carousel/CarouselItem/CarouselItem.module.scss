@@ -1,0 +1,34 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+
+
+	&__image {
+		height: 80vh;
+	}
+
+	.innerContainer {
+		&__title {
+			font-size: 50px;
+
+		}
+
+		&__text {
+			font-size: 24px;
+		}
+
+		&__button {
+			display: inline-block;
+			padding: 15px 32px;
+			font-size: 16px;
+			color: #fff;
+			text-align: center;
+			text-decoration: none;
+			background-color: #04AA6D;
+		}
+
+	}
+
+}
