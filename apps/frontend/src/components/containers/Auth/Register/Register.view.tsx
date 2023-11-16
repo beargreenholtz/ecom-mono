@@ -12,6 +12,8 @@ type TProps = {
 		password: string;
 		confirmPassword: string;
 	};
+	readonly isButtonDisabled: boolean;
+	readonly errorForm: string;
 	readonly isShowPassword: boolean;
 	readonly isShowingModal: boolean;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -86,11 +88,20 @@ const RegisterView = (props: TProps) => {
 						>
 							{props.isShowPassword ? 'Hide' : 'Show'}
 						</button>
-						<button type="submit">Register</button>
+						<button
+							className={props.isButtonDisabled ? classes['disabled'] : ''}
+							disabled={props.isButtonDisabled}
+							type="submit"
+						>
+							Register
+						</button>
 					</form>
 					<button type="submit" onClick={props.handleClickGoogle}>
 						Google
 					</button>
+					{props.errorForm && (
+						<span className={classes['registerContainer__error']}>{props.errorForm}</span>
+					)}
 				</div>
 			</div>
 		</>

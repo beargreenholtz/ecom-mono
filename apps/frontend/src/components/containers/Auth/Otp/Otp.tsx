@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AxiosError } from 'axios';
+import { AxiosError, isAxiosError } from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -12,6 +12,9 @@ const Otp = () => {
 	const navigate = useNavigate();
 
 	const { otp } = useParams();
+
+	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+	const [errorForm, setErrorForm] = useState('');
 
 	let decodedUrl: string;
 
@@ -44,6 +47,17 @@ const Otp = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
+		setIsButtonDisabled(true);
+		setTimeout(() => {
+			setIsButtonDisabled(false);
+		}, 5000);
+
+		if (inputOtpState.includes('')) {
+			setErrorForm('Otp should be 6 characters');
+
+			return;
+		}
+
 		try {
 			const response = await useApi(
 				{
@@ -67,15 +81,19 @@ const Otp = () => {
 
 			navigate('/');
 		} catch (error) {
-			console.error('An error occurred during otp:', error);
+			if (isAxiosError(error)) {
+				setErrorForm(error.response?.data?.message);
+			}
 		}
 	};
 
 	return (
 		<OtpView
+			isButtonDisabled={isButtonDisabled}
+			inputOtp={inputOtpState}
+			errorForm={errorForm}
 			handleInputPaste={handleInputPaste}
 			handleInputChange={handleInputChange}
-			inputOtp={inputOtpState}
 			handleSubmit={handleSubmit}
 		/>
 	);

@@ -7,7 +7,9 @@ type TProps = {
 		email: string;
 		password: string;
 	};
+	readonly errorForm: string;
 	readonly showPassword: boolean;
+	readonly isButtonDisabled: boolean;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handlePasswordToggle: () => void;
@@ -45,7 +47,13 @@ const LoginView = (props: TProps) => {
 						<label htmlFor="password">Password:</label>
 					</div>
 
-					<button type="submit">Login</button>
+					<button
+						className={props.isButtonDisabled ? classes['disabled'] : ''}
+						type="submit"
+						disabled={props.isButtonDisabled}
+					>
+						Login
+					</button>
 				</form>
 				<button type="button" onClick={props.handleClickGoogle}>
 					Google
@@ -53,6 +61,9 @@ const LoginView = (props: TProps) => {
 				<button type="button" onClick={props.handleOnClickPassReset}>
 					Reset Password
 				</button>
+				{props.errorForm && (
+					<span className={classes['loginContainer__error']}>{props.errorForm}</span>
+				)}
 			</div>
 		</div>
 	);

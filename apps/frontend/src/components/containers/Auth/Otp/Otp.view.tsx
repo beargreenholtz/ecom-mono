@@ -4,6 +4,8 @@ import classes from './Otp.module.scss';
 
 type TProps = {
 	readonly inputOtp: string[];
+	readonly isButtonDisabled: boolean;
+	readonly errorForm: string;
 	readonly handleInputPaste: (e: React.ClipboardEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
@@ -34,8 +36,15 @@ const OtpView = (props: TProps) => {
 							})}
 						</div>
 					</div>
-					<button type="submit">Submit</button>
+					<button
+						className={props.isButtonDisabled ? classes['disabled'] : ''}
+						type="submit"
+						disabled={props.isButtonDisabled}
+					>
+						Submit
+					</button>
 				</form>
+				{props.errorForm && <p className={classes['containerOtp__error']}>{props.errorForm}</p>}
 			</div>
 		</div>
 	);

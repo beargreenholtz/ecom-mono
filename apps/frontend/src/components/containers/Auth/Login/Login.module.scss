@@ -20,7 +20,6 @@
 			text-align: center;
 		}
 
-
 		.inputContainer {
 			position: relative;
 			display: flex;
@@ -57,9 +56,6 @@
 			}
 		}
 
-
-
-
 		button {
 			width: 100%;
 			padding: 10px;
@@ -74,6 +70,20 @@
 			&:hover {
 				background-color: #0056b3;
 			}
+
+		}
+
+		.disabled {
+			background-color: #808080;
+
+			&:hover {
+				background-color: #808080;
+			}
+		}
+
+		&__error {
+			font-size: 2rem;
+			color: #f00;
 		}
 	}
 }

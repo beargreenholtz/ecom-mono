@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, isAxiosError } from 'axios';
 
 import { useDispatch } from 'react-redux';
 
@@ -14,6 +14,7 @@ import RegisterView from './Register.view';
 const Register = () => {
 	const dispatch = useDispatch();
 
+	const [errorForm, setErrorForm] = useState('');
 	const [isShowingModal, toggleModal] = useModal();
 
 	const [formData, setFormData] = useState({
@@ -24,6 +25,8 @@ const Register = () => {
 		confirmPassword: '',
 	});
 
+	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const handlePasswordToggle = () => {
@@ -33,7 +36,7 @@ const Register = () => {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		console.log(isShowingModal);
+		setErrorForm('');
 
 		setFormData((prevData) => ({
 			...prevData,
@@ -43,13 +46,13 @@ const Register = () => {
 
 	const validateInput = (inputs: TValidateInputs) => {
 		if (Object.values(inputs).some((value) => value.trim() === '')) {
-			console.error('All Inputs Required');
+			setErrorForm('All Inputs Required');
 
 			return false;
 		}
 
 		if (!passowrdvaliteregex.test(inputs.password)) {
-			console.error(
+			setErrorForm(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
 
@@ -57,7 +60,7 @@ const Register = () => {
 		}
 
 		if (inputs.password !== inputs.confirmPassword) {
-			console.error('Passwords dont match');
+			setErrorForm('Passwords dont match');
 
 			return false;
 		}
@@ -67,6 +70,11 @@ const Register = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		setIsButtonDisabled(true);
+		setTimeout(() => {
+			setIsButtonDisabled(false);
+		}, 5000);
 
 		if (!validateInput(formData)) {
 			return;
@@ -98,7 +106,9 @@ const Register = () => {
 
 			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
-			console.error('An error occurred during registration:', error);
+			if (isAxiosError(error)) {
+				setErrorForm(error.response?.data?.message);
+			}
 		}
 	};
 
@@ -106,6 +116,7 @@ const Register = () => {
 		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
 	};
 
+	//move to shop main page
 	const getUserFromGoogle = async () => {
 		try {
 			const response = await axios.get(`${import.meta.env.VITE_BACkEND_URL}/user/success`, {
@@ -133,6 +144,8 @@ const Register = () => {
 			isShowPassword={isShowPassword}
 			formData={formData}
 			isShowingModal={isShowingModal}
+			errorForm={errorForm}
+			isButtonDisabled={isButtonDisabled}
 			handlePasswordToggle={handlePasswordToggle}
 			toggleModal={toggleModal}
 			handleInputChange={handleInputChange}
