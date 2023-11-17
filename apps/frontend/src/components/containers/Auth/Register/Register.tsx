@@ -5,22 +5,23 @@ import { useDispatch } from 'react-redux';
 
 import useApi from '@/utils/useApi';
 import useModal from '@/utils/useModal';
-import type { TValidateInputs } from '@/types/user';
-import { passowrdvaliteregex } from '@/utils/password-validate';
 import * as authActions from '@/store/actions/auth';
+import useValidation from '@/utils/input-validate';
 
 import RegisterView from './Register.view';
 
 const Register = () => {
 	const dispatch = useDispatch();
 
+	const [resetErrors, errors, handleValidation] = useValidation();
+
 	const [errorForm, setErrorForm] = useState('');
 	const [isShowingModal, toggleModal] = useModal();
 
 	const [formData, setFormData] = useState({
+		email: '',
 		username: '',
 		name: '',
-		email: '',
 		password: '',
 		confirmPassword: '',
 	});
@@ -37,6 +38,7 @@ const Register = () => {
 		const { name, value } = e.target;
 
 		setErrorForm('');
+		resetErrors();
 
 		setFormData((prevData) => ({
 			...prevData,
@@ -44,41 +46,17 @@ const Register = () => {
 		}));
 	};
 
-	const validateInput = (inputs: TValidateInputs) => {
-		if (Object.values(inputs).some((value) => value.trim() === '')) {
-			setErrorForm('All Inputs Required');
-
-			return false;
-		}
-
-		if (!passowrdvaliteregex.test(inputs.password)) {
-			setErrorForm(
-				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
-			);
-
-			return false;
-		}
-
-		if (inputs.password !== inputs.confirmPassword) {
-			setErrorForm('Passwords dont match');
-
-			return false;
-		}
-
-		return true;
-	};
-
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		if (!handleValidation(formData)) {
+			return;
+		}
 
 		setIsButtonDisabled(true);
 		setTimeout(() => {
 			setIsButtonDisabled(false);
 		}, 5000);
-
-		if (!validateInput(formData)) {
-			return;
-		}
 
 		console.log('Form data:', formData);
 
@@ -141,6 +119,7 @@ const Register = () => {
 
 	return (
 		<RegisterView
+			errors={errors}
 			isShowPassword={isShowPassword}
 			formData={formData}
 			isShowingModal={isShowingModal}

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Input from '@/ui/Input';
+import type { FormFields } from '@/types/user';
 import classes from './Login.module.scss';
 
 type TProps = {
@@ -10,6 +12,7 @@ type TProps = {
 	readonly errorForm: string;
 	readonly showPassword: boolean;
 	readonly isButtonDisabled: boolean;
+	readonly errors: FormFields;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handlePasswordToggle: () => void;
@@ -18,34 +21,29 @@ type TProps = {
 };
 
 const LoginView = (props: TProps) => {
+	const firstObject = Object.keys(props.errors)[0];
+
 	return (
 		<div className={classes['container']}>
 			<div className={classes['loginContainer']}>
 				<h2 className={classes['loginContainer__title']}>Login</h2>
 				<form onSubmit={props.handleSubmit}>
-					<div className={classes['inputContainer']}>
-						<input
-							type="email"
-							id="email"
-							name="email"
-							placeholder=" "
-							value={props.formData.email}
-							onChange={props.handleInputChange}
-						/>
-						<label htmlFor="email">Email:</label>
-					</div>
-
-					<div className={classes['inputContainer']}>
-						<input
-							type={props.showPassword ? 'text' : 'password'}
-							id="password"
-							name="password"
-							placeholder=" "
-							value={props.formData.password}
-							onChange={props.handleInputChange}
-						/>
-						<label htmlFor="password">Password:</label>
-					</div>
+					<Input
+						type="email"
+						error={props.errors['email']}
+						value={props.formData.email}
+						handleInputChange={props.handleInputChange}
+						inputName="email"
+						firstErrorItem={firstObject}
+					/>
+					<Input
+						type={props.showPassword ? 'text' : 'password'}
+						value={props.formData.password}
+						error={props.errors['password']}
+						handleInputChange={props.handleInputChange}
+						inputName="password"
+						firstErrorItem={firstObject}
+					/>
 
 					<button
 						className={props.isButtonDisabled ? classes['disabled'] : ''}

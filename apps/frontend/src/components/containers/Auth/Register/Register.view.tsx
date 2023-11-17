@@ -1,6 +1,8 @@
 import React from 'react';
 
 import Modal from '@/ui/Modal';
+import Input from '@/ui/Input';
+import type { FormFields } from '@/types/user';
 
 import classes from './Register.module.scss';
 
@@ -16,6 +18,7 @@ type TProps = {
 	readonly errorForm: string;
 	readonly isShowPassword: boolean;
 	readonly isShowingModal: boolean;
+	readonly errors: FormFields;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handlePasswordToggle: () => void;
@@ -57,6 +60,8 @@ const RegisterView = (props: TProps) => {
 		},
 	];
 
+	const firstObject = Object.keys(props.errors)[0];
+
 	return (
 		<>
 			<Modal isShow={props.isShowingModal} onClickCloseButton={props.toggleModal}>
@@ -66,21 +71,47 @@ const RegisterView = (props: TProps) => {
 				<div className={classes['registerContainer']}>
 					<h2 className={classes['registerContainer__title']}>Register</h2>
 					<form onSubmit={props.handleSubmit}>
-						{formFields.map((field) => (
-							<div className={classes['inputContainer']} key={field.name}>
-								<label className={classes['inputContainer__label']} htmlFor={field.id}>
-									{field.label}
-								</label>
-								<input
-									className={classes['inputContainer__input']}
-									type={field.type}
-									id={field.id}
-									name={field.name}
-									value={props.formData[field.name as keyof typeof props.formData]}
-									onChange={props.handleInputChange}
-								/>
-							</div>
-						))}
+						<Input
+							type="email"
+							error={props.errors['email']}
+							value={props.formData.email}
+							handleInputChange={props.handleInputChange}
+							inputName="email"
+							firstErrorItem={firstObject}
+						/>
+						<Input
+							type="text"
+							error={props.errors['username']}
+							value={props.formData.username}
+							handleInputChange={props.handleInputChange}
+							inputName="username"
+							firstErrorItem={firstObject}
+						/>
+						<Input
+							type="text"
+							error={props.errors['name']}
+							value={props.formData.name}
+							handleInputChange={props.handleInputChange}
+							inputName="name"
+							firstErrorItem={firstObject}
+						/>
+						<Input
+							type={props.isShowPassword ? 'text' : 'password'}
+							error={props.errors['password']}
+							value={props.formData.password}
+							handleInputChange={props.handleInputChange}
+							inputName="password"
+							firstErrorItem={firstObject}
+						/>
+						<Input
+							type={props.isShowPassword ? 'text' : 'password'}
+							error={props.errors['confirmPassword']}
+							value={props.formData.confirmPassword}
+							handleInputChange={props.handleInputChange}
+							inputName="confirmPassword"
+							firstErrorItem={firstObject}
+						/>
+
 						<button
 							type="button"
 							className={classes['passwordToggle']}

@@ -12,3 +12,15 @@ export type TUser = {
 	email: string;
 	role: string;
 };
+
+export type FormFields = {
+	name?: string;
+	email?: string;
+	username?: string;
+	password?: string;
+	confirmPassword?: string;
+};
+
+export type FormErrors = {
+	[key: string]: string;
+};

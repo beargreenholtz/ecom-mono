@@ -3,6 +3,7 @@ import { AxiosError, isAxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 
 import { passowrdvaliteregex } from '@/utils/password-validate';
+import useValidation from '@/utils/input-validate';
 import useApi from '@/utils/useApi';
 import LoginView from './Login.view';
 
@@ -16,6 +17,8 @@ const Login = () => {
 		password: '',
 	});
 
+	const [resetErrors, errors, handleValidation] = useValidation();
+
 	const [errorForm, setErrorForm] = useState('');
 
 	const [showPassword, setShowPassword] = useState(false);
@@ -27,6 +30,8 @@ const Login = () => {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
+		resetErrors();
+
 		setErrorForm('');
 
 		setFormData((prevData) => ({
@@ -37,6 +42,10 @@ const Login = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		if (!handleValidation(formData)) {
+			return;
+		}
 
 		if (formData.email.trim() === '' || formData.password.trim() === '') {
 			setErrorForm('All Inputs Required');
@@ -98,6 +107,7 @@ const Login = () => {
 			formData={formData}
 			errorForm={errorForm}
 			isButtonDisabled={isButtonDisabled}
+			errors={errors}
 			handlePasswordToggle={handlePasswordToggle}
 			handleOnClickPassReset={handleOnClickPassReset}
 			handleInputChange={handleInputChange}
