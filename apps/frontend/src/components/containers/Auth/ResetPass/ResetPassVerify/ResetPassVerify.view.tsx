@@ -30,7 +30,6 @@ const ResetPassVerifyView = (props: TProps) => {
 					</button>
 				</form>
 				{props.isSuccesPasswordReset && <span>Password has been reset</span>}
-
 				{props.error && <span>{props.error}</span>}
 			</div>
 		</div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-
 import { useDispatch } from 'react-redux';
+
 import useApi from '@/utils/useApi';
+
 import ResetPassView from './ResetPass.view';
 
 const ResetPass = () => {

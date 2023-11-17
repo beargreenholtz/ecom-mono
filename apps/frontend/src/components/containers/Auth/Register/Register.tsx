@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios, { AxiosError } from 'axios';
-
 import { useDispatch } from 'react-redux';
 
 import useApi from '@/utils/useApi';
@@ -16,7 +15,7 @@ const Register = () => {
 
 	const [isShowingModal, toggleModal] = useModal();
 
-	const [formData, setFormData] = useState({
+	const [formDataState, setformDataState] = useState({
 		username: '',
 		name: '',
 		email: '',
@@ -35,7 +34,7 @@ const Register = () => {
 
 		console.log(isShowingModal);
 
-		setFormData((prevData) => ({
+		setformDataState((prevData) => ({
 			...prevData,
 			[name]: value,
 		}));
@@ -68,11 +67,11 @@ const Register = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (!validateInput(formData)) {
+		if (!validateInput(formDataState)) {
 			return;
 		}
 
-		console.log('Form data:', formData);
+		console.log('Form data:', formDataState);
 
 		try {
 			const response = await useApi(
@@ -80,10 +79,10 @@ const Register = () => {
 					url: `${import.meta.env.VITE_BACkEND_URL}/user/signup`,
 					method: 'post',
 					data: {
-						name: formData.username,
-						username: formData.username,
-						email: formData.email,
-						password: formData.password,
+						name: formDataState.username,
+						username: formDataState.username,
+						email: formDataState.email,
+						password: formDataState.password,
 					},
 				},
 				dispatch,
@@ -131,7 +130,7 @@ const Register = () => {
 	return (
 		<RegisterView
 			isShowPassword={isShowPassword}
-			formData={formData}
+			formData={formDataState}
 			isShowingModal={isShowingModal}
 			handlePasswordToggle={handlePasswordToggle}
 			toggleModal={toggleModal}

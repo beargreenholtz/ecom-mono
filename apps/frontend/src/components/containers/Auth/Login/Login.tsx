@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import { passowrdvaliteregex } from '@/utils/password-validate';
 import useApi from '@/utils/useApi';
+
 import LoginView from './Login.view';
 
 const Login = () => {
 	const dispatch = useDispatch();
 
-	const [formData, setFormData] = useState({
+	const [formDataState, setformDataState] = useState({
 		email: '',
 		password: '',
 	});
@@ -23,7 +24,7 @@ const Login = () => {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		setFormData((prevData) => ({
+		setformDataState((prevData) => ({
 			...prevData,
 			[name]: value,
 		}));
@@ -32,13 +33,13 @@ const Login = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (formData.email.trim() === '' || formData.password.trim() === '') {
+		if (formDataState.email.trim() === '' || formDataState.password.trim() === '') {
 			console.error('All Inputs Required');
 
 			return;
 		}
 
-		if (!passowrdvaliteregex.test(formData.password)) {
+		if (!passowrdvaliteregex.test(formDataState.password)) {
 			console.error(
 				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
 			);
@@ -46,7 +47,7 @@ const Login = () => {
 			return;
 		}
 
-		console.log('Form data:', formData);
+		console.log('Form data:', formDataState);
 
 		try {
 			const response = await useApi(
@@ -54,8 +55,8 @@ const Login = () => {
 					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginGenerateOtp`,
 					method: 'post',
 					data: {
-						email: formData.email,
-						password: formData.password,
+						email: formDataState.email,
+						password: formDataState.password,
 					},
 				},
 				dispatch,
@@ -84,7 +85,7 @@ const Login = () => {
 	return (
 		<LoginView
 			showPassword={showPassword}
-			formData={formData}
+			formData={formDataState}
 			handlePasswordToggle={handlePasswordToggle}
 			handleOnClickPassReset={handleOnClickPassReset}
 			handleInputChange={handleInputChange}

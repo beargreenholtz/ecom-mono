@@ -43,7 +43,6 @@ const AppRouter = () => {
 				},
 			],
 		},
-
 		{
 			element: (
 				<>

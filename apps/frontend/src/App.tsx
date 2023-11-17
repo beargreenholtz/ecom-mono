@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import * as authActions from '@/store/actions/auth';
+
 import AppRouter from './App.router';
 
 const App = () => {

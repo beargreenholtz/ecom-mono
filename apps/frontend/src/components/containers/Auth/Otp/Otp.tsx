@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import * as authActions from '@/store/actions/auth';
 import useApi from '@/utils/useApi';
+
 import OtpView from './Otp.view';
 
 const Otp = () => {
