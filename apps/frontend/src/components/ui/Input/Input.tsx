@@ -8,7 +8,7 @@ type TProps = {
 	readonly type: string;
 	readonly error: string | undefined;
 	readonly firstErrorItem: string | undefined;
-	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const Input = (props: TProps) => {
@@ -18,7 +18,7 @@ const Input = (props: TProps) => {
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setError('');
-		props.handleInputChange(e);
+		props.onChangeInput(e);
 	};
 
 	useEffect(() => {

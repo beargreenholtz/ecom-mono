@@ -15,29 +15,6 @@ type TProps = {
 };
 
 const AddItemFormView = (props: TProps) => {
-	const formFields = [
-		{
-			name: 'name',
-			type: 'text',
-			label: 'Name',
-		},
-		{
-			name: 'stock',
-			type: 'number',
-			label: 'Stock',
-		},
-		{
-			name: 'image',
-			type: 'file',
-			label: 'Image',
-		},
-		{
-			name: 'price',
-			type: 'number',
-			label: 'Price',
-		},
-	];
-
 	return (
 		<div className={classes['container']}>
 			<h1 className={classes['container__title']}>Add Item</h1>

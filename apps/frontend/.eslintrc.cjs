@@ -2,14 +2,14 @@ module.exports = {
 	root: true,
 	env: {
 		browser: true,
-		es2021: true,
+		es2022: true,
 	},
 	extends: ['../../.eslintrc.cjs'],
 	parserOptions: {
 		ecmaFeatures: {
 			jsx: true,
 		},
-		ecmaVersion: 12,
+		ecmaVersion: 13,
 		project: './tsconfig.eslint.json',
 		tsconfigRootDir: __dirname,
 		sourceType: 'module',
@@ -22,7 +22,6 @@ module.exports = {
 		'jsx-a11y/html-has-lang': 'error',
 		'jsx-a11y/img-redundant-alt': ['error'],
 		'jsx-a11y/lang': 'error',
-		'jsx-a11y/no-redundant-roles': 'error',
 
 		'react/jsx-indent': 'off',
 		'react/jsx-fragments': 'error',
@@ -45,7 +44,6 @@ module.exports = {
 		'react/jsx-pascal-case': 'error',
 		'react/jsx-one-expression-per-line': ['error', { allow: 'single-child' }],
 		'react/jsx-no-useless-fragment': 'error',
-		'react/jsx-no-script-url': 'error',
 		'react/jsx-indent-props': ['error', 'tab'],
 		'react/jsx-indent': ['error', 'tab'],
 		'react/jsx-equals-spacing': ['error', 'never'],
@@ -74,7 +72,7 @@ module.exports = {
 		'react/no-unknown-property': ['error'],
 		'react/prefer-read-only-props': ['error'],
 		'react/react-in-jsx-scope': ['error'],
-		'react/jsx-handler-names': ['error', { eventHandlerPrefix: false }],
+		'react/jsx-handler-names': ['error'],
 		'react/jsx-key': ['error', { checkKeyMustBeforeSpread: true }],
 		'react/jsx-max-depth': ['error', { max: 10 }],
 		'react/jsx-no-duplicate-props': ['error'],
@@ -92,7 +90,7 @@ module.exports = {
 			},
 		},
 		{
-			files: ['./vite.config.ts'],
+			files: ['./vite.config.cjs'],
 			rules: {
 				'no-process-env': 'off',
 			},

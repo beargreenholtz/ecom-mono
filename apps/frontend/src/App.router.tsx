@@ -84,8 +84,10 @@ const AppRouter = () => {
 		},
 	];
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const authRoutes = [];
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const notAuthRotues = [];
 
 	const errorElement = [

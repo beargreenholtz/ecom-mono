@@ -9,7 +9,6 @@ module.exports = {
 		'property-no-vendor-prefix': null,
 		'value-no-vendor-prefix': null,
 		'selector-id-pattern': null,
-		'scale-unlimited/declaration-strict-value': null,
 		'color-named': ['never'],
 		'declaration-block-no-duplicate-properties': [true],
 		'function-disallowed-list': ['rgb', 'rgba', 'hsl', 'hwb'],

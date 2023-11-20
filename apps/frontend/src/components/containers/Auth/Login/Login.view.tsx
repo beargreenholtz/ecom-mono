@@ -13,7 +13,7 @@ type TProps = {
 	readonly showPassword: boolean;
 	readonly isButtonDisabled: boolean;
 	readonly errors: FormFields;
-	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handlePasswordToggle: () => void;
 	readonly handleClickGoogle: () => void;
@@ -23,26 +23,32 @@ type TProps = {
 const LoginView = (props: TProps) => {
 	const firstObject = Object.keys(props.errors)[0];
 
+	const takeover = () => {
+		console.log('teatae');
+	};
+
 	return (
 		<div className={classes['container']}>
 			<div className={classes['loginContainer']}>
-				<h2 className={classes['loginContainer__title']}>Login</h2>
+				<h2 className={classes['loginContainer__title']} onClick={takeover}>
+					Login
+				</h2>
 				<form onSubmit={props.handleSubmit}>
 					<Input
 						type="email"
 						error={props.errors['email']}
 						value={props.formData.email}
-						handleInputChange={props.handleInputChange}
 						inputName="email"
 						firstErrorItem={firstObject}
+						onChangeInput={props.handleChangeInput}
 					/>
 					<Input
 						type={props.showPassword ? 'text' : 'password'}
 						value={props.formData.password}
 						error={props.errors['password']}
-						handleInputChange={props.handleInputChange}
 						inputName="password"
 						firstErrorItem={firstObject}
+						onChangeInput={props.handleChangeInput}
 					/>
 
 					<button

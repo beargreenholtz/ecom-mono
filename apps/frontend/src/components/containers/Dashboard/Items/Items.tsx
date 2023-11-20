@@ -9,7 +9,7 @@ import ItemsView from './Items.view';
 
 const Items = () => {
 	const dispatch = useDispatch();
-	const [isShowingModal, toggleModal] = useModal();
+	const [isShowingModal, onClickToggleModal] = useModal();
 	const [isShowingModalEdit, toggleModalEdit] = useModal();
 	const [clickedItemId, setClickedItemId] = useState<TItem | null>(null);
 
@@ -58,10 +58,10 @@ const Items = () => {
 			allItems={allItemsState}
 			isShowingModalEdit={isShowingModalEdit}
 			clickedItemId={clickedItemId}
-			toggleModal={toggleModal}
 			toggleModalEdit={toggleModalEdit}
 			handleClickEdit={handleClickEdit}
 			addItem={addItem}
+			onClickToggleModal={onClickToggleModal}
 		/>
 	);
 };

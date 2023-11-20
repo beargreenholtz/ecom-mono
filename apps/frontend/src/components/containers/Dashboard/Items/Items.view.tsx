@@ -12,7 +12,7 @@ type TProps = {
 	readonly allItems: TItem[];
 	readonly clickedItemId: TItem | null;
 	readonly addItem: (itemInfo: TItem) => void;
-	readonly toggleModal: () => void;
+	readonly onClickToggleModal: () => void;
 	readonly toggleModalEdit: () => void;
 	readonly handleClickEdit: (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => void;
 };
@@ -22,10 +22,10 @@ const ItemsView = (props: TProps) => {
 
 	return (
 		<>
-			<Modal isShow={props.isShowingModal} onClickCloseButton={props.toggleModal}>
-				<AddItemForm toggleModal={props.toggleModal} addItem={props.addItem} />
+			<Modal isShow={props.isShowingModal} onClickCloseButton={props.onClickToggleModal}>
+				<AddItemForm addItem={props.addItem} onClickCloseButton={props.onClickToggleModal} />
 			</Modal>
-			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.toggleModalEdit}>
+			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.onClickToggleModal}>
 				<EditItemForm
 					toggleModal={props.toggleModalEdit}
 					item={props.clickedItemId && props.clickedItemId}
@@ -69,7 +69,7 @@ const ItemsView = (props: TProps) => {
 						);
 					})}
 				</div>
-				<button type="button" className={classes['addItemButton']} onClick={props.toggleModal}>
+				<button type="button" className={classes['addItemButton']} onClick={props.onClickToggleModal}>
 					Add Item
 				</button>
 			</div>

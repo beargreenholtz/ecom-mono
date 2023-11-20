@@ -8,7 +8,7 @@ type TProps = {
 };
 
 const Modal = (props: TProps) => {
-	const handlClickModal = (e: MouseEvent<HTMLDivElement>) => {
+	const onClickModal = (e: MouseEvent<HTMLDivElement>) => {
 		e.stopPropagation();
 	};
 
@@ -19,7 +19,7 @@ const Modal = (props: TProps) => {
 	return (
 		<ModalView
 			isShow={props.isShow}
-			handlClickModal={handlClickModal}
+			onClickModal={onClickModal}
 			onClickCloseButton={props.onClickCloseButton}
 		>
 			{props.children}

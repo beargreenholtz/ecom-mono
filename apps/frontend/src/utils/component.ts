@@ -1,4 +1,4 @@
-import type { IClasses } from '../interfaces/component';
+import type { TClasses } from '../types/component';
 
 /**
  * The function returns the mapped class names list
@@ -8,7 +8,8 @@ import type { IClasses } from '../interfaces/component';
  * @param args The list of classes to get mapped
  * @returns The result string of the concatenation class names
  */
-export const concatClasses = <T extends IClasses>(
+
+export const concatClasses = <T extends TClasses>(
 	classes: T,
 	firstClass: keyof T | null,
 	secondClass: keyof T | null,
@@ -40,22 +41,28 @@ export const concatClasses = <T extends IClasses>(
  * @param args The list of classes to concat
  * @returns The result string of the concatenation class names
  */
-export const concatDiverseClasses = (
-	firstClass?: string,
-	secondClass?: string,
-	...args: ReadonlyArray<string | undefined>
-) => {
-	const allClasses = [firstClass, secondClass, ...args];
+export const concatDiverseClasses = (...args: ReadonlyArray<string | undefined>) => {
+	return args.join(' ');
+};
 
-	return allClasses.reduce<string>((finalClasses, className, index) => {
-		if (!className) {
-			return finalClasses;
+export const classNames = (
+	classes: { [key: string]: string },
+	...args: (string | { [key: string]: unknown })[]
+): string => {
+	const classArray: string[] = [];
+
+	args.forEach((arg) => {
+		if (typeof arg === 'string' && classes[arg]) {
+			classArray.push(classes[arg]!);
+		} else if (typeof arg === 'object') {
+			for (const key in arg) {
+				// eslint-disable-next-line no-prototype-builtins
+				if (arg.hasOwnProperty(key) && arg[key] && classes[key]) {
+					classArray.push(classes[key]!);
+				}
+			}
 		}
+	});
 
-		if (index === 0) {
-			return className;
-		}
-
-		return `${finalClasses} ${className}`;
-	}, '');
+	return classArray.join(' ');
 };

@@ -9,7 +9,7 @@ import EditUserFormView from './EditUserForm.view';
 
 type TProps = {
 	readonly item: TUser | null;
-	readonly toggleModal: () => void;
+	readonly onClickCloseButton: () => void;
 };
 
 const EditUserForm = (props: TProps) => {
@@ -52,7 +52,7 @@ const EditUserForm = (props: TProps) => {
 				throw response;
 			}
 
-			props.toggleModal();
+			props.onClickCloseButton();
 		} catch (error) {
 			console.error('An error occurred during otp:', error);
 		}

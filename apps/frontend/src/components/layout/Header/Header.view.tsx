@@ -8,7 +8,7 @@ import Logo from '@/assets/logo.png';
 import classes from './Header.module.scss';
 
 type TProps = {
-	readonly logout: () => void;
+	readonly onClickLogout: () => void;
 };
 const HeaderView = (props: TProps) => {
 	const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);
@@ -43,7 +43,11 @@ const HeaderView = (props: TProps) => {
 				</div>
 			)}
 			{isAuth && (
-				<button type="button" className={classes['linksContainer__link']} onClick={props.logout}>
+				<button
+					type="button"
+					className={classes['linksContainer__link']}
+					onClick={props.onClickLogout}
+				>
 					Logout
 				</button>
 			)}

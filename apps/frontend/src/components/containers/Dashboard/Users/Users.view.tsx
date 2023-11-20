@@ -11,7 +11,7 @@ type TProps = {
 	readonly allUsers: TUser[];
 	readonly clickedItemId: TUser | null;
 	readonly addItem: (itemInfo: TUser) => void;
-	readonly toggleModalEdit: () => void;
+	readonly onClickToggleModalEdit: () => void;
 	readonly handleClickEdit: (e: React.MouseEvent<HTMLButtonElement>, item: TUser) => void;
 };
 
@@ -20,10 +20,10 @@ const UsersView = (props: TProps) => {
 
 	return (
 		<>
-			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.toggleModalEdit}>
+			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.onClickToggleModalEdit}>
 				<EditUserForm
-					toggleModal={props.toggleModalEdit}
 					item={props.clickedItemId && props.clickedItemId}
+					onClickCloseButton={props.onClickToggleModalEdit}
 				/>
 			</Modal>
 			<div className={classes['container']}>

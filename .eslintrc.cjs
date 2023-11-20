@@ -20,20 +20,9 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'unused-imports', 'import', 'deprecation', 'unicorn'],
 	rules: {
 		'max-lines': ['error', { max: 500, skipBlankLines: true, skipComments: true }],
-		'quotes': ['error', 'single', { avoidEscape: true }],
-		'semi': ['error', 'always'],
-		'no-empty': [
-			'error',
-			{
-				allowEmptyCatch: true,
-			},
-		],
-		'no-promise-executor-return': 'error',
 		'no-self-compare': 'error',
 		'no-template-curly-in-string': 'error',
 		'no-unreachable-loop': 'error',
-		'no-multiple-empty-lines': 'error',
-		'no-trailing-spaces': 'error',
 		'require-await': 'error',
 		'no-var': 'error',
 		'no-labels': 'error',
@@ -120,22 +109,12 @@ module.exports = {
 		'@typescript-eslint/no-use-before-define': ['error'],
 		'@typescript-eslint/consistent-type-imports': ['error'],
 		'@typescript-eslint/await-thenable': 'error',
-		'@typescript-eslint/explicit-member-accessibility': [
-			'error',
-			{ accessbility: 'explicit', overrides: { constructors: 'off' } },
-		],
-
-		'unused-imports/no-unused-imports': 'error',
 
 		'import/default': ['error'],
 		'import/no-absolute-path': ['error'],
 		'import/no-self-import': ['error'],
 		'import/no-useless-path-segments': ['error'],
-		'import/export': ['error'],
 		'import/no-mutable-exports': ['error'],
-		'import/no-unused-modules': ['error'],
-		'import/no-commonjs': ['error'],
-		'import/no-amd': ['error'],
 		'import/first': ['error'],
 		'import/exports-last': ['error'],
 		'import/no-duplicates': ['error'],
@@ -160,8 +139,6 @@ module.exports = {
 
 		'unicorn/catch-error-name': 'error',
 		'unicorn/new-for-builtins': 'error',
-		'unicorn/prefer-node-protocol': 'error',
-		'unicorn/no-new-buffer': 'error',
 		'unicorn/throw-new-error': 'error',
 		'unicorn/text-encoding-identifier-case': 'error',
 		'unicorn/switch-case-braces': 'error',
@@ -183,13 +160,6 @@ module.exports = {
 				'./tests/scripts/global-setup.ts',
 				'./tests/scripts/global-teardown.ts',
 			],
-		},
-		{
-			files: ['./inflint.config.ts'],
-			rules: {
-				'quotes': 'off',
-				'no-useless-escape': 'off',
-			},
 		},
 		{
 			files: ['./tests/**/*'],

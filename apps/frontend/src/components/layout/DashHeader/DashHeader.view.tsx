@@ -8,7 +8,7 @@ import type { RootState } from '@/store/app';
 import classes from './DashHeader.module.scss';
 
 type TProps = {
-	readonly logout: () => void;
+	readonly onClickLogout: () => void;
 };
 
 const DashHeaderView = (props: TProps) => {
@@ -44,7 +44,11 @@ const DashHeaderView = (props: TProps) => {
 				</div>
 			)}
 			{isAuth && (
-				<button type="button" className={classes['linksContainer__link']} onClick={props.logout}>
+				<button
+					type="button"
+					className={classes['linksContainer__link']}
+					onClick={props.onClickLogout}
+				>
 					Logout
 				</button>
 			)}

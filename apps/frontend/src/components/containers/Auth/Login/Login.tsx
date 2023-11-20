@@ -110,9 +110,9 @@ const Login = () => {
 			errors={errors}
 			handlePasswordToggle={handlePasswordToggle}
 			handleOnClickPassReset={handleOnClickPassReset}
-			handleInputChange={handleInputChange}
 			handleSubmit={handleSubmit}
 			handleClickGoogle={onClickGoogle}
+			handleChangeInput={handleInputChange}
 		/>
 	);
 };

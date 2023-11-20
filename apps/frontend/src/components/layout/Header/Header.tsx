@@ -8,11 +8,11 @@ import HeaderView from './Header.view';
 const Header = () => {
 	const dispatch = useDispatch();
 
-	const logout = () => {
+	const onClickLogout = () => {
 		dispatch(authActions.logout());
 	};
 
-	return <HeaderView logout={logout} />;
+	return <HeaderView onClickLogout={onClickLogout} />;
 };
 
 export default React.memo(Header);

@@ -10,7 +10,7 @@ import UsersView from './Users.view';
 
 const Users = () => {
 	const dispatch = useDispatch();
-	const [isShowingModalEdit, toggleModalEdit] = useModal();
+	const [isShowingModalEdit, onClickToggleModalEdit] = useModal();
 	const [clickedItemId, setClickedItemId] = useState<TUser | null>(null);
 
 	const [allUsersState, setAllUsersState] = useState<TUser[]>([]);
@@ -45,7 +45,7 @@ const Users = () => {
 
 	const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>, item: TUser) => {
 		setClickedItemId(item);
-		toggleModalEdit();
+		onClickToggleModalEdit();
 	};
 
 	return (
@@ -53,9 +53,9 @@ const Users = () => {
 			allUsers={allUsersState}
 			isShowingModalEdit={isShowingModalEdit}
 			clickedItemId={clickedItemId}
-			toggleModalEdit={toggleModalEdit}
 			handleClickEdit={handleClickEdit}
 			addItem={addItem}
+			onClickToggleModalEdit={onClickToggleModalEdit}
 		/>
 	);
 };

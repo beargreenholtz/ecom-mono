@@ -12,7 +12,7 @@ const DashHeader = () => {
 		dispatch(authActions.logout());
 	};
 
-	return <DashHeaderView logout={logout} />;
+	return <DashHeaderView onClickLogout={logout} />;
 };
 
 export default React.memo(DashHeader);

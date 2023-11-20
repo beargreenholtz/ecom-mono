@@ -8,7 +8,7 @@
 		"build": "vite build",
 		"start": "vite start",
 		"export": "yarn run build && vite export -o _static",
-		"lint": "eslint -c ./.eslintrc.cjs --ignore-path ./.eslintignore \"./**/*.{ts,tsx,cjs}\"",
+		"lint": "eslint -c ./.eslintrc.cjs --ignore-path ./.eslintignore \"./**/*.{ts,tsx,cjs}\" --fix",
 		"type-check": "tsc --project ./tsconfig.json",
 		"depcheck": "depcheck --config ./.depcheckrc.json",
 		"stylelint": "stylelint --config ./stylelint.config.cjs \"./src/**/*.scss\" --fix",

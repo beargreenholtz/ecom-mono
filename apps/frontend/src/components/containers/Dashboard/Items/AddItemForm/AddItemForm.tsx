@@ -7,7 +7,7 @@ import useApi from '@/utils/useApi';
 import AddItemFormView from './AddItemForm.view';
 
 type TProps = {
-	readonly toggleModal: () => void;
+	readonly onClickCloseButton: () => void;
 	readonly addItem: (itemInfo: TItem) => void;
 };
 
@@ -59,7 +59,7 @@ const AddItemForm = (props: TProps) => {
 
 			props.addItem({ ...formData, _id: 'reload to generate id' });
 
-			props.toggleModal();
+			props.onClickCloseButton();
 		} catch (error) {
 			console.error('An error occurred during adding item:', error);
 		}
