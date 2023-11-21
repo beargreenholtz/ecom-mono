@@ -33,7 +33,6 @@ const ResetPassVerify = () => {
 				dispatch,
 			);
 
-			console.log('User ID:', response);
 			setIsSuccessPasswordResetState(true);
 		} catch (error) {
 			if (error instanceof AxiosError) setErrorState(error.message);

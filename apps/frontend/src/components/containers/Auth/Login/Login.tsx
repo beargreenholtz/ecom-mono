@@ -47,8 +47,6 @@ const Login = () => {
 			return;
 		}
 
-		console.log('Form data:', formDataState);
-
 		try {
 			const response = await useApi(
 				{

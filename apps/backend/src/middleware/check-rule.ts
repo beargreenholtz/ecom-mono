@@ -19,7 +19,6 @@ const checkAuth = (
 			throw new Error('Admin faild');
 		}
 
-		console.log('got');
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
 
 		const userRole = decodedToken.role;

@@ -163,7 +163,6 @@ export const getAllUsers = async (_req, res: Response, next: NextFunction) => {
 	try {
 		const allUsers = await getAllUsersHandler();
 
-		console.log(allUsers);
 		res.status(200).json({ allUsers });
 	} catch (error) {
 		return next(error);

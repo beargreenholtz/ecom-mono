@@ -76,8 +76,6 @@ export const loginGenerateOtpHandler: TLoginGenerateOtpHandler = async (info: TO
 
 	const otp = generateOtp(6);
 
-	console.log(otp);
-
 	const hashedOtp = await bcrypt.hash(otp, 12);
 
 	const otpPayload = { email: info.email, otp: hashedOtp };
@@ -123,11 +121,7 @@ export const loginOtpHandler: TLoginOtpHandler = async (info: TOtp) => {
 
 	if (!otpUser) throw new HttpError('Cant Find Otp, Login Again', 402);
 
-	console.log(otpUser.otp);
-
 	const isValidPassword = await bcrypt.compare(info.otp, otpUser.otp);
-
-	console.log(isValidPassword);
 
 	if (!isValidPassword) throw new HttpError('Otp Doesnt Match', 402);
 
@@ -173,8 +167,6 @@ export const passwordResetGenertorHandler = async (email: string) => {
 	let encryptedData = cipher.update(JSON.stringify(encryptInfo), 'utf8', 'hex');
 
 	encryptedData += cipher.final('hex');
-
-	console.log(encryptedData);
 
 	await saveresetPasswordTokenOnUser(existingUser, hashedPassword);
 

@@ -32,8 +32,6 @@ const Register = () => {
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 
-		console.log(isShowingModal);
-
 		setformDataState((prevData) => ({
 			...prevData,
 			[name]: value,
@@ -70,8 +68,6 @@ const Register = () => {
 		if (!validateInput(formDataState)) {
 			return;
 		}
-
-		console.log('Form data:', formDataState);
 
 		try {
 			const response = await useApi(

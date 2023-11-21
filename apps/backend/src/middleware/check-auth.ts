@@ -21,7 +21,6 @@ const checkAuth = async (
 			throw new Error('auth faildddddd');
 		}
 
-		console.log('got');
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
 
 		const userId = decodedToken.userId;
