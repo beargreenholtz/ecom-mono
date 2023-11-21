@@ -102,7 +102,7 @@ const Register = () => {
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/google-auth`, '_self');
 	};
 
 	const getUserFromGoogle = async () => {

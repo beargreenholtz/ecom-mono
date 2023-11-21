@@ -3,9 +3,9 @@ import React from 'react';
 import classes from './ResetPassVerify.module.scss';
 
 type TProps = {
-	readonly error: string | null;
+	readonly error: string;
 	readonly passwordInputState: string;
-	readonly isSuccesPasswordReset: boolean;
+	readonly isSuccessPasswordResetState: boolean;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
@@ -29,7 +29,7 @@ const ResetPassVerifyView = (props: TProps) => {
 						Submit
 					</button>
 				</form>
-				{props.isSuccesPasswordReset && <span>Password has been reset</span>}
+				{props.isSuccessPasswordResetState && <span>Password has been reset</span>}
 				{props.error && <span>{props.error}</span>}
 			</div>
 		</div>

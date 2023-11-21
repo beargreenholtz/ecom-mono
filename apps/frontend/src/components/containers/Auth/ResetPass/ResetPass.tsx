@@ -16,7 +16,7 @@ const ResetPass = () => {
 		try {
 			const response = await useApi(
 				{
-					url: `${import.meta.env.VITE_BACkEND_URL}/user/passwordresetrequest`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/password-reset-request`,
 					method: 'post',
 					data: {
 						email: email,

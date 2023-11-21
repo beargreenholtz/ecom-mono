@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"rootDir": "./src",
+		"typeRoots": ["./node_modules/@types", "./@types"],
+		"esModuleInterop": true,
+		"lib": ["es2022"],
+		"moduleResolution": "NodeNext",
+		"module": "NodeNext",
+		"outDir": "dist",
+		"sourceMap": true
+	}
+}

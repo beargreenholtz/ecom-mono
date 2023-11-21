@@ -10,16 +10,14 @@ import ResetPassVerifyView from './ResetPassVerify.view';
 const ResetPassVerify = () => {
 	const { token } = useParams();
 
+	const dispatch = useDispatch();
+
 	const [passwordInputState, setPasswordInputState] = useState('');
-	const [isSuccesPasswordResetState, setIsSuccesPasswordResetState] = useState(false);
-	const [errorState, setErrorState] = useState<string | null>(null);
+	const [isSuccessPasswordResetState, setIsSuccessPasswordResetState] = useState(false);
+	const [errorState, setErrorState] = useState('');
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		const dispatch = useDispatch();
-
-		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/passwordreset/${token}`);
-
-		console.log(errorState);
+		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/password-reset/${token}`);
 
 		e.preventDefault();
 
@@ -36,7 +34,7 @@ const ResetPassVerify = () => {
 			);
 
 			console.log('User ID:', response);
-			setIsSuccesPasswordResetState(true);
+			setIsSuccessPasswordResetState(true);
 		} catch (error) {
 			if (error instanceof AxiosError) setErrorState(error.message);
 
@@ -52,7 +50,7 @@ const ResetPassVerify = () => {
 		<ResetPassVerifyView
 			error={errorState}
 			passwordInputState={passwordInputState}
-			isSuccesPasswordReset={isSuccesPasswordResetState}
+			isSuccessPasswordResetState={isSuccessPasswordResetState}
 			handleSubmit={handleSubmit}
 			handleInputChange={handleInputChange}
 		/>

@@ -52,7 +52,7 @@ const Login = () => {
 		try {
 			const response = await useApi(
 				{
-					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginGenerateOtp`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/login-generate-otp`,
 					method: 'post',
 					data: {
 						email: formDataState.email,
@@ -66,20 +66,20 @@ const Login = () => {
 				throw response;
 			}
 
-			const token: string = response?.data.otp.encryptedOtpPayload;
+			const encryptedOtpPayload = response.data.otp?.encryptedOtpPayload;
 
-			window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/otp/${token}`;
+			window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/otp/${encryptedOtpPayload}`;
 		} catch (error) {
 			console.error('An error occurred during otp:', error);
 		}
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/google-auth`, '_self');
 	};
 
 	const handleOnClickPassReset = () => {
-		window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/resetpassword/request`;
+		window.location.href = `${import.meta.env.VITE_CLIENT_URL}/auth/password-reset/request`;
 	};
 
 	return (

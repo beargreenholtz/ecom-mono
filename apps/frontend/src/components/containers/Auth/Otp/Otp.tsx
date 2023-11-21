@@ -48,7 +48,7 @@ const Otp = () => {
 		try {
 			const response = await useApi(
 				{
-					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginotp`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/login-otp`,
 					method: 'post',
 					data: {
 						token: decodedUrl,
@@ -62,9 +62,9 @@ const Otp = () => {
 				throw response;
 			}
 
-			const jwttoken: string = response?.headers.authorization;
+			const jwtToken: string = response?.headers.authorization;
 
-			dispatch(authActions.loginSuccess(jwttoken));
+			dispatch(authActions.loginSuccess(jwtToken));
 
 			navigate('/');
 		} catch (error) {
