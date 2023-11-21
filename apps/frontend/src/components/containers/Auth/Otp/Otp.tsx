@@ -61,7 +61,7 @@ const Otp = () => {
 		try {
 			const response = await useApi(
 				{
-					url: `${import.meta.env.VITE_BACkEND_URL}/user/loginotp`,
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/login-otp`,
 					method: 'post',
 					data: {
 						token: decodedUrl,

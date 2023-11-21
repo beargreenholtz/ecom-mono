@@ -31,16 +31,16 @@ router.post(
 	signUp,
 );
 
-router.post('/logingenerateotp', loginGenerateOtp);
-router.post('/loginotp/', loginOtp);
+router.post('/login-generate-otp', loginGenerateOtp);
+router.post('/login-otp/', loginOtp);
 
-router.post('/passwordresetrequest', passwordResetGenertor);
-router.post('/passwordReset/:resetPasswordToken', passwordReset);
+router.post('/password-reset-request', passwordResetGenertor);
+router.post('/password-Reset/:resetPasswordToken', passwordReset);
 
-router.get('/failedgoogleauth', failedgoogleauth);
+router.get('/failed-goog-leauth', failedgoogleauth);
 
 router.get(
-	'/googleauth',
+	'/google-auth',
 	passport.authenticate('google', {
 		scope: ['email', 'profile'],
 	}),
@@ -56,7 +56,7 @@ router.get(
 	}),
 );
 
-router.get('/getallusers', getAllUsers);
+router.get('/get-all-users', getAllUsers);
 
 router.post('/update', editUser);
 

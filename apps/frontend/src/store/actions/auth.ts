@@ -17,7 +17,7 @@ export interface LogoutAction {
 }
 
 export const loginSuccess = (token: string): LoginSuccessAction => {
-	localStorage.setItem('jwt_token', token);
+	localStorage.setItem('jwt_token', JSON.stringify(token));
 
 	return {
 		type: LOGIN_SUCCESS,

@@ -7,6 +7,8 @@ import useApi from '@/utils/useApi';
 import ResetPassVerifyView from './ResetPassVerify.view';
 
 const ResetPassVerify = () => {
+	const dispatch = useDispatch();
+
 	const { token } = useParams();
 
 	const [passwordInputState, setPasswordInputState] = useState('');
@@ -14,13 +16,11 @@ const ResetPassVerify = () => {
 	const [errorState, setErrorState] = useState<string | null>(null);
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		const dispatch = useDispatch();
+		e.preventDefault();
 
-		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/passwordreset/${token}`);
+		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/password-reset/${token}`);
 
 		console.log(errorState);
-
-		e.preventDefault();
 
 		try {
 			const response = await useApi(

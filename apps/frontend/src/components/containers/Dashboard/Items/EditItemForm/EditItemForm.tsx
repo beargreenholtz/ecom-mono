@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
 import type { TItem } from '@/types/item';
 import useApi from '@/utils/useApi';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+
 import EditItemFormView from './EditItemForm.view';
 
 type TProps = {
@@ -13,6 +15,7 @@ type TProps = {
 
 const EditItemForm = (props: TProps) => {
 	const dispatch = useDispatch();
+	const [storedData, persistData] = useLocalStorage('jwt_token');
 
 	const [formData, setFormData] = useState({
 		name: props.item?.name,
@@ -34,6 +37,8 @@ const EditItemForm = (props: TProps) => {
 		e.preventDefault();
 
 		try {
+			if (typeof storedData !== 'string') throw 'no token';
+
 			const response = await useApi(
 				{
 					url: `${import.meta.env.VITE_BACkEND_URL}/item/update`,
@@ -46,7 +51,7 @@ const EditItemForm = (props: TProps) => {
 						imageUrl: formData.imageUrl,
 					},
 					headers: {
-						authorization: localStorage.getItem('jwt_token'),
+						authorization: storedData,
 					},
 				},
 				dispatch,

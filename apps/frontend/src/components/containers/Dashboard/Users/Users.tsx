@@ -24,7 +24,7 @@ const Users = () => {
 			try {
 				const response = await useApi(
 					{
-						url: `${import.meta.env.VITE_BACkEND_URL}/user/getallusers`,
+						url: `${import.meta.env.VITE_BACkEND_URL}/user/get-all-users`,
 						method: 'get',
 					},
 					dispatch,

@@ -178,7 +178,7 @@ export const passwordResetGenertorHandler = async (email: string) => {
 
 	await saveresetPasswordTokenOnUser(existingUser, hashedPassword);
 
-	const resetLink = `${process.env.CLIENT_HOME_PAGE_URL}/auth/resetpassword/confirm/${encodeURIComponent(
+	const resetLink = `${process.env.CLIENT_HOME_PAGE_URL}/auth/password-reset/confirm/${encodeURIComponent(
 		encryptedData,
 	)}`;
 

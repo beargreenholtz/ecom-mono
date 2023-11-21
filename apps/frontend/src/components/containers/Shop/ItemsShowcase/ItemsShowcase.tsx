@@ -16,7 +16,7 @@ const ItemsShowcase = () => {
 			try {
 				const response = await useApi(
 					{
-						url: `${import.meta.env.VITE_BACkEND_URL}/item/getallitems`,
+						url: `${import.meta.env.VITE_BACkEND_URL}/item/get-all-items`,
 						method: 'post',
 						data: {
 							limit: 6,

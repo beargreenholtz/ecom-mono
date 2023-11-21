@@ -118,7 +118,7 @@ export const passwordReset: RequestHandler = async (req: TRequest, res: Response
 
 export const callbackGoogleAuth: RequestHandler = async (req, res, next) => {
 	await passport.authenticate('google', {
-		failureRedirect: '/user/failedgoogleauth',
+		failureRedirect: '/user/failed-google-auth',
 	})(req, res, () => {
 		try {
 			if (!process.env.JWT_SECRET) throw new HttpError('No JWT secret', 500);

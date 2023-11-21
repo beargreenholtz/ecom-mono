@@ -1,15 +1,22 @@
-import axios, { type AxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
 import type { Dispatch, AnyAction } from '@reduxjs/toolkit';
 
 import { logout } from '@/store/actions/auth';
 
-const useApi = async (
+type TOtp = {
+	readonly encryptedOtpPayload: string;
+};
+type TResponse = {
+	readonly otp?: TOtp;
+};
+
+const useApi = async <T extends TResponse>(
 	axiosParams: AxiosRequestConfig,
 	dispatch: Dispatch<AnyAction>,
 	toggleModal?: () => void,
 ) => {
 	try {
-		const result = await axios.request(axiosParams);
+		const result = await axios.request<T>(axiosParams);
 
 		if (toggleModal) {
 			toggleModal();

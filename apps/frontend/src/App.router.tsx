@@ -61,11 +61,11 @@ const AppRouter = () => {
 					element: <Login />,
 				},
 				{
-					path: '/auth/resetpassword/request',
+					path: '/auth/password-reset/request',
 					element: <ResetPassRequest />,
 				},
 				{
-					path: '/auth/resetpassword/confirm/:token',
+					path: '/auth/password-reset/confirm/:token',
 					element: <ResetPassConfirm />,
 				},
 				{
@@ -90,13 +90,11 @@ const AppRouter = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const notAuthRotues = [];
 
-	const errorElement = [
-		{
-			errorElement: <NotFound />,
-		},
-	];
+	const errorElement = {
+		errorElement: <NotFound />,
+	};
 
-	const router = createBrowserRouter([...generealRotues, ...errorElement]);
+	const router = createBrowserRouter([...generealRotues, errorElement]);
 
 	return (
 		<Suspense fallback={<Loading />}>
