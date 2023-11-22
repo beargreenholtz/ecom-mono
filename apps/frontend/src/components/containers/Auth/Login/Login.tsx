@@ -44,7 +44,7 @@ const Login = () => {
 		console.log('Form data:', formData);
 
 		try {
-			const response = await axios.post('http://localhost:5000/user/loginGenerateOtp', {
+			const response = await axios.post('http://localhost:5000/user/login-generate-otp', {
 				email: formData.email,
 				password: formData.password,
 			});
