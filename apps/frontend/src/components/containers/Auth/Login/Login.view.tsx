@@ -4,8 +4,8 @@ import classes from './Login.module.scss';
 
 type TProps = {
 	readonly formData: {
-		email: string;
-		password: string;
+		readonly email: string;
+		readonly password: string;
 	};
 	readonly showPassword: boolean;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

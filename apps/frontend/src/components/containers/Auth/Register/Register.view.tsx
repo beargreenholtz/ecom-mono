@@ -6,11 +6,11 @@ import classes from './Register.module.scss';
 
 type TProps = {
 	readonly formData: {
-		username: string;
-		email: string;
-		name: string;
-		password: string;
-		confirmPassword: string;
+		readonly username: string;
+		readonly email: string;
+		readonly name: string;
+		readonly password: string;
+		readonly confirmPassword: string;
 	};
 	readonly isShowPassword: boolean;
 	readonly isShowingModal: boolean;
