@@ -1,9 +1,9 @@
 export const TOGGLE_MENU = '[Menu] Togge Menu';
 
-export interface ToggleMenu {
+export type ToggleMenu = {
 	type: typeof TOGGLE_MENU;
 	payload: { isMenuOpen: boolean };
-}
+};
 
 export const toggleMenu = (isMenuOpen: boolean): ToggleMenu => {
 	return {
