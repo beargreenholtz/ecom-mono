@@ -1,12 +1,10 @@
 import React from 'react';
 import Flickity from 'react-flickity-component';
-import 'flickity/css/flickity.css';
-import { carouselItems } from '@/data/carouselItems';
 
+import { carouselItems } from '@/data/carouselItems';
 import CarouselItem from './CarouselItem';
 
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
+import 'flickity/css/flickity.css';
 import classes from './Carousel.module.scss';
 
 const CarouselView = () => {
