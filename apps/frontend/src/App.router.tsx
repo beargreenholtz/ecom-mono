@@ -77,11 +77,7 @@ const AppRouter = () => {
 
 	const notAuthRotues = [];
 
-	const errorElement = {
-		errorElement: <NotFound />,
-	};
-
-	const router = createBrowserRouter([...generealRotues, errorElement]);
+	const router = createBrowserRouter([...generealRotues]);
 
 	return (
 		<Suspense fallback={<Loading />}>
