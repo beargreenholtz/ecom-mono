@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
-import * as fromMenu from './reducers/menu';
+import * as fromAuth from './reducers/auth';
 
 const rootReducer = combineReducers({
-	user: fromMenu.reducer,
+	user: fromAuth.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

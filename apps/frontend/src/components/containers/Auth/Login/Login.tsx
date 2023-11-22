@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import axios, { type AxiosError } from 'axios';
+import axios from 'axios';
 import LoginView from './Login.view';
 
 const Login = () => {
@@ -43,28 +43,22 @@ const Login = () => {
 
 		console.log('Form data:', formData);
 
-		await axios
-			.post('http://localhost:5000/user/loginGenerateOtp', {
+		try {
+			const response = await axios.post('http://localhost:5000/user/login-generate-otp', {
 				email: formData.email,
 				password: formData.password,
-			})
-			.then(
-				(res) => {
-					const { userId, email, otp } = res.data;
+			});
 
-					console.log('User ID:', userId);
-					console.log('User Email:', email);
-					console.log('JWT Token:', otp.otp);
-					window.location.href = `http://localhost/auth/otp/${otp.otp}`;
-				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
-				},
-			);
+			const token: string = response.data.otp.encryptedOtpPayload;
+
+			window.location.href = `http://localhost/auth/otp/${token}`;
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				console.error('Error during registration:', error.response?.data?.message);
+			} else {
+				console.log('An unknown error occurred');
+			}
+		}
 	};
 
 	const onClickGoogle = () => {
@@ -72,7 +66,7 @@ const Login = () => {
 	};
 
 	const handleOnClickPassReset = () => {
-		window.location.href = 'http://localhost/auth/resetpass';
+		window.location.href = 'http://localhost/auth/resetpassword/request';
 	};
 
 	return (

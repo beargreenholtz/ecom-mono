@@ -18,40 +18,42 @@ type TProps = {
 const LoginView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
-			<h2>Login</h2>
-			<form onSubmit={props.onSubmit}>
-				<div className={classes['inputContainer']}>
-					<label htmlFor="email">Email:</label>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						value={props.formData.email}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="password">Password:</label>
-					<div className={classes['passwordInputContainer']}>
+			<div className={classes['loginContainer']}>
+				<h2 className={classes['loginContainer__title']}>Login</h2>
+				<form onSubmit={props.onSubmit}>
+					<div className={classes['inputContainer']}>
+						<label htmlFor="email">Email:</label>
 						<input
-							type={props.showPassword ? 'text' : 'password'}
-							id="password"
-							name="password"
-							value={props.formData.password}
+							type="email"
+							id="email"
+							name="email"
+							value={props.formData.email}
 							onChange={props.onInputChange}
 						/>
 					</div>
-				</div>
 
-				<button type="submit">Login</button>
-			</form>
-			<button type="button" onClick={props.onClickGoogle}>
-				Google
-			</button>
-			<button type="button" onClick={props.handleOnClickPassReset}>
-				Reset Password
-			</button>
+					<div className={classes['inputContainer']}>
+						<label htmlFor="password">Password:</label>
+						<div className={classes['passwordInputContainer']}>
+							<input
+								type={props.showPassword ? 'text' : 'password'}
+								id="password"
+								name="password"
+								value={props.formData.password}
+								onChange={props.onInputChange}
+							/>
+						</div>
+					</div>
+
+					<button type="submit">Login</button>
+				</form>
+				<button type="button" onClick={props.onClickGoogle}>
+					Google
+				</button>
+				<button type="button" onClick={props.handleOnClickPassReset}>
+					Reset Password
+				</button>
+			</div>
 		</div>
 	);
 };
