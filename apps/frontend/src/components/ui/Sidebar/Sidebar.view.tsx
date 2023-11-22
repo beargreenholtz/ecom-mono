@@ -1,26 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { links } from '@/data/sidebarLinks';
+
 import classes from './Sidebar.module.scss';
 
 const SidebarView = () => {
 	return (
 		<div className={classes['container']}>
-			<NavLink className={classes['container__link']} to="/dashboard/users">
-				Users
-			</NavLink>
-			<NavLink className={classes['container__link']} to="/dashboard/items">
-				Items
-			</NavLink>
-			<NavLink className={classes['container__link']} to="/items">
-				Orders
-			</NavLink>
-			<NavLink className={classes['container__link']} to="/items">
-				Mail
-			</NavLink>
-			<NavLink className={classes['container__link']} to="/items">
-				Reports
-			</NavLink>
+			{links.map((link) => {
+				<NavLink className={classes['container__link']} to={link.to}>
+					{link.name}
+				</NavLink>;
+			})}
 		</div>
 	);
 };

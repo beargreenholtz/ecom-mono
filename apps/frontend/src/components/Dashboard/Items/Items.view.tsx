@@ -2,9 +2,10 @@ import React from 'react';
 
 import Modal from '@/ui/Modal';
 import type { TItem } from '@/types/item';
-import classes from './Items.module.scss';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
+
+import classes from './Items.module.scss';
 
 type TProps = {
 	readonly isShowingModal: boolean;

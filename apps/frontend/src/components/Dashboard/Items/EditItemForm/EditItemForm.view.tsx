@@ -4,10 +4,10 @@ import classes from './EditItemForm.module.scss';
 
 type TProps = {
 	readonly formData: {
-		name?: string;
-		stock?: number;
-		imageUrl?: string;
-		price?: number;
+		readonly name?: string;
+		readonly stock?: number;
+		readonly imageUrl?: string;
+		readonly price?: number;
 	};
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -6,11 +6,11 @@ type TProps = {
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	readonly formData: {
-		name: string;
-		imageUrl: string;
-		stock: number;
-		image?: string;
-		price: number;
+		readonly name: string;
+		readonly imageUrl: string;
+		readonly stock: number;
+		readonly image?: string;
+		readonly price: number;
 	};
 };
 

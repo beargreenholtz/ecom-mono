@@ -4,9 +4,9 @@ import classes from './EditUserForm.module.scss';
 
 type TProps = {
 	readonly formData: {
-		name?: string;
-		email?: string;
-		role?: string;
+		readonly name?: string;
+		readonly email?: string;
+		readonly role?: string;
 	};
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
