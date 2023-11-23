@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 
-import type { TItem } from '@/types/item';
+import type { TItem } from '@/types/api/item';
 import useApi from '@/utils/useApi';
 import ItemsShowcaseView from './ItemsShowcase.view';
 

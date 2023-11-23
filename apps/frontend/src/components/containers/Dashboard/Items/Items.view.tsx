@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Modal from '@/ui/Modal';
-import type { TItem } from '@/types/item';
+import type { TItem } from '@/types/api/item';
 import classes from './Items.module.scss';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';

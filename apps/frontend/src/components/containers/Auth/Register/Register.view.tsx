@@ -2,17 +2,17 @@ import React from 'react';
 
 import Modal from '@/ui/Modal';
 import Input from '@/ui/Input';
-import type { FormFields } from '@/types/user';
+import type { FormFields } from '@/types/api/user';
 
 import classes from './Register.module.scss';
 
 type TProps = {
 	readonly formData: {
-		username: string;
-		email: string;
-		name: string;
-		password: string;
-		confirmPassword: string;
+		readonly username: string;
+		readonly email: string;
+		readonly name: string;
+		readonly password: string;
+		readonly confirmPassword: string;
 	};
 	readonly isButtonDisabled: boolean;
 	readonly errorForm: string;
@@ -23,7 +23,7 @@ type TProps = {
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handlePasswordToggle: () => void;
 	readonly handleClickGoogle: () => void;
-	readonly toggleModal: () => void;
+	readonly onClickCloseButton: () => void;
 };
 
 const RegisterView = (props: TProps) => {
@@ -31,7 +31,7 @@ const RegisterView = (props: TProps) => {
 
 	return (
 		<>
-			<Modal isShow={props.isShowingModal} handleClickCloseButton={props.toggleModal}>
+			<Modal isShow={props.isShowingModal} onClickCloseButton={props.onClickCloseButton}>
 				error
 			</Modal>
 			<div className={`${classes['container']} ${classes['glow']}`}>

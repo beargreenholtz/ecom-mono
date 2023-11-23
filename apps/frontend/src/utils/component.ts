@@ -1,4 +1,4 @@
-import type { TClasses } from '../types/component';
+import type { TClasses } from '../types/tools/component';
 
 /**
  * The function returns the mapped class names list

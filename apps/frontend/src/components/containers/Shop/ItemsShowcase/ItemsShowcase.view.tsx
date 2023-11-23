@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { TItem } from '@/types/item';
+import type { TItem } from '@/types/api/item';
 import classes from './ItemsShowcase.module.scss';
 
 type TProps = {

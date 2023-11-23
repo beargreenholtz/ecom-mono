@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Input from '@/ui/Input';
-import type { FormFields } from '@/types/user';
+import type { FormFields } from '@/types/api/user';
 import classes from './Login.module.scss';
 
 type TProps = {
 	readonly formData: {
-		email: string;
-		password: string;
+		readonly email: string;
+		readonly password: string;
 	};
 	readonly errorForm: string;
 	readonly showPassword: boolean;

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { AxiosError } from 'axios';
 import useApi from '@/utils/useApi';
-import type { TUser } from '@/types/user';
+import type { TUser } from '@/types/api/user';
 
 import EditUserFormView from './EditUserForm.view';
 

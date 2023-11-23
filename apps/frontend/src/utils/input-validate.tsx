@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { FormErrors, FormFields } from '@/types/user';
+import type { FormErrors, FormFields } from '@/types/api/user';
 import { passowrdvaliteregex } from './password-validate';
 
 const useValidation = (): [() => void, FormErrors, (fields: FormFields) => boolean] => {

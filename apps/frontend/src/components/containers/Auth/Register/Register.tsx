@@ -128,10 +128,10 @@ const Register = () => {
 			errorForm={errorForm}
 			isButtonDisabled={isButtonDisabled}
 			handlePasswordToggle={handlePasswordToggle}
-			toggleModal={toggleModal}
 			handleInputChange={handleInputChange}
 			handleSubmit={handleSubmit}
 			handleClickGoogle={onClickGoogle}
+			onClickCloseButton={toggleModal}
 		/>
 	);
 };

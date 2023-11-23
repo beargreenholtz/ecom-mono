@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 
 import useModal from '@/utils/useModal';
 import useApi from '@/utils/useApi';
-import type { TItem } from '@/types/item';
+import type { TItem } from '@/types/api/item';
 import ItemsView from './Items.view';
 
 const Items = () => {

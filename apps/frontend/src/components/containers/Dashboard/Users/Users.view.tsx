@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { TUser } from '@/types/user';
+import type { TUser } from '@/types/api/user';
 import Modal from '@/ui/Modal';
 import EditUserForm from './EditUserForm';
 

@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 
 import useModal from '@/utils/useModal';
 import useApi from '@/utils/useApi';
-import type { TUser } from '@/types/user';
+import type { TUser } from '@/types/api/user';
 
 import UsersView from './Users.view';
 

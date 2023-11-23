@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AxiosError } from 'axios';
-import type { TItem } from '@/types/item';
+import type { TItem } from '@/types/api/item';
 import useApi from '@/utils/useApi';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
