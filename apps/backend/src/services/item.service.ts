@@ -7,6 +7,7 @@ export const createItem = async (user: TItem) => {
 		imageUrl: user.imageUrl,
 		price: user.price,
 		stock: user.stock,
+		category: user.category.toLocaleLowerCase(),
 	});
 
 	await newItem.save();
@@ -27,4 +28,12 @@ export const updateItemById = async (info: TItem) => {
 		{ _id: info.id },
 		{ name: info.name, stock: info.stock, price: info.price, imageUrl: info.imageUrl },
 	);
+};
+
+export const getAllItemsByCategory = async (category: string) => {
+	return await Product.find({ category: category });
+};
+
+export const getItemByName = async (name: string) => {
+	return await Product.findOne({ name: name });
 };
