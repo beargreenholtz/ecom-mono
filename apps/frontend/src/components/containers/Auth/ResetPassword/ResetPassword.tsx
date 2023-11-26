@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import useApi from '@/utils/useApi';
 
-import ResetPassView from './ResetPass.view';
+import ResetPassView from './ResetPassword.view';
 
-const ResetPass = () => {
+const ResetPassword = () => {
 	const dispatch = useDispatch();
 
 	const [email, setEmail] = useState('');
@@ -38,4 +38,4 @@ const ResetPass = () => {
 	return <ResetPassView email={email} handleSubmit={handleSubmit} handleInputChange={handleInputChange} />;
 };
 
-export default React.memo(ResetPass);
+export default React.memo(ResetPassword);

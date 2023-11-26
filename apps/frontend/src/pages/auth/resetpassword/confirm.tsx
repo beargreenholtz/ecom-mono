@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ResetPassVerify from '@/containers/Auth/ResetPass/ResetPassVerify';
+import ResetPasswordVerify from '@/containers/Auth/ResetPassword/ResetPasswordVerify';
 
 const resetPassVerifyPage = () => {
-	return <ResetPassVerify />;
+	return <ResetPasswordVerify />;
 };
 
 export default resetPassVerifyPage;

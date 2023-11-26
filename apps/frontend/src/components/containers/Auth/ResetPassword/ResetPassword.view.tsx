@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './ResetPass.module.scss';
+import classes from './ResetPassword.module.scss';
 
 type TProps = {
 	readonly email: string;
@@ -8,7 +8,7 @@ type TProps = {
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const ResetPassView = (props: TProps) => {
+const ResetPasswordView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
 			<div className={classes['containerInner']}>
@@ -32,4 +32,4 @@ const ResetPassView = (props: TProps) => {
 	);
 };
 
-export default React.memo(ResetPassView);
+export default React.memo(ResetPasswordView);

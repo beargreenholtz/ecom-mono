@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useApi from '@/utils/useApi';
 
-import ResetPassVerifyView from './ResetPassVerify.view';
+import ResetPassVerifyView from './ResetPasswordVerify.view';
 
-const ResetPassVerify = () => {
+const ResetPasswordVerify = () => {
 	const { token } = useParams();
 
 	const dispatch = useDispatch();
@@ -56,4 +56,4 @@ const ResetPassVerify = () => {
 	);
 };
 
-export default React.memo(ResetPassVerify);
+export default React.memo(ResetPasswordVerify);

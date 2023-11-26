@@ -2,10 +2,8 @@ import React from 'react';
 
 import Login from '@/containers/Auth/Login';
 
-interface TProps {}
-
-const LoginPage = () => {
+const loginPage = () => {
 	return <Login />;
 };
 
-export default LoginPage;
+export default loginPage;

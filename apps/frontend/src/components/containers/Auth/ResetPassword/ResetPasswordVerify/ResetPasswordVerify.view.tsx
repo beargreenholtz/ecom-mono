@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './ResetPassVerify.module.scss';
+import classes from './ResetPasswordVerify.module.scss';
 
 type TProps = {
 	readonly error: string;

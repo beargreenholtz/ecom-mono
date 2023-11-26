@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ResetPass from '@/containers/Auth/ResetPass';
+import resetPasswordPage from '@/containers/Auth/ResetPassword';
 
-const resetPassPage = () => {
-	return <ResetPass />;
+const resetPasswordPage = () => {
+	return <resetPasswordPage />;
 };
 
-export default resetPassPage;
+export default resetPasswordPage;
