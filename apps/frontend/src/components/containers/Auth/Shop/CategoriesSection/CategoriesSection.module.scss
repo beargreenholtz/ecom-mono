@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 65vh;
+	padding: 24px;
+
+	.imageContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: 33%;
+		border-radius: 8px;
+
+		img {
+			width: 100%;
+			object-fit: cover;
+		}
+
+		&__title {
+			font-size: 4rem;
+			font-weight: 700;
+			color: #fff;
+
+		}
+
+		&__button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 150px;
+			height: 50px;
+			margin-top: 20px;
+			font-size: 2rem;
+			color: #fff;
+			text-decoration: none;
+			border: 3px solid #fff;
+		}
+	}
+}
