@@ -4,7 +4,7 @@ import checkAuth from '../middleware/check-auth';
 
 const router = express.Router();
 
-router.post('/getallitems', getAllItems);
+router.post('/get-all-items', getAllItems);
 
 router.use(checkAuth);
 

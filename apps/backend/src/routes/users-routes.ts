@@ -6,19 +6,18 @@ import { passowrdvaliteregex } from '../utils/password-validate';
 import {
 	signUp,
 	loginGenerateOtp,
-	passwordResetGenertor,
+	passwordResetGenerator,
 	loginOtp,
 	passwordReset,
-	// callbackGoogleAuth,
-	failedgoogleauth,
-	successgoogleauth,
+	failedGooglAuth,
+	successGoogleAuth,
 	getAllUsers,
 	editUser,
 } from '../controllers/user.controller';
 
 const router = express.Router();
 
-router.get('/success', successgoogleauth);
+router.get('/success', successGoogleAuth);
 
 router.post(
 	'/signup',
@@ -31,25 +30,23 @@ router.post(
 	signUp,
 );
 
-router.post('/logingenerateotp', loginGenerateOtp);
-router.post('/loginotp/', loginOtp);
+router.post('/login-generate-otp', loginGenerateOtp);
+router.post('/login-otp/', loginOtp);
 
-router.post('/passwordresetrequest', passwordResetGenertor);
-router.post('/passwordReset/:resetPasswordToken', passwordReset);
+router.post('/password-reset-request', passwordResetGenerator);
+router.post('/password-reset/:resetPasswordToken', passwordReset);
 
-router.get('/failedgoogleauth', failedgoogleauth);
+router.get('/failed-google-auth', failedGooglAuth);
 
 router.get(
-	'/googleauth',
+	'/google-auth',
 	passport.authenticate('google', {
 		scope: ['email', 'profile'],
 	}),
 );
 
-// router.get('/callbackgoogleauth', callbackGoogleAuth);
-
 router.get(
-	'/callbackgoogleauth',
+	'/callback-google-auth',
 	passport.authenticate('google', {
 		successRedirect: process.env.CLIENT_HOME_PAGE_URL,
 		failureRedirect: '/login/failed',

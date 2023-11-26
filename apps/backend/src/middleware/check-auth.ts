@@ -18,10 +18,9 @@ const checkAuth = async (
 		const token = req.headers.authorization?.split(' ')[1];
 
 		if (!token) {
-			throw new Error('auth faildddddd');
+			throw new Error('auth failed');
 		}
 
-		console.log('got');
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
 
 		const userId = decodedToken.userId;
@@ -34,9 +33,9 @@ const checkAuth = async (
 
 		next();
 	} catch (error) {
-		const newerror = new HttpError('auth failed', 401);
+		const newError = new HttpError('auth failed', 401);
 
-		return next(newerror);
+		return next(newError);
 	}
 };
 

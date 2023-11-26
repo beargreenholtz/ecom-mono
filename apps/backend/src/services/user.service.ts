@@ -37,7 +37,7 @@ export const findLatestOtp = async (email: string) => {
 	return await OTP.findOne({ email }).sort({ createdAt: -1 }).limit(1);
 };
 
-export const saveresetPasswordTokenOnUser = async (existingUser: TUser, resetPasswordToken: string) => {
+export const saveResetPasswordTokenOnUser = async (existingUser: TUser, resetPasswordToken: string) => {
 	existingUser.resetPasswordToken = resetPasswordToken;
 	existingUser.resetPasswordTokenExpiration = Date.now() + 60 * 60 * 1000;
 
@@ -45,13 +45,6 @@ export const saveresetPasswordTokenOnUser = async (existingUser: TUser, resetPas
 
 	return existingUser;
 };
-
-// export const findUserByresetPasswordToken = async (resetPasswordToken: string) => {
-// 	return await User.findOne({
-// 		resetPasswordToken: resetPasswordToken,
-// 		resetPasswordTokenExpiration: { $gt: Date.now() },
-// 	});
-// };
 
 export const saveUserWithNewPassword = async (user: TUser, hashedPassword: string) => {
 	user.password = hashedPassword;

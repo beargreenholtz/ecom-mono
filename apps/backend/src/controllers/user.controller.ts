@@ -9,7 +9,7 @@ import {
 	getAllUsersHandler,
 	loginGenerateOtpHandler,
 	loginOtpHandler,
-	passwordResetGenertorHandler,
+	passwordResetGeneratorHandler,
 	passwordResetHandler,
 	signUpHandler,
 	successGoogleAuthHandler,
@@ -77,7 +77,7 @@ export const loginOtp: RequestHandler = async (req: TRequest, res: Response, nex
 	}
 };
 
-export const passwordResetGenertor: RequestHandler = async (
+export const passwordResetGenerator: RequestHandler = async (
 	req: TRequest,
 	res: Response,
 	next: NextFunction,
@@ -85,7 +85,7 @@ export const passwordResetGenertor: RequestHandler = async (
 	try {
 		if (!req.body.email) throw new HttpError('General Error', 500);
 
-		const resetLink = await passwordResetGenertorHandler(req.body.email);
+		const resetLink = await passwordResetGeneratorHandler(req.body.email);
 
 		res.json({
 			resetLink: resetLink,
@@ -139,11 +139,11 @@ export const callbackGoogleAuth: RequestHandler = async (req, res, next) => {
 	});
 };
 
-export const failedgoogleauth: RequestHandler = (_req, res) => {
+export const failedGooglAuth: RequestHandler = (_req, res) => {
 	res.send('Failed');
 };
 
-export const successgoogleauth: RequestHandler = (req, res) => {
+export const successGoogleAuth: RequestHandler = (req, res) => {
 	if (req.user) {
 		const userInfo: TSuccessgoogleauth = {
 			_id: req.user._id,
@@ -163,7 +163,6 @@ export const getAllUsers = async (_req, res: Response, next: NextFunction) => {
 	try {
 		const allUsers = await getAllUsersHandler();
 
-		console.log(allUsers);
 		res.status(200).json({ allUsers });
 	} catch (error) {
 		return next(error);

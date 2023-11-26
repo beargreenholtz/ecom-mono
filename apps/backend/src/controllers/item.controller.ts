@@ -19,7 +19,7 @@ export const createItem = async (req: TRequest, res, next: NextFunction) => {
 	}
 };
 
-export const getAllItems = async (req, res: Response, next: NextFunction) => {
+export const getAllItems = async (req: TRequest, res: Response, next: NextFunction) => {
 	try {
 		const allItems = await getAllItemsHandler(req.body.limit);
 
@@ -29,7 +29,7 @@ export const getAllItems = async (req, res: Response, next: NextFunction) => {
 	}
 };
 
-export const editItem = async (req, res: Response, next: NextFunction) => {
+export const editItem = async (req: TRequest, res: Response, next: NextFunction) => {
 	try {
 		const info = {
 			id: req.body.id,

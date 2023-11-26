@@ -5,8 +5,10 @@ type TParams = {
 };
 
 type TBody = {
+	id: string;
 	name?: string;
 	imageUrl?: string;
+	limit?: number;
 	stock?: number;
 	price?: number;
 };

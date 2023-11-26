@@ -16,10 +16,9 @@ const checkAuth = (
 		const token = req.headers.authorization?.split(' ')[1];
 
 		if (!token) {
-			throw new Error('Admin faild');
+			throw new Error('Admin failed');
 		}
 
-		console.log('got');
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
 
 		const userRole = decodedToken.role;
@@ -30,9 +29,9 @@ const checkAuth = (
 
 		next();
 	} catch (error) {
-		const newerror = new HttpError('auth failed', 401);
+		const newError = new HttpError('auth failed', 401);
 
-		return next(newerror);
+		return next(newError);
 	}
 };
 

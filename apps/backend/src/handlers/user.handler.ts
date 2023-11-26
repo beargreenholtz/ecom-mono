@@ -2,14 +2,14 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { encryptionConfig } from '../config/encryptconfig';
+import { encryptionConfig } from '../config/encrypt-config';
 import {
 	createOtp,
 	createUser,
 	findOtp,
 	getAllUsers,
 	getUserByEmail,
-	saveresetPasswordTokenOnUser,
+	saveResetPasswordTokenOnUser,
 	saveUserWithNewPassword,
 	updateUserById,
 } from '../services/user.service';
@@ -76,8 +76,6 @@ export const loginGenerateOtpHandler: TLoginGenerateOtpHandler = async (info: TO
 
 	const otp = generateOtp(6);
 
-	console.log(otp);
-
 	const hashedOtp = await bcrypt.hash(otp, 12);
 
 	const otpPayload = { email: info.email, otp: hashedOtp };
@@ -123,11 +121,7 @@ export const loginOtpHandler: TLoginOtpHandler = async (info: TOtp) => {
 
 	if (!otpUser) throw new HttpError('Cant Find Otp, Login Again', 402);
 
-	console.log(otpUser.otp);
-
 	const isValidPassword = await bcrypt.compare(info.otp, otpUser.otp);
-
-	console.log(isValidPassword);
 
 	if (!isValidPassword) throw new HttpError('Otp Doesnt Match', 402);
 
@@ -150,7 +144,7 @@ export const loginOtpHandler: TLoginOtpHandler = async (info: TOtp) => {
 	};
 };
 
-export const passwordResetGenertorHandler = async (email: string) => {
+export const passwordResetGeneratorHandler = async (email: string) => {
 	const existingUser = await getUserByEmail(email);
 
 	if (!existingUser) throw new HttpError('Cant Find User', 402);
@@ -174,9 +168,7 @@ export const passwordResetGenertorHandler = async (email: string) => {
 
 	encryptedData += cipher.final('hex');
 
-	console.log(encryptedData);
-
-	await saveresetPasswordTokenOnUser(existingUser, hashedPassword);
+	await saveResetPasswordTokenOnUser(existingUser, hashedPassword);
 
 	const resetLink = `${process.env.CLIENT_HOME_PAGE_URL}/auth/resetpassword/confirm/${encodeURIComponent(
 		encryptedData,
