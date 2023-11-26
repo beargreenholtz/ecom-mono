@@ -10,8 +10,8 @@ type TProps = {
 const ItemsShowcaseView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
-			{props.allItems.map((item, index) => (
-				<div className={classes['itemContainer']} key={index}>
+			{props.allItems.map((item) => (
+				<div className={classes['itemContainer']} key={item.name}>
 					<div className={classes['itemContainer__title']}>{item.name}</div>
 					<img className={classes['itemContainer__image']} src={item.imageUrl} alt={item.name} />
 				</div>

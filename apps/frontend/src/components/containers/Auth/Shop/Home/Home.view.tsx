@@ -10,7 +10,7 @@ import classes from './Home.module.scss';
 const HomeView = () => {
 	return (
 		<>
-			<section className={classes['firstContainer']}>
+			<section className={classes['container']}>
 				<Carousel />
 			</section>
 			<CategoriesSection />

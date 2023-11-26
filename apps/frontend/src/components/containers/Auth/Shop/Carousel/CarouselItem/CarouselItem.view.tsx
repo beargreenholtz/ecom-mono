@@ -8,14 +8,15 @@ type TProps = {
 	readonly title: string;
 	readonly text: string;
 };
+
 const CarouselItemView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
 			<img src={props.imageSrc} alt={props.alt} className={classes['container__image']} />
-			<div className={classes['innerContainer']}>
-				<h1 className={classes['innerContainer__title']}>{props.title}</h1>
-				<p className={classes['innerContainer__text']}>{props.text}</p>
-				<button type="button" className={classes['innerContainer__button']}>
+			<div className={classes['itemContainer']}>
+				<h1 className={classes['itemContainer__title']}>{props.title}</h1>
+				<p className={classes['itemContainer__text']}>{props.text}</p>
+				<button type="button" className={classes['itemContainer__button']}>
 					Shop Now
 				</button>
 			</div>

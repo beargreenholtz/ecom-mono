@@ -1,11 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { categoriesSection } from '@/data/categoriesSection';
+
 import classes from './CategoriesSection.module.scss';
 
 const CategoriesSectionView = () => {
 	return (
-		<div className={classes['secondContainer']}>
+		<div className={classes['container']}>
 			{categoriesSection.map((item) => (
 				<div
 					style={{ backgroundImage: `url(${item.image})` }}

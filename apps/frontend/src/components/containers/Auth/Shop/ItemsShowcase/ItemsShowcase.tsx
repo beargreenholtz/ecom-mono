@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
+import { type AxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 
 import type { TItem } from '@/types/item';
@@ -16,7 +16,7 @@ const ItemsShowcase = () => {
 			try {
 				const response = await useApi(
 					{
-						url: `${import.meta.env.VITE_BACkEND_URL}/item/getallitems`,
+						url: `${import.meta.env.VITE_BACkEND_URL}/item/get-all-items`,
 						method: 'post',
 						data: {
 							limit: 6,
