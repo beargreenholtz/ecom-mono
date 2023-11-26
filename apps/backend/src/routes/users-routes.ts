@@ -53,7 +53,7 @@ router.get(
 	}),
 );
 
-router.get('/getallusers', getAllUsers);
+router.get('/get-all-users', getAllUsers);
 
 router.post('/update', editUser);
 
