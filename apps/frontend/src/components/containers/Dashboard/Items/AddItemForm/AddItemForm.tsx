@@ -19,9 +19,10 @@ const AddItemForm = (props: TProps) => {
 		imageUrl: '',
 		stock: 0,
 		price: 0,
+		category: '',
 	});
 
-	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
 		const { name, value } = e.target;
 
 		setFormData((prevData) => ({
@@ -36,6 +37,8 @@ const AddItemForm = (props: TProps) => {
 		try {
 			const userToken = localStorage.getItem('jwt_token');
 
+			if (!userToken) return;
+
 			const response = await useApi(
 				{
 					url: `${import.meta.env.VITE_BACkEND_URL}/item/create`,
@@ -45,9 +48,10 @@ const AddItemForm = (props: TProps) => {
 						imageUrl: formData.imageUrl,
 						stock: formData.stock,
 						price: formData.price,
+						category: formData.category,
 					},
 					headers: {
-						authorization: `${userToken}`,
+						authorization: JSON.parse(userToken),
 					},
 				},
 				dispatch,

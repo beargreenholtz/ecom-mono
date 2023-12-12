@@ -17,6 +17,8 @@ const Otp = React.lazy(() => import('./pages/auth/otp/Otp'));
 const ResetPassRequest = React.lazy(() => import('./pages/auth/resetpassword/Request'));
 const ResetPassConfirm = React.lazy(() => import('./pages/auth/resetpassword/confirm'));
 const Home = React.lazy(() => import('./pages/shop/Home'));
+const Category = React.lazy(() => import('./pages/shop/Category'));
+const Item = React.lazy(() => import('./pages/shop/Item'));
 
 const AppRouter = () => {
 	const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);
@@ -55,6 +57,14 @@ const AppRouter = () => {
 				{
 					path: '/',
 					element: <Home />,
+				},
+				{
+					path: '/category/:category',
+					element: <Category />,
+				},
+				{
+					path: '/items/:itemName',
+					element: <Item />,
 				},
 				{
 					path: '/auth/login',

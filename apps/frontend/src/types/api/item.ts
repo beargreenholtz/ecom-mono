@@ -4,4 +4,5 @@ export type TItem = {
 	readonly name: string;
 	readonly price: number;
 	readonly stock: number;
+	readonly category: string;
 };

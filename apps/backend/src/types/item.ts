@@ -5,13 +5,14 @@ type TParams = {
 };
 
 type TBody = {
-	name?: string;
-	imageUrl?: string;
-	stock?: number;
-	price?: number;
+	name: string;
+	imageUrl: string;
+	stock: number;
+	price: number;
+	category: string;
 };
 
-export type TRequest = Request<TParams, object, TBody>;
+export type TRequest = Request<TParams, object, Partial<TBody>>;
 
 export type TItem = {
 	id: string;
@@ -19,4 +20,5 @@ export type TItem = {
 	name: string;
 	stock: number;
 	price: number;
+	category: string;
 };

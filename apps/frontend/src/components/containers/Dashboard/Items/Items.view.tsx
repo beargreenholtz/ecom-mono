@@ -19,7 +19,7 @@ type TProps = {
 };
 
 const ItemsView = (props: TProps) => {
-	const itemBarDesc = ['ID', 'Product', 'Stock', 'Price', 'Action'];
+	const itemBarDesc = ['ID', 'Category', 'Product', 'Stock', 'Price', 'Action'];
 
 	return (
 		<>
@@ -47,6 +47,7 @@ const ItemsView = (props: TProps) => {
 						return (
 							<div className={classes['itemContainer']} key={index}>
 								<span className={classes['itemContainer__description']}>{item._id}</span>
+								<span className={classes['itemContainer__description']}>{item.category}</span>
 								<span className={classes['itemContainer__description']}>{item.name}</span>
 								<span className={classes['itemContainer__description']}>{item.stock}</span>
 								<span className={classes['itemContainer__description']}>

@@ -4,13 +4,14 @@ import classes from './AddItemForm.module.scss';
 
 type TProps = {
 	readonly handleSubmit: (e: React.FormEvent) => void;
-	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 	readonly formData: {
-		name: string;
-		imageUrl: string;
-		stock: number;
-		image?: string;
-		price: number;
+		readonly name: string;
+		readonly imageUrl: string;
+		readonly stock: number;
+		readonly image?: string;
+		readonly price: number;
+		readonly category: string;
 	};
 };
 
@@ -65,6 +66,18 @@ const AddItemFormView = (props: TProps) => {
 						onChange={props.handleInputChange}
 					/>
 					<label htmlFor="price">Price:</label>
+				</div>
+
+				<div className={classes['inputContainer']}>
+					<input
+						type="text"
+						id="category"
+						name="category"
+						placeholder=" "
+						value={props.formData.category}
+						onChange={props.handleInputChange}
+					/>
+					<label htmlFor="category">Category: </label>
 				</div>
 
 				<button type="submit">Add</button>

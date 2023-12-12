@@ -3,7 +3,7 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 
 import HttpError from '../models/http-error';
 
-const checkAuth = (
+const checkRule = (
 	req: express.Request & { userData?: { userId: string } },
 	_: express.Response | express.RequestHandler,
 	next: express.NextFunction,
@@ -37,4 +37,4 @@ const checkAuth = (
 	}
 };
 
-export default checkAuth;
+export default checkRule;

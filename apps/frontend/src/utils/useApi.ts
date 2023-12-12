@@ -1,6 +1,7 @@
-import axios, { type AxiosError, type AxiosRequestConfig, type AxiosResponse } from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import type { Dispatch, AnyAction } from '@reduxjs/toolkit';
 
+import type { TItem } from '@/types/api/item';
 import { logout } from '@/store/actions/auth';
 
 type TOtp = {
@@ -8,6 +9,8 @@ type TOtp = {
 };
 type TResponse = {
 	readonly otp?: TOtp;
+	readonly allItems?: TItem[];
+	readonly item?: TItem;
 };
 
 const useApi = async <T extends TResponse>(

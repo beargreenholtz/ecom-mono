@@ -37,6 +37,10 @@ const Items = () => {
 					throw response;
 				}
 
+				if (!response?.data.allItems) {
+					throw 'No Items';
+				}
+
 				setAllItemsState(response?.data.allItems);
 			} catch (error) {
 				console.error('An error occurred during otp:', error);
