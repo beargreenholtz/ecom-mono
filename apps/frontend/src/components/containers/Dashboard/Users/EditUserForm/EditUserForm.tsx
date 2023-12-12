@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AxiosError } from 'axios';
+import { AxiosError, isAxiosError } from 'axios';
 import useApi from '@/utils/useApi';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { TUser } from '@/types/api/user';
 
 import EditUserFormView from './EditUserForm.view';
@@ -14,6 +15,9 @@ type TProps = {
 
 const EditUserForm = (props: TProps) => {
 	const dispatch = useDispatch();
+	const [storedData, persistData] = useLocalStorage('jwt_token');
+
+	const [error, setError] = useState('');
 
 	const [formData, setFormData] = useState({
 		name: props.item?.name,
@@ -34,6 +38,8 @@ const EditUserForm = (props: TProps) => {
 		e.preventDefault();
 
 		try {
+			if (typeof storedData !== 'string') throw 'no token';
+
 			const response = await useApi(
 				{
 					url: `${import.meta.env.VITE_BACkEND_URL}/user/update`,
@@ -44,6 +50,9 @@ const EditUserForm = (props: TProps) => {
 						email: formData.email,
 						role: formData.role,
 					},
+					headers: {
+						authorization: storedData,
+					},
 				},
 				dispatch,
 			);
@@ -51,16 +60,17 @@ const EditUserForm = (props: TProps) => {
 			if (response instanceof AxiosError) {
 				throw response;
 			}
-
-			props.onClickCloseButton();
 		} catch (error) {
-			console.error('An error occurred during otp:', error);
+			if (isAxiosError(error)) {
+				setError(error.response?.data?.message);
+			}
 		}
 	};
 
 	return (
 		<EditUserFormView
 			formData={formData}
+			error={error}
 			handleSubmit={handleSubmit}
 			handleInputChange={handleInputChange}
 		/>

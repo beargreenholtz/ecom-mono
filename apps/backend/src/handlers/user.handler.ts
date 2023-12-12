@@ -136,7 +136,12 @@ export const loginOtpHandler: TLoginOtpHandler = async (info: TOtp) => {
 	if (!existingUser) throw new HttpError('Cant Find User', 402);
 
 	const token = jwt.sign(
-		{ userId: existingUser.id, email: existingUser.email, username: existingUser.username },
+		{
+			userId: existingUser.id,
+			email: existingUser.email,
+			username: existingUser.username,
+			role: existingUser.role,
+		},
 		process.env.JWT_SECRET,
 		{
 			expiresIn: '1h',

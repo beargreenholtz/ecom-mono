@@ -36,8 +36,6 @@ const ResetPass = () => {
 			if (response instanceof AxiosError) {
 				throw response;
 			}
-
-			console.log('User ID:', response);
 		} catch (error) {
 			if (isAxiosError(error)) {
 				setErrorForm(error.response?.data?.message);

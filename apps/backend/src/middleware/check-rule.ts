@@ -19,10 +19,11 @@ const checkAuth = (
 			throw new Error('Admin faild');
 		}
 
-		console.log('got');
 		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
 
 		const userRole = decodedToken.role;
+
+		console.log(decodedToken);
 
 		if (userRole !== 'admin') {
 			throw new Error('No admin');
@@ -30,7 +31,7 @@ const checkAuth = (
 
 		next();
 	} catch (error) {
-		const newerror = new HttpError('auth failed', 401);
+		const newerror = new HttpError('Admin faild', 401);
 
 		return next(newerror);
 	}

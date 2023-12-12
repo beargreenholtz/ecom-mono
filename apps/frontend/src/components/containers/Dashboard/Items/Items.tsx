@@ -10,7 +10,7 @@ import ItemsView from './Items.view';
 const Items = () => {
 	const dispatch = useDispatch();
 	const [isShowingModal, onClickToggleModal] = useModal();
-	const [isShowingModalEdit, toggleModalEdit] = useModal();
+	const [isShowingModalEdit, onToggleModalEdit] = useModal();
 	const [clickedItemId, setClickedItemId] = useState<TItem | null>(null);
 
 	const [allItemsState, setAllItemsState] = useState<TItem[]>([]);
@@ -49,7 +49,7 @@ const Items = () => {
 	const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => {
 		console.log(e);
 		setClickedItemId(item);
-		toggleModalEdit();
+		onToggleModalEdit();
 	};
 
 	return (
@@ -58,9 +58,9 @@ const Items = () => {
 			allItems={allItemsState}
 			isShowingModalEdit={isShowingModalEdit}
 			clickedItemId={clickedItemId}
-			toggleModalEdit={toggleModalEdit}
 			handleClickEdit={handleClickEdit}
 			addItem={addItem}
+			onToggleModalEdit={onToggleModalEdit}
 			onClickToggleModal={onClickToggleModal}
 		/>
 	);

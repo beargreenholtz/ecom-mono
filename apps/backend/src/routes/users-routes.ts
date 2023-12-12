@@ -2,6 +2,8 @@ import express from 'express';
 import { check } from 'express-validator';
 import passport from 'passport';
 import { passowrdvaliteregex } from '../utils/password-validate';
+import checkAuth from '../middleware/check-auth';
+import checkRule from '../middleware/check-rule';
 
 import {
 	signUp,
@@ -57,6 +59,9 @@ router.get(
 );
 
 router.get('/get-all-users', getAllUsers);
+
+router.use(checkAuth);
+router.use(checkRule);
 
 router.post('/update', editUser);
 

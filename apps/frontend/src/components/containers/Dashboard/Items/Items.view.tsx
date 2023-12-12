@@ -2,9 +2,10 @@ import React from 'react';
 
 import Modal from '@/ui/Modal';
 import type { TItem } from '@/types/api/item';
-import classes from './Items.module.scss';
 import AddItemForm from './AddItemForm';
 import EditItemForm from './EditItemForm';
+
+import classes from './Items.module.scss';
 
 type TProps = {
 	readonly isShowingModal: boolean;
@@ -13,7 +14,7 @@ type TProps = {
 	readonly clickedItemId: TItem | null;
 	readonly addItem: (itemInfo: TItem) => void;
 	readonly onClickToggleModal: () => void;
-	readonly toggleModalEdit: () => void;
+	readonly onToggleModalEdit: () => void;
 	readonly handleClickEdit: (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => void;
 };
 
@@ -25,10 +26,11 @@ const ItemsView = (props: TProps) => {
 			<Modal isShow={props.isShowingModal} onClickCloseButton={props.onClickToggleModal}>
 				<AddItemForm addItem={props.addItem} onClickCloseButton={props.onClickToggleModal} />
 			</Modal>
-			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.onClickToggleModal}>
+			// eslint-disable-next-line react/jsx-handler-names
+			<Modal isShow={props.isShowingModalEdit} onClickCloseButton={props.onToggleModalEdit}>
 				<EditItemForm
-					toggleModal={props.toggleModalEdit}
 					item={props.clickedItemId && props.clickedItemId}
+					onToggleModalEdit={props.onToggleModalEdit}
 				/>
 			</Modal>
 			<div className={classes['container']}>

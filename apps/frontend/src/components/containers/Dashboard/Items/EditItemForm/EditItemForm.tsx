@@ -10,7 +10,7 @@ import EditItemFormView from './EditItemForm.view';
 
 type TProps = {
 	readonly item: TItem | null;
-	readonly toggleModal: () => void;
+	readonly onToggleModalEdit: () => void;
 };
 
 const EditItemForm = (props: TProps) => {
@@ -61,7 +61,7 @@ const EditItemForm = (props: TProps) => {
 				throw response;
 			}
 
-			props.toggleModal();
+			props.onToggleModalEdit();
 		} catch (error) {
 			console.error('An error occurred during otp:', error);
 		}

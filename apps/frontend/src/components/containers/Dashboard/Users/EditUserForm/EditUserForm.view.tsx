@@ -8,6 +8,7 @@ type TProps = {
 		email?: string;
 		role?: string;
 	};
+	readonly error: string;
 	readonly handleSubmit: (e: React.FormEvent) => void;
 	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
 };
@@ -56,6 +57,7 @@ const EditUserFormView = (props: TProps) => {
 
 				<button type="submit">Edit</button>
 			</form>
+			{props.error && <p>{props.error}</p>}
 		</div>
 	);
 };

@@ -27,17 +27,23 @@ const useApi = async <T extends TResponse>(
 		if (axios.isAxiosError(error)) {
 			if (error.status === 401) {
 				dispatch({ type: logout });
+
+				return error;
 			}
 
 			if (error.status === 500) {
 				console.error('Something went wrong');
+
+				return error;
 			}
 
-			console.error('Error during registration:', error.response?.data?.message);
+			console.error('Error ', error.response?.data?.message);
 
 			return error;
 		} else {
 			console.log('An unknown error occurred');
+
+			return error;
 		}
 	}
 };
