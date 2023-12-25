@@ -16,6 +16,8 @@ import {
 	successgoogleauth,
 	getAllUsers,
 	editUser,
+	updateCart,
+	getCartItems,
 } from '../controllers/user.controller';
 
 const router = express.Router();
@@ -64,5 +66,9 @@ router.use(checkAuth);
 router.use(checkRule);
 
 router.post('/update', editUser);
+
+router.post('/update-cart', updateCart);
+
+router.get('/get-cart-items', getCartItems);
 
 export default router;

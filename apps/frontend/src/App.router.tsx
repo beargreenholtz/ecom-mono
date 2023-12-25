@@ -23,7 +23,7 @@ const Item = React.lazy(() => import('./pages/shop/Item'));
 const AppRouter = () => {
 	const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);
 
-	console.log(isAuth);
+	isAuth;
 	const generealRotues = [
 		{
 			path: '/dashboard',
@@ -63,7 +63,7 @@ const AppRouter = () => {
 					element: <Category />,
 				},
 				{
-					path: '/items/:itemName',
+					path: '/items/:itemName/:itemId',
 					element: <Item />,
 				},
 				{

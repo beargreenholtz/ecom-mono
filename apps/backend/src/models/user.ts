@@ -35,6 +35,7 @@ const userSchema = new Schema({
 	},
 	orders: [{ type: mongoose.Types.ObjectId, required: false, ref: 'Order' }],
 	reviews: [{ type: mongoose.Types.ObjectId, required: false, ref: 'Review' }],
+	cart: { type: Schema.Types.ObjectId, required: false, ref: 'Cart' },
 });
 
 userSchema.plugin(uniqueValidator);

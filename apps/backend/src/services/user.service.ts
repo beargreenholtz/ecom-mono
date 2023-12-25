@@ -1,6 +1,9 @@
 import User from '../models/user';
 import OTP from '../models/otp';
 import type { TUser, TUserOrigin } from '../types/user';
+import Cart from '../models/cart';
+import Product from '../models/product';
+import type { CartItem } from '../types/cart';
 
 export const getUserByEmail = async (email: string) => {
 	return await User.findOne({ email: email });
@@ -76,4 +79,46 @@ export const updateUserById = async (info: TUserOrigin) => {
 		{ _id: info.id },
 		{ name: info.name, email: info.email, role: info.role },
 	);
+};
+
+export const updateCartByUserIdAndItems = async (userId: string, items: CartItem[]) => {
+	console.log(items);
+
+	const existingCart = await Cart.findOne({ userId });
+
+	if (existingCart) {
+		items.forEach((newItem) => {
+			const existingItem = existingCart.items.find((item) => {
+				return item.productId.toString() === newItem.productId.toString();
+			});
+
+			if (existingItem) {
+				existingItem.quantity += newItem.quantity;
+			} else {
+				existingCart.items.push(newItem);
+			}
+		});
+
+		await existingCart.save();
+	} else {
+		const newCart = new Cart({
+			userId: userId,
+			items,
+		});
+
+		await newCart.save();
+
+		await User.findByIdAndUpdate(userId, { cart: newCart._id });
+	}
+
+	return { existingCart };
+};
+
+export const getAllCartItemsById = async (userId: string) => {
+	const cartItems = await Cart.findOne({ userId }).populate({
+		path: 'items',
+		populate: { path: 'productId' },
+	});
+
+	return cartItems;
 };

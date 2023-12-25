@@ -8,6 +8,7 @@ import classes from './Item.module.scss';
 type TProps = {
 	readonly item: TItem | undefined;
 	readonly quantity: number;
+	onClickAddToCart: VoidFunction;
 	readonly handleClickChangeQuantity: (direction: string) => void;
 	readonly handleChangeQuantity: (e: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -59,7 +60,11 @@ const ItemView = (props: TProps) => {
 								+
 							</button>
 						</div>
-						<button type="button" className={classes['addToCartContainer__button']}>
+						<button
+							type="button"
+							className={classes['addToCartContainer__button']}
+							onClick={props.onClickAddToCart}
+						>
 							Add To Cart
 						</button>
 					</div>

@@ -22,6 +22,12 @@
 			}
 		}
 
+		&__svg {
+			cursor: pointer;
+		}
 	}
 
+	&__rightside {
+		display: flex;
+	}
 }

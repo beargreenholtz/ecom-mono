@@ -24,7 +24,7 @@ const LoginView = (props: TProps) => {
 	const firstObject = Object.keys(props.errors)[0];
 
 	const takeover = () => {
-		console.log('teatae');
+		('teatae');
 	};
 
 	return (

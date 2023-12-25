@@ -18,8 +18,6 @@ export const createItem = async (req: TRequest, res, next: NextFunction) => {
 			category: req.body.category,
 		};
 
-		console.log(req.body.category);
-
 		const response = await createItemHandler(info);
 
 		res.status(200).json({ response });

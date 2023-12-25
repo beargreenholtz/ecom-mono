@@ -20,7 +20,7 @@ const ResetPassVerify = () => {
 
 		const decodedUrl = decodeURI(`${import.meta.env.VITE_BACkEND_URL}/user/password-reset/${token}`);
 
-		console.log(errorState);
+		errorState;
 
 		try {
 			const response = await useApi(
@@ -34,12 +34,12 @@ const ResetPassVerify = () => {
 				dispatch,
 			);
 
-			console.log('User ID:', response);
+			'User ID:', response;
 			setIsSuccesPasswordResetState(true);
 		} catch (error) {
 			if (error instanceof AxiosError) setErrorState(error.message);
 
-			console.log(error);
+			error;
 		}
 	};
 

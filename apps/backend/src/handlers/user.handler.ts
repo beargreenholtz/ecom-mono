@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { encryptionConfig } from '../config/encryptconfig';
 import {
+	updateCartByUserIdAndItems,
 	createOtp,
 	createUser,
 	findOtp,
@@ -12,6 +13,7 @@ import {
 	saveresetPasswordTokenOnUser,
 	saveUserWithNewPassword,
 	updateUserById,
+	getAllCartItemsById,
 } from '../services/user.service';
 import HttpError from '../models/http-error';
 import type {
@@ -26,6 +28,8 @@ import type {
 } from '../types/user';
 import mailSender from '../utils/mail-sender';
 import generateOtp from '../utils/generate-otp';
+import type Cart from '../models/cart';
+import type { CartItem } from '../types/cart';
 
 export const signUpHandler: TSignUpHandler = async (info: TUser) => {
 	const isUserExist = await getUserByEmail(info.email);
@@ -76,8 +80,6 @@ export const loginGenerateOtpHandler: TLoginGenerateOtpHandler = async (info: TO
 
 	const otp = generateOtp(6);
 
-	console.log(otp);
-
 	const hashedOtp = await bcrypt.hash(otp, 12);
 
 	const otpPayload = { email: info.email, otp: hashedOtp };
@@ -123,11 +125,11 @@ export const loginOtpHandler: TLoginOtpHandler = async (info: TOtp) => {
 
 	if (!otpUser) throw new HttpError('Cant Find Otp, Login Again', 402);
 
-	console.log(otpUser.otp);
+	otpUser.otp;
 
 	const isValidPassword = await bcrypt.compare(info.otp, otpUser.otp);
 
-	console.log(isValidPassword);
+	isValidPassword;
 
 	if (!isValidPassword) throw new HttpError('Otp Doesnt Match', 402);
 
@@ -179,7 +181,7 @@ export const passwordResetGenertorHandler = async (email: string) => {
 
 	encryptedData += cipher.final('hex');
 
-	console.log(encryptedData);
+	encryptedData;
 
 	await saveresetPasswordTokenOnUser(existingUser, hashedPassword);
 
@@ -264,4 +266,22 @@ export const editUserHandler = async (info: TUserOrigin) => {
 	if (!user) throw new HttpError('cant find product', 500);
 
 	return user;
+};
+
+export const updateCartHandler = async (userEmail: string, items: CartItem[]) => {
+	const user = await getUserByEmail(userEmail);
+
+	if (!user) throw new HttpError('cant find user', 500);
+
+	const updatedUserInfo = await updateCartByUserIdAndItems(user._id, items);
+
+	return updatedUserInfo;
+};
+
+export const getCartItemsHandler = async (userId: string) => {
+	const items = await getAllCartItemsById(userId);
+
+	if (!items) throw new HttpError('cant find items', 500);
+
+	return items;
 };

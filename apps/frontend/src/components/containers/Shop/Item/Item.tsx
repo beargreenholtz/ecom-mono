@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AxiosError } from 'axios';
 
+import * as cartActions from '@/store/actions/cart';
 import type { TItem } from '@/types/api/item';
 import useApi from '@/utils/useApi';
 
@@ -10,7 +11,7 @@ import ItemView from './Item.view';
 
 const Item = () => {
 	const dispatch = useDispatch();
-	const { itemName } = useParams();
+	const { itemName, itemId } = useParams();
 
 	const [itemState, setItemState] = useState<TItem>();
 	const [quantityState, setQuantityState] = useState(0);
@@ -52,6 +53,51 @@ const Item = () => {
 		}
 	};
 
+	const onClickAddToCart = async () => {
+		console.log(itemState?._id);
+
+		if (!itemName || !itemId) return;
+
+		const itemInfo = {
+			_id: itemId,
+			name: itemName,
+			quantity: quantityState,
+		};
+
+		dispatch(cartActions.cartItemsUpdate([itemInfo]));
+
+		try {
+			const userToken = localStorage.getItem('jwt_token');
+
+			if (!userToken || !itemState) return;
+
+			const response = await useApi(
+				{
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/update-cart`,
+					method: 'post',
+					data: {
+						items: [
+							{
+								productId: itemState._id,
+								quantity: quantityState,
+							},
+						],
+					},
+					headers: {
+						authorization: JSON.parse(userToken),
+					},
+				},
+				dispatch,
+			);
+
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+		} catch (error) {
+			console.error('An error occurred during adding item:', error);
+		}
+	};
+
 	useEffect(() => {
 		fetchCategoryItems();
 	}, []);
@@ -62,6 +108,7 @@ const Item = () => {
 			item={itemState}
 			handleClickChangeQuantity={handleClickChangeQuantity}
 			handleChangeQuantity={handleChangeQuantity}
+			onClickAddToCart={onClickAddToCart}
 		/>
 	);
 };

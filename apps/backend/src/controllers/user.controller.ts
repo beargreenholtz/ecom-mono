@@ -2,17 +2,20 @@ import type { Response, NextFunction, RequestHandler } from 'express';
 import passport from 'passport';
 import { validationResult } from 'express-validator';
 
+import jwt, { type JwtPayload } from 'jsonwebtoken';
 import type { TUser, TRequest, TOtp, TPassReset, TSuccessgoogleauth } from '../types/user';
 import HttpError from '../models/http-error';
 import {
 	editUserHandler,
 	getAllUsersHandler,
+	getCartItemsHandler,
 	loginGenerateOtpHandler,
 	loginOtpHandler,
 	passwordResetGenertorHandler,
 	passwordResetHandler,
 	signUpHandler,
 	successGoogleAuthHandler,
+	updateCartHandler,
 } from '../handlers/user.handler';
 
 export const signUp: RequestHandler = async (req: TRequest, res: Response, next: NextFunction) => {
@@ -163,7 +166,6 @@ export const getAllUsers = async (_req, res: Response, next: NextFunction) => {
 	try {
 		const allUsers = await getAllUsersHandler();
 
-		console.log(allUsers);
 		res.status(200).json({ allUsers });
 	} catch (error) {
 		return next(error);
@@ -182,6 +184,36 @@ export const editUser = async (req, res: Response, next: NextFunction) => {
 		const item = await editUserHandler(info);
 
 		res.status(200).json({ item });
+	} catch (error) {
+		return next(error);
+	}
+};
+
+export const updateCart = async (req, res: Response, next: NextFunction) => {
+	try {
+		const token = req.headers.authorization?.split(' ')[1];
+
+		const items = req.body.items;
+
+		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
+
+		const userInfo = await updateCartHandler(decodedToken.email, items);
+
+		res.status(200).json({ userInfo });
+	} catch (error) {
+		return next(error);
+	}
+};
+
+export const getCartItems = async (req, res: Response, next: NextFunction) => {
+	try {
+		const token = req.headers.authorization?.split(' ')[1];
+
+		const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as JwtPayload;
+
+		const userInfo = await getCartItemsHandler(decodedToken.userId);
+
+		res.status(200).json({ userInfo });
 	} catch (error) {
 		return next(error);
 	}

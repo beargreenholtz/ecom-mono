@@ -23,7 +23,7 @@ const checkRule = (
 
 		const userRole = decodedToken.role;
 
-		console.log(decodedToken);
+		decodedToken;
 
 		if (userRole !== 'admin') {
 			throw new Error('No admin');

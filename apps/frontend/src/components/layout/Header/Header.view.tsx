@@ -4,14 +4,19 @@ import { useSelector } from 'react-redux';
 
 import type { RootState } from '@/store/app';
 import Logo from '@/assets/logo.png';
+import Svg from '@/ui/Svg';
+import CartPopup from './CartPopup';
 
 import classes from './Header.module.scss';
 
 type TProps = {
-	readonly onClickLogout: () => void;
+	readonly isHoverCart: boolean;
+	readonly onClickCart: VoidFunction;
+	readonly onClickLogout: VoidFunction;
 };
 const HeaderView = (props: TProps) => {
 	const isAuth = useSelector((state: RootState) => state.user.isAuthenticated);
+	const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
 	return (
 		<div className={classes['container']}>
@@ -43,13 +48,24 @@ const HeaderView = (props: TProps) => {
 				</div>
 			)}
 			{isAuth && (
-				<button
-					type="button"
-					className={classes['linksContainer__link']}
-					onClick={props.onClickLogout}
-				>
-					Logout
-				</button>
+				<div className={classes['container__rightside']}>
+					<button
+						type="button"
+						className={classes['linksContainer__link']}
+						onClick={props.onClickLogout}
+					>
+						Logout
+					</button>
+					<div>
+						{cartItems.length > 0 && <p>{cartItems.length}</p>}
+						<Svg
+							className={classes['linksContainer__svg']}
+							name="cart"
+							onClick={props.onClickCart}
+						/>
+						{props.isHoverCart && <CartPopup />}
+					</div>
+				</div>
 			)}
 		</div>
 	);

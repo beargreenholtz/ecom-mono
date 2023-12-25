@@ -6,17 +6,17 @@ figlet('Ecom Now', (err, figletText) => {
 		return;
 	}
 
-	console.log(chalk.bold(figletText));
+	(chalk.bold(figletText));
 
-	console.log(chalk.bold.blue('Welcome to Ecom Site'));
+	(chalk.bold.blue('Welcome to Ecom Site'));
 
-	console.log('🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨\n');
+	('🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨🎉✨\n');
 
-	console.log(chalk.bold('Please follow these rules:'));
+	(chalk.bold('Please follow these rules:'));
 
-	console.log(
+	(
 		chalk.bold.blue('- 📦️ Use "git cmt" instead of "git commit" in order to commit your changes'),
 	);
-	console.log(chalk.bold.blue('- 🛂 Follow the code conventions (our linters will enforce you..)'));
-	console.log(chalk.bold.blue('- 📝 Document/Modify your new feature/fix in the README.md file'));
+	(chalk.bold.blue('- 🛂 Follow the code conventions (our linters will enforce you..)'));
+	(chalk.bold.blue('- 📝 Document/Modify your new feature/fix in the README.md file'));
 });

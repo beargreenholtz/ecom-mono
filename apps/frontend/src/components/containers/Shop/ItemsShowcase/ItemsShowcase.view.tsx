@@ -12,7 +12,11 @@ const ItemsShowcaseView = (props: TProps) => {
 	return (
 		<div className={classes['container']}>
 			{props.allItems.map((item, index) => (
-				<NavLink className={classes['itemContainer']} key={index} to={`/items/${item.name}`}>
+				<NavLink
+					className={classes['itemContainer']}
+					key={index}
+					to={`/items/${item.name}/${item._id}`}
+				>
 					<div className={classes['itemContainer__title']}>{item.name}</div>
 					<img className={classes['itemContainer__image']} src={item.imageUrl} alt={item.name} />
 				</NavLink>

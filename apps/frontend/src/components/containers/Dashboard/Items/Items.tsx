@@ -51,7 +51,7 @@ const Items = () => {
 	}, []);
 
 	const handleClickEdit = (e: React.MouseEvent<HTMLButtonElement>, item: TItem) => {
-		console.log(e);
+		e;
 		setClickedItemId(item);
 		onToggleModalEdit();
 	};

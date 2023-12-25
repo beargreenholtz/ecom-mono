@@ -60,7 +60,7 @@ const Register = () => {
 			setIsButtonDisabled(false);
 		}, 5000);
 
-		console.log('Form data:', formData);
+		'Form data:', formData;
 
 		try {
 			const response = await useApi(
@@ -111,7 +111,7 @@ const Register = () => {
 
 			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
-			console.log(error);
+			error;
 		}
 	};
 

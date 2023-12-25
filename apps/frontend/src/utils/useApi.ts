@@ -1,16 +1,21 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 import type { Dispatch, AnyAction } from '@reduxjs/toolkit';
 
+import * as authActions from '@/store/actions/auth';
+import type { TUserInfo } from '@/types/api/cart';
 import type { TItem } from '@/types/api/item';
 import { logout } from '@/store/actions/auth';
 
 type TOtp = {
 	readonly encryptedOtpPayload: string;
 };
+
 type TResponse = {
 	readonly otp?: TOtp;
 	readonly allItems?: TItem[];
 	readonly item?: TItem;
+	readonly status: number;
+	readonly userInfo: TUserInfo;
 };
 
 const useApi = async <T extends TResponse>(
@@ -30,6 +35,7 @@ const useApi = async <T extends TResponse>(
 		if (axios.isAxiosError(error)) {
 			if (error.status === 401) {
 				dispatch({ type: logout });
+				dispatch(authActions.logout());
 
 				return error;
 			}
@@ -41,10 +47,6 @@ const useApi = async <T extends TResponse>(
 			}
 
 			console.error('Error ', error.response?.data?.message);
-
-			return error;
-		} else {
-			console.log('An unknown error occurred');
 
 			return error;
 		}
