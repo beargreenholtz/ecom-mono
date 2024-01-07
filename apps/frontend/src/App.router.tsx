@@ -15,7 +15,7 @@ const Login = React.lazy(() => import('./pages/auth/Login'));
 const Register = React.lazy(() => import('./pages/auth/Register'));
 const Otp = React.lazy(() => import('./pages/auth/otp/Otp'));
 const ResetPassRequest = React.lazy(() => import('./pages/auth/resetpassword/Request'));
-const ResetPassConfirm = React.lazy(() => import('./pages/auth/resetpassword/confirm'));
+const ResetPassConfirm = React.lazy(() => import('./pages/auth/resetpassword/Confirm'));
 const Home = React.lazy(() => import('./pages/shop/Home'));
 const Category = React.lazy(() => import('./pages/shop/Category'));
 const Item = React.lazy(() => import('./pages/shop/Item'));

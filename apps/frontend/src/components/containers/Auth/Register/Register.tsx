@@ -4,7 +4,6 @@ import axios, { AxiosError, isAxiosError } from 'axios';
 import { useDispatch } from 'react-redux';
 
 import useApi from '@/utils/useApi';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
 import useModal from '@/utils/useModal';
 import * as authActions from '@/store/actions/auth';
 import useValidation from '@/utils/input-validate';
@@ -13,7 +12,6 @@ import RegisterView from './Register.view';
 
 const Register = () => {
 	const dispatch = useDispatch();
-	const [storedData, persistData] = useLocalStorage('jwt_token');
 
 	const [resetErrors, errors, handleValidation] = useValidation();
 
@@ -60,8 +58,6 @@ const Register = () => {
 			setIsButtonDisabled(false);
 		}, 5000);
 
-		'Form data:', formData;
-
 		try {
 			const response = await useApi(
 				{
@@ -96,7 +92,6 @@ const Register = () => {
 		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/google-auth`, '_self');
 	};
 
-	//move to shop main page
 	const getUserFromGoogle = async () => {
 		try {
 			const response = await axios.get(`${import.meta.env.VITE_BACkEND_URL}/user/success`, {
