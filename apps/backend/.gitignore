@@ -4,3 +4,4 @@ tsconfig.tsbuildinfo
 tsconfig.build.tsbuildinfo
 envs
 .env.development
+.env
