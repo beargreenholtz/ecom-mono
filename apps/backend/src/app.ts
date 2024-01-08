@@ -25,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((_: express.Request, res: express.Response, next: express.NextFunction) => {
-	res.setHeader('Access-Control-Allow-Origin', `${process.env.CLIENT_HOME_PAGE_URL}`);
+	res.setHeader('Access-Control-Allow-Origin', `*`);
 	res.setHeader(
 		'Access-Control-Allow-Headers',
 		'Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Type',
