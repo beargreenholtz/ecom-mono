@@ -6,7 +6,7 @@
 	"author": "Bear Greenholtz",
 	"license": "MIT",
 	"scripts": {
-		"start": "node app.js",
+		"start": "node dist/app.js",
 		"start:dev": "dotenv nodemon app.js",
 		"build": "tsc -p ./tsconfig.build.json",
 		"type-check": "tsc -p ./tsconfig.json",
