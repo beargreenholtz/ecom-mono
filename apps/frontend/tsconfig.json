@@ -1,5 +1,33 @@
 {
-	"extends": "./tsconfig.base.json",
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"baseUrl": "./",
+		"jsx": "preserve",
+		"lib": ["es2022", "dom", "dom.iterable"],
+		"moduleResolution": "node",
+		"module": "ESNext",
+		"esModuleInterop": true,
+		"noEmit": true,
+		"paths": {
+			"@/ui/*": ["src/components/ui/*"],
+			"@/containers/*": ["src/components/containers/*"],
+			"@/layout/*": ["src/components/layout/*"],
+			"@/data/*": ["src/data/*"],
+			"@/utils/*": ["src/utils/*"],
+			"@/store/*": ["src/store/*"],
+			"@/images/*": ["src/assets/images/*"],
+			"@/assets/*": ["src/assets/*"],
+			"@/hooks/*": ["src/hooks/*"],
+			"@/models/*": ["src/models/*"],
+			"@/styles/*": ["src/styles/*"],
+			"@/types/*": ["src/types/*"]
+		},
+		"typeRoots": ["./@types", "./node_modules/@types"],
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true
+	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx", ".next/types/**/*.ts"],
 	"exclude": ["./node_modules"]
 }

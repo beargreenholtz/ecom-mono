@@ -18,6 +18,5 @@ figlet('Ecom Now', (err, figletText) => {
 		chalk.bold.blue('- 📦️ Use "git cmt" instead of "git commit" in order to commit your changes'),
 	);
 	console.log(chalk.bold.blue('- 🛂 Follow the code conventions (our linters will enforce you..)'));
-	console.log(chalk.bold.blue('- 🚀 Make sure GitHub actions are passed before asking for PR'));
 	console.log(chalk.bold.blue('- 📝 Document/Modify your new feature/fix in the README.md file'));
 });

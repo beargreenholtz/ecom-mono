@@ -1,62 +1,76 @@
 import React from 'react';
 
+import Input from '@/ui/Input';
+import type { FormFields } from '@/types/api/user';
 import classes from './Login.module.scss';
 
 type TProps = {
-	formData: {
-		email: string;
-		password: string;
+	readonly formData: {
+		readonly email: string;
+		readonly password: string;
 	};
-	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: (e: React.FormEvent) => void;
-	showPassword: boolean;
-	handlePasswordToggle: () => void;
-	onClickGoogle: () => void;
-	handleOnClickPassReset: () => void;
+	readonly errorForm: string;
+	readonly showPassword: boolean;
+	readonly isButtonDisabled: boolean;
+	readonly errors: FormFields;
+	readonly handleChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleSubmit: (e: React.FormEvent) => void;
+	readonly handlePasswordToggle: () => void;
+	readonly handleClickGoogle: () => void;
+	readonly handleOnClickPassReset: () => void;
 };
 
 const LoginView = (props: TProps) => {
+	const firstObject = Object.keys(props.errors)[0];
+
+	const takeover = () => {
+		console.log('teatae');
+	};
+
 	return (
 		<div className={classes['container']}>
-			<h2>Login</h2>
-			<form onSubmit={props.onSubmit}>
-				<div className={classes['inputContainer']}>
-					<label htmlFor="email">Email:</label>
-					<input
+			<div className={classes['loginContainer']}>
+				<h2 className={classes['loginContainer__title']} onClick={takeover}>
+					Login
+				</h2>
+				<form onSubmit={props.handleSubmit}>
+					<Input
 						type="email"
-						id="email"
-						name="email"
+						error={props.errors['email']}
 						value={props.formData.email}
-						onChange={props.onInputChange}
+						inputName="email"
+						firstErrorItem={firstObject}
+						onChangeInput={props.handleChangeInput}
 					/>
-				</div>
+					<Input
+						type={props.showPassword ? 'text' : 'password'}
+						value={props.formData.password}
+						error={props.errors['password']}
+						inputName="password"
+						firstErrorItem={firstObject}
+						onChangeInput={props.handleChangeInput}
+					/>
 
-				<div className={classes['inputContainer']}>
-					<label htmlFor="password">Password:</label>
-					<div className={classes['passwordInputContainer']}>
-						<input
-							type={props.showPassword ? 'text' : 'password'}
-							id="password"
-							name="password"
-							value={props.formData.password}
-							onChange={props.onInputChange}
-						/>
-					</div>
-				</div>
-
-				<button type="submit">Login</button>
-			</form>
-			<button type="button" onClick={props.onClickGoogle}>
-				Google
-			</button>
-			<button type="button" onClick={props.handleOnClickPassReset}>
-				Reset Password
-			</button>
+					<button
+						className={props.isButtonDisabled ? classes['disabled'] : ''}
+						type="submit"
+						disabled={props.isButtonDisabled}
+					>
+						Login
+					</button>
+				</form>
+				<button type="button" onClick={props.handleClickGoogle}>
+					Google
+				</button>
+				<button type="button" onClick={props.handleOnClickPassReset}>
+					Reset Password
+				</button>
+				{props.errorForm && (
+					<span className={classes['loginContainer__error']}>{props.errorForm}</span>
+				)}
+			</div>
 		</div>
 	);
 };
-
-LoginView.displayName = 'LoginView';
-LoginView.defaultProps = {};
 
 export default React.memo(LoginView);

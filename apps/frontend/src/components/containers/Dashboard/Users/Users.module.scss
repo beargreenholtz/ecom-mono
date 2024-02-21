@@ -1,0 +1,51 @@
+.container {
+	display: flex;
+
+
+	.usersContainer {
+		width: 100%;
+		margin-inline-start: 250px;
+		margin-top: 150px;
+		border: solid 2px #808080;
+		border-radius: 4px;
+
+		.usersBar {
+			display: flex;
+			padding: 20px;
+			border-bottom: solid 2px #bbdd;
+
+			&__description {
+				width: 400px;
+				font-size: 2rem;
+				color: #bbdd;
+				border-inline-start: solid 2px #bbdd;
+			}
+		}
+
+		.itemContainer {
+			display: flex;
+			padding: 20px;
+			font-size: 1.3rem;
+			border-bottom: solid 2px #bbdd;
+
+			&__description {
+				width: 400px;
+			}
+
+			&__image {
+				width: 50px;
+				object-fit: contain;
+			}
+
+			&__button {
+				padding: 4px;
+				color: #fff;
+				background-color: #008000;
+				border-radius: 8px;
+			}
+
+		}
+	}
+
+
+}

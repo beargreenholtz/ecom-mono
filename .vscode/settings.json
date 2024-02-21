@@ -2,37 +2,13 @@
 	"editor.formatOnSave": true,
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.codeActionsOnSave": {
-		"source.fixAll.stylelint": true
+		"source.fixAll.stylelint": "explicit",
+		"source.fixAll.eslint": "explicit"
 	},
 	"stylelint.validate": ["css", "scss"],
-	"typescript.tsdk": "node_modules/typescript/lib",
+	"eslint.validate": ["javascript"],
 	"search.exclude": {
 		"**/node_modules": true
 	},
-	"files.associations": {
-		"commit-msg": "shellscript"
-	},
-	// Copy all below to your user settings to get nice visual
-	"material-icon-theme.files.associations": {
-		".inflintignore": "crystal",
-		"inflint.config.ts": "crystal",
-		"czvinyl.config.cjs": "ocaml",
-		".depcheckrc.json": "parcel",
-		".cz.json": "jinja",
-		"*.routes.ts": "routing",
-		".compodocrc.json": "mjml",
-		"*.strategy.ts": "nest-gateway"
-	},
-	"material-icon-theme.folders.associations": {
-		".volumes": "database",
-		"decorators": "meta",
-		"interceptors": "connection",
-		"strategies": "mappings",
-		"queries": "shader",
-		"secrets": "keys",
-		"user": "client",
-		"_templates": "template"
-	},
-	"material-icon-theme.activeIconPack": "react_redux",
-	"task.allowAutomaticTasks": "on"
+	"cSpell.words": ["passowrdvaliteregex", "reduxjs"]
 }

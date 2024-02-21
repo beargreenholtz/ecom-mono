@@ -1,0 +1,39 @@
+.inputContainer {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 45px;
+
+	label {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		height: 100%;
+		margin-bottom: 5px;
+		font-weight: bold;
+		transition: 300ms ease;
+	}
+
+	input {
+		width: 350px;
+		padding: 10px 0;
+		background-color: transparent;
+		border: none;
+		border-bottom: solid #007bff;
+		transition: 300ms ease;
+
+		&:focus {
+			outline: none;
+			box-shadow: 0 1px 0 0 #0056b3;
+		}
+
+		&:focus+label,
+		&:not(:placeholder-shown)+label {
+			transform: translateY(-28px);
+		}
+	}
+
+	&__error {
+		color: #f00;
+	}
+}

@@ -1,25 +1,46 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState } from 'react';
-import axios, { type AxiosError } from 'axios';
+import axios, { AxiosError, isAxiosError } from 'axios';
+
+import { useDispatch } from 'react-redux';
+
+import useApi from '@/utils/useApi';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
+import useModal from '@/utils/useModal';
+import * as authActions from '@/store/actions/auth';
+import useValidation from '@/utils/input-validate';
+
 import RegisterView from './Register.view';
 
 const Register = () => {
+	const dispatch = useDispatch();
+	const [storedData, persistData] = useLocalStorage('jwt_token');
+
+	const [resetErrors, errors, handleValidation] = useValidation();
+
+	const [errorForm, setErrorForm] = useState('');
+	const [isShowingModal, toggleModal] = useModal();
+
 	const [formData, setFormData] = useState({
+		email: '',
 		username: '',
 		name: '',
-		email: '',
 		password: '',
 		confirmPassword: '',
 	});
 
-	const [showPassword, setShowPassword] = useState(false);
+	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const handlePasswordToggle = () => {
-		setShowPassword(!showPassword);
+		setIsShowPassword(!isShowPassword);
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
+
+		setErrorForm('');
+		resetErrors();
 
 		setFormData((prevData) => ({
 			...prevData,
@@ -30,72 +51,65 @@ const Register = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 
-		if (
-			formData.username.trim() === '' ||
-			formData.email.trim() === '' ||
-			formData.name.trim() === '' ||
-			formData.password.trim() === ''
-		) {
-			console.error('All Inputs Required');
-
+		if (!handleValidation(formData)) {
 			return;
 		}
 
-		if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])\S{8,}$/.test(formData.password)) {
-			console.error(
-				'Password should have at least 1 lowercase, 1 uppercase, and 1 unique character, and be at least 8 characters long',
-			);
-
-			return;
-		}
-
-		if (formData.password !== formData.confirmPassword) {
-			console.error('Passwords dont match');
-
-			return;
-		}
+		setIsButtonDisabled(true);
+		setTimeout(() => {
+			setIsButtonDisabled(false);
+		}, 5000);
 
 		console.log('Form data:', formData);
 
-		await axios
-			.post('http://localhost:5000/user/signup', {
-				name: formData.username,
-				username: formData.username,
-				email: formData.email,
-				password: formData.password,
-			})
-			.then(
-				(res) => {
-					const { userId, email, token } = res.data;
-
-					console.log('Registration successful!');
-					console.log('User ID:', userId);
-					console.log('User Email:', email);
-					console.log('JWT Token:', token);
+		try {
+			const response = await useApi(
+				{
+					url: `${import.meta.env.VITE_BACkEND_URL}/user/signup`,
+					method: 'post',
+					data: {
+						name: formData.username,
+						username: formData.username,
+						email: formData.email,
+						password: formData.password,
+					},
 				},
-				(error: Error | AxiosError) => {
-					if (axios.isAxiosError(error)) {
-						console.error('Error during registration:', error?.response?.data?.message);
-					} else {
-						console.log('An unknown error occurred');
-					}
-				},
+				dispatch,
+				toggleModal,
 			);
+
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+
+			const token: string = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(token));
+		} catch (error) {
+			if (isAxiosError(error)) {
+				setErrorForm(error.response?.data?.message);
+			}
+		}
 	};
 
 	const onClickGoogle = () => {
-		window.open(`${process.env.NEXT_PUBLIC_BACkEND_URL}/user/googleauth`, '_self');
+		window.open(`${import.meta.env.VITE_BACkEND_URL}/user/google-auth`, '_self');
 	};
 
-	const [user, setUser] = useState(null);
-
+	//move to shop main page
 	const getUserFromGoogle = async () => {
 		try {
-			const url = `${process.env.NEXT_PUBLIC_BACkEND_URL}/user/success`;
-			const { data } = await axios.get(url, { withCredentials: true });
+			const response = await axios.get(`${import.meta.env.VITE_BACkEND_URL}/user/success`, {
+				withCredentials: true,
+			});
 
-			setUser(data);
-			console.log(data);
+			if (response instanceof AxiosError) {
+				throw response;
+			}
+
+			const token = response?.headers.authorization;
+
+			dispatch(authActions.loginSuccess(token));
 		} catch (error) {
 			console.log(error);
 		}
@@ -107,17 +121,19 @@ const Register = () => {
 
 	return (
 		<RegisterView
-			showPassword={showPassword}
+			errors={errors}
+			isShowPassword={isShowPassword}
 			formData={formData}
+			isShowingModal={isShowingModal}
+			errorForm={errorForm}
+			isButtonDisabled={isButtonDisabled}
 			handlePasswordToggle={handlePasswordToggle}
-			onInputChange={handleInputChange}
-			onSubmit={handleSubmit}
-			onClickGoogle={onClickGoogle}
+			handleInputChange={handleInputChange}
+			handleSubmit={handleSubmit}
+			handleClickGoogle={onClickGoogle}
+			onClickCloseButton={toggleModal}
 		/>
 	);
 };
-
-Register.displayName = 'Register';
-Register.defaultProps = {};
 
 export default React.memo(Register);

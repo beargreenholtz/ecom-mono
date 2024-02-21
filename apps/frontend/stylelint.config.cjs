@@ -12,20 +12,11 @@ module.exports = {
 		'color-named': ['never'],
 		'declaration-block-no-duplicate-properties': [true],
 		'function-disallowed-list': ['rgb', 'rgba', 'hsl', 'hwb'],
-		'selector-pseudo-class-no-unknown': [
-			true,
-			{
-				ignorePseudoClasses: ['global', 'export'],
-			},
-		],
+		'selector-pseudo-class-no-unknown': [true],
 
 		'scss/operator-no-newline-after': null,
 		'scss/at-import-partial-extension': null,
 		'scss/percent-placeholder-pattern':
 			/^_[a-z][a-z0-9]*(([A-Z][a-z0-9]+)*[A-Z]?|([a-z0-9]+[A-Z])*|[A-Z])$/,
-		// 'scale-unlimited/declaration-strict-value': [
-		// 	['/padding/', 'top', 'bottom', '/margin/', 'font-size', 'fill', '/gap/'],
-		// 	{ ignoreVariables: false, ignoreValues: ['transparent', '/rem/', '0', 'auto'] },
-		// ],
 	},
 };

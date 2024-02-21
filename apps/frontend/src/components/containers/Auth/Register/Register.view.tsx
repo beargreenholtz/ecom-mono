@@ -1,100 +1,109 @@
 import React from 'react';
+
+import Modal from '@/ui/Modal';
+import Input from '@/ui/Input';
+import type { FormFields } from '@/types/api/user';
+
 import classes from './Register.module.scss';
 
 type TProps = {
-	formData: {
-		username: string;
-		email: string;
-		name: string;
-		password: string;
-		confirmPassword: string;
+	readonly formData: {
+		readonly username: string;
+		readonly email: string;
+		readonly name: string;
+		readonly password: string;
+		readonly confirmPassword: string;
 	};
-	onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onSubmit: (e: React.FormEvent) => void;
-	showPassword: boolean;
-	handlePasswordToggle: () => void;
-	onClickGoogle: () => void;
+	readonly isButtonDisabled: boolean;
+	readonly errorForm: string;
+	readonly isShowPassword: boolean;
+	readonly isShowingModal: boolean;
+	readonly errors: FormFields;
+	readonly handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	readonly handleSubmit: (e: React.FormEvent) => void;
+	readonly handlePasswordToggle: () => void;
+	readonly handleClickGoogle: () => void;
+	readonly onClickCloseButton: () => void;
 };
 
 const RegisterView = (props: TProps) => {
+	const firstObject = Object.keys(props.errors)[0];
+
 	return (
-		<div className={classes['container']}>
-			<h2>Register</h2>
-			<form onSubmit={props.onSubmit}>
-				<div className={classes['inputContainer']}>
-					<label htmlFor="username">Username:</label>
-					<input
-						type="text"
-						id="username"
-						name="username"
-						value={props.formData.username}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="email">Email:</label>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						value={props.formData.email}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="name">Name:</label>
-					<input
-						type="text"
-						id="name"
-						name="name"
-						value={props.formData.name}
-						onChange={props.onInputChange}
-					/>
-				</div>
-
-				<div className={classes['inputContainer']}>
-					<label htmlFor="password">Password:</label>
-					<div className={classes['passwordInputContainer']}>
-						<input
-							type={props.showPassword ? 'text' : 'password'}
-							id="password"
-							name="password"
-							value={props.formData.password}
-							onChange={props.onInputChange}
+		<>
+			<Modal isShow={props.isShowingModal} onClickCloseButton={props.onClickCloseButton}>
+				error
+			</Modal>
+			<div className={`${classes['container']} ${classes['glow']}`}>
+				<div className={classes['registerContainer']}>
+					<h2 className={classes['registerContainer__title']}>Register</h2>
+					<form onSubmit={props.handleSubmit}>
+						<Input
+							type="email"
+							error={props.errors['email']}
+							value={props.formData.email}
+							inputName="email"
+							firstErrorItem={firstObject}
+							onChangeInput={props.handleInputChange}
 						/>
-					</div>
-				</div>
+						<Input
+							type="text"
+							error={props.errors['username']}
+							value={props.formData.username}
+							inputName="username"
+							firstErrorItem={firstObject}
+							onChangeInput={props.handleInputChange}
+						/>
+						<Input
+							type="text"
+							error={props.errors['name']}
+							value={props.formData.name}
+							inputName="name"
+							firstErrorItem={firstObject}
+							onChangeInput={props.handleInputChange}
+						/>
+						<Input
+							type={props.isShowPassword ? 'text' : 'password'}
+							error={props.errors['password']}
+							value={props.formData.password}
+							inputName="password"
+							firstErrorItem={firstObject}
+							onChangeInput={props.handleInputChange}
+						/>
+						<Input
+							type={props.isShowPassword ? 'text' : 'password'}
+							error={props.errors['confirmPassword']}
+							value={props.formData.confirmPassword}
+							inputName="confirmPassword"
+							firstErrorItem={firstObject}
+							onChangeInput={props.handleInputChange}
+						/>
 
-				<div className={classes['inputContainer']}>
-					<label htmlFor="confirmPassword">Confirm Password:</label>
-					<input
-						type={props.showPassword ? 'text' : 'password'}
-						id="confirmPassword"
-						name="confirmPassword"
-						value={props.formData.confirmPassword}
-						onChange={props.onInputChange}
-					/>
-					<button
-						type="button"
-						className={classes['passwordToggle']}
-						onClick={props.handlePasswordToggle}
-					>
-						{props.showPassword ? 'Hide' : 'Show'}
+						<button
+							type="button"
+							className={classes['passwordToggle']}
+							onClick={props.handlePasswordToggle}
+						>
+							{props.isShowPassword ? 'Hide' : 'Show'}
+						</button>
+						<button
+							className={props.isButtonDisabled ? classes['disabled'] : ''}
+							disabled={props.isButtonDisabled}
+							type="submit"
+						>
+							Register
+						</button>
+					</form>
+					<button type="submit" onClick={props.handleClickGoogle}>
+						Google
 					</button>
+					{props.errorForm && (
+						<span className={classes['registerContainer__error']}>{props.errorForm}</span>
+					)}
 				</div>
-
-				<button type="submit">Register</button>
-			</form>
-			<button type="submit" onClick={props.onClickGoogle}>
-				Google
-			</button>
-		</div>
+			</div>
+		</>
 	);
 };
-
-RegisterView.displayName = 'RegisterView';
-RegisterView.defaultProps = {};
 
 export default React.memo(RegisterView);

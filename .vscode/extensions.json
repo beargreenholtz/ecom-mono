@@ -3,7 +3,6 @@
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 		"aaron-bond.better-comments",
-		"stylelint.vscode-stylelint",
-		"nrwl.angular-console"
+		"stylelint.vscode-stylelint"
 	]
 }
