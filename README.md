@@ -11,7 +11,7 @@ This eCommerce website project is designed to provide a user-friendly online pla
 ![Dashboard](https://i.imgur.com/2KyMpzL.png)
 
 
-![shop](https://i.imgur.com/oa9gQiq.png)
+![shop](https://i.imgur.com/1NnN7an.png)
 
 
 ## Run Locally
